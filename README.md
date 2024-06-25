@@ -2,17 +2,19 @@
 
 -  [Cahier des charges](https://docs.google.com/document/d/180JOUNCo4_jzBkek-JFCUXFFabEzrM3o/edit?pli=1)
 -  [Gantt](https://docs.google.com/spreadsheets/d/16DjTfLwqH-vK7sKKc6DJYYvVggpnn4S9ldSixgz56y4/edit#gid=0)
+-  [Maquette](https://www.figma.com/design/u6wt6sdBeTkP5bvQhDNZFc/Untitled?node-id=237-224&t=6LIfo7RgihLw8v4t-0)
+-  [Présentation](https://docs.google.com/presentation/d/1W34K8pxT4teb89EdLcWEExjdoN-cgQk8kLQ822LqXPk/edit)
 
 ## Lancer le serveur interne
 
 ```bash
 symfony serve -d
 ```
-## Commandes git
+# Commandes git
 
 Commandes de base pour l'utilisation de Git
 
-# Modification du projet
+## Modification du projet
 
 A faire tout le temps avant de travailler : Met le dépot local à jour
 
@@ -30,8 +32,13 @@ git commit -m “Modifications”
 ```bash
 git push origin nom_branche
 ```
+Optionnel : Vérifier l'état de vos fichiers avant git add
+```
+```bash
+git status
+```
 
-# Gestion des branches
+## Gestion des branches
 
 Lister les branches existantes
 ```bash

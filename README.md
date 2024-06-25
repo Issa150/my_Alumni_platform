@@ -33,7 +33,6 @@ git commit -m “Modifications”
 git push origin nom_branche
 ```
 Optionnel : Vérifier l'état de vos fichiers avant git add
-```
 ```bash
 git status
 ```

@@ -10,7 +10,11 @@ symfony serve -d
 ```
 ## Commandes git
 
-A faire tout le temps avant de travailler :
+Commandes de base pour l'utilisation de Git
+
+# Modification du projet
+
+A faire tout le temps avant de travailler : Met le dépot local à jour
 
 ```bash
 git pull origin nom_branche
@@ -25,4 +29,23 @@ git commit -m “Modifications”
 ```
 ```bash
 git push origin nom_branche
+```
+
+# Gestion des branches
+
+Lister les branches existantes
+```bash
+git branch
+```
+Changer de branche
+```bash
+git checkout nom_branche
+```
+Créer une nouvelle branche
+```bash
+git branch nom_branche
+```
+Fusionner la branche nom_branche depuis la branche principale
+```bash
+git merge nom_branche
 ```

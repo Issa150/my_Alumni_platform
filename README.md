@@ -11,6 +11,10 @@
 symfony serve -d
 ```
 
+## XAMPP
+
+Exécuter les actions "Start" pour Apache et MySQL au démarage du travail, et "Stop" à la fin.
+
 ## Première initialisation après pull
 
 Après le tout premier pull du projet, il est important que le composer soit bien initialisé, sinon le serveur ne pourra pas se lancer

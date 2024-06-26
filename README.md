@@ -10,6 +10,14 @@
 ```bash
 symfony serve -d
 ```
+
+## Première initialisation après pull
+
+Après le tout premier pull du projet, il est important que le composer soit bien initialisé, sinon le serveur ne pourra pas se lancer
+```bash
+composer install
+```
+
 # Commandes git
 
 Commandes de base pour l'utilisation de Git

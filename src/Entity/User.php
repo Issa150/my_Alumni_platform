@@ -70,8 +70,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $certificateYearObtention = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $link = null;
 
     public function getId(): ?int
     {
@@ -252,18 +250,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCertificateYearObtention(?\DateTimeImmutable $certificateYearObtention): static
     {
         $this->certificateYearObtention = $certificateYearObtention;
-
-        return $this;
-    }
-
-    public function getLink(): ?string
-    {
-        return $this->link;
-    }
-
-    public function setLink(?string $link): static
-    {
-        $this->link = $link;
 
         return $this;
     }

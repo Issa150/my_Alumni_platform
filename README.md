@@ -22,6 +22,12 @@ Après le tout premier pull du projet, il est important que le composer soit bie
 composer install
 ```
 
+# Notes de test
+
+Ensemble des dispositifs pour tester l'application
+Email des utilisateurs de test pour se connecter via le formulaire de connexion
+- admin@colombbus.org
+
 # Commandes git
 
 Commandes de base pour l'utilisation de Git
@@ -63,7 +69,4 @@ Créer une nouvelle branche
 ```bash
 git branch nom_branche
 ```
-Fusionner la branche nom_branche depuis la branche principale
-```bash
-git merge nom_branche
-```
+[Explications pour fusionner la branche locale à la branche principale](https://blog.mergify.com/how-to-merge-branches-in-github/)

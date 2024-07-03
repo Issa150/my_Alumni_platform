@@ -15,9 +15,10 @@ symfony serve -d
 
 Exécuter les actions "Start" pour Apache et MySQL au démarage du travail, et "Stop" à la fin.
 
-## Première initialisation après pull
+## Important à faire
 
-Après le tout premier pull du projet, il est important que le composer soit bien initialisé, sinon le serveur ne pourra pas se lancer
+Après le tout premier pull du projet, il est important que le composer soit bien initialisé, sinon le serveur ne pourra pas se lancer.
+Quand un des contributeurs a ajouté un nouveau bundle (exemple : easyadmin) et qu'il a push son travail, le package ne sera pas installer pour les autres utilisateur même après le pull. Il faut donc faire cette commande à ce moment là également
 ```bash
 composer install
 ```
@@ -71,5 +72,9 @@ git checkout nom_branche
 Créer une nouvelle branche
 ```bash
 git branch nom_branche
+```
+Après déplacement sur la nouvelle branche créée, il faut la push sur le dépot distant
+```bash
+git push origin -u nom_branche
 ```
 [Explications pour fusionner la branche locale à la branche principale](https://blog.mergify.com/how-to-merge-branches-in-github/)

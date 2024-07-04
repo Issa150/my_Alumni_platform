@@ -35,8 +35,12 @@ class ChangePasswordFormType extends AbstractType
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
-                        new PasswordStrength(),
-                        new NotCompromisedPassword(),
+                        new PasswordStrength([
+                            'message' => 'La robustesse du mot de passe est trop faible. Veuillez utiliser un mot de passe plus robuste.',
+                        ]),
+                        new NotCompromisedPassword([
+                            'message' => 'Ce mot de passe a été divulgué lors d\'une violation de données, il ne doit pas être utilisé. Veuillez utiliser un autre mot de passe.',
+                        ]),
                     ],
                     'label' => 'Nouveau mot de passe',
                 ],

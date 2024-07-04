@@ -1,38 +1,42 @@
 <header>
-         <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Thirteenth navbar example">
-                <div class=" container-fluid">
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Thirteenth navbar example">
+		<div class=" container-fluid">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-                  <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-                    <a class="navbar-brand col-lg-3" href="#">PACS</a>
-                    <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-                      <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true" href="#">Agenda</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true" href="#">Annuaire</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true" href="#" >Emplois</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true" href="#">Formations</a>
-                      </li>
-                    </ul>
-                    <div class="d-block d-lg-flex col-lg-3 justify-content-lg-end">
-            <div class="icon-container">
-              <i class="icon bi bi-people-fill"></i>
-            </div>
-            <div class="profile-picture">
-              <img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
-            </div>
-            <div class="icon-container">
-              <i class="icon bi bi-box-arrow-right"></i>
-            </div>
-          </div>
-                  </div>
-                </div>
-              </nav>
-       </header>
+			<div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+				<a class="navbar-brand col-lg-3" href="#">PACS</a>
+				<ul class="navbar-nav col-lg-6 justify-content-lg-center">
+					<li class="nav-item">
+						<a class="nav-link" aria-disabled="true" href="#">Agenda</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-disabled="true" href="#">Annuaire</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-disabled="true" href="#">Emplois</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-disabled="true" href="#">Formations</a>
+					</li>
+				</ul>
+				<div class="d-block d-lg-flex col-lg-3 justify-content-lg-end">
+					<div class="icon-container">
+						<i class="icon bi bi-people-fill"></i>
+					</div>
+					<div class="profile-picture">
+						{% if user %}
+							<img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+						{% else %}
+							<i class="icon bi bi-person-circle"></i>
+						{% endif %}
+					</div>
+					<div class="icon-container">
+						<i class="icon bi bi-box-arrow-right"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>

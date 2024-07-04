@@ -1,20 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Accueil Pacs : votre espace Alumni Colombbus, où les anciens élèves se retrouvent et partagent leurs expériences
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	{# BANNIERE PHOTO #}
+	<div class="container">
+		<div class="card text-light rounded-0">
+			<img src="{{ asset('assets/img/default/banner.jpg') }}" class="card-img rounded-0" alt="...">
+			{% if user %}
+				<div class="my-overlay-gradient card-img-overlay d-flex">
+					<h1 class="card-title mt-auto text-uppercase">Boostez votre carrière
+						<br>grâce au réseau Colombbus Alumni</h1>
+				</div>
+			{% endif %}
+		</div>
+	</div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/utilisateur/Documents/10MentionWeb/10MentionWeb_Alumni/src/Controller/MainController.php</code></li>
-        <li>Your template at <code>C:/Users/utilisateur/Documents/10MentionWeb/10MentionWeb_Alumni/templates/main/index.html.twig</code></li>
-    </ul>
-</div>
+	{# --------------------------------- #}
+	<section class="bg-yellow text-white text-center">
+		<div class="container px-4 py-5" id="featured-3">
+			<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+				<div class="feature col">
+					<div class="text-center">
+						{{ ux_icon('fa:graduation-cap', {'width': '105px', 'height': '105px'}) }}
+					</div>
+					<h3 class="fs-2">ALUMNI</h3>
+				</div>
+				<div class="feature col">
+					<div class="text-center">
+						{{ ux_icon('ion:calendar-sharp', {'width': '100px', 'height': '100px'}) }}
+					</div>
+					<h3 class="fs-2">EVENEMENT</h3>
+				</div>
+				<div class="feature col">
+					<div class="text-center">
+						{{ ux_icon('fa-solid:hands-helping', {'width': '100px', 'height': '100px'}) }}
+					</div>
+					<h3 class="fs-2">OFFRE D'EMPLOI</h3>
+				</div>
+			</div>
+		</div>
+	</section>
+
 {% endblock %}

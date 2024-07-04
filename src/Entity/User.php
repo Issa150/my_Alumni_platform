@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Enum\UserGender;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -67,10 +68,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $studyField = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $gender = null;
+    private ?UserGender $gender = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $certificateYearObtention = null;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $lastConnectedAt = null;
 
 
     public function getId(): ?int
@@ -233,12 +237,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getGender(): ?string
+    public function getGender(): ?Usergender
     {
         return $this->gender;
     }
 
-    public function setGender(?string $gender): static
+    public function setGender(?userGender $gender): static
     {
         $this->gender = $gender;
 
@@ -253,6 +257,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCertificateYearObtention(?\DateTimeImmutable $certificateYearObtention): static
     {
         $this->certificateYearObtention = $certificateYearObtention;
+
+        return $this;
+    }
+
+    public function getLastConnectedAt(): ?\DateTimeImmutable
+    {
+        return $this->lastConnectedAt;
+    }
+
+    public function setLastConnectedAt(?\DateTimeImmutable $lastConnectedAt): static
+    {
+        $this->lastConnectedAt = $lastConnectedAt;
 
         return $this;
     }

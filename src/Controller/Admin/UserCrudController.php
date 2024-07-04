@@ -14,7 +14,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
 use EasyCorp\Bundle\EasyAdminBundle\Field\{IdField, EmailField, TextField};
 use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore};
-use Symfony\Component\VarDumper\VarDumper;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -78,7 +77,7 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             EmailField::new('email'),
             ArrayField::new('roles', 'Role'),
-            TextField::new('password')
+            TextField::new('password','Mot de passe')
         ];
 
         return $fields;

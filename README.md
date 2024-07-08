@@ -10,6 +10,28 @@
 ```bash
 symfony serve -d
 ```
+
+## XAMPP
+
+Exécuter les actions "Start" pour Apache et MySQL au démarage du travail, et "Stop" à la fin.
+
+## Important à faire
+
+Après le tout premier pull du projet, il est important que le composer soit bien initialisé, sinon le serveur ne pourra pas se lancer.
+Quand un des contributeurs a ajouté un nouveau bundle (exemple : easyadmin) et qu'il a push son travail, le package ne sera pas installer pour les autres utilisateur même après le pull. Il faut donc faire cette commande à ce moment là également
+```bash
+composer install
+```
+
+# Notes de test
+
+Ensemble des dispositifs pour tester l'application
+Email des utilisateurs de test pour se connecter via le formulaire de connexion
+- admin@colombbus.org : ROLE_ADMIN
+- partner@colombbus.org: ROLE_PARTNER
+- alumni@colombbus.org : ROLE_USER
+Mot de passe commun pour tous ces comptes : Colombbus2024@
+
 # Commandes git
 
 Commandes de base pour l'utilisation de Git
@@ -51,7 +73,8 @@ Créer une nouvelle branche
 ```bash
 git branch nom_branche
 ```
-Fusionner la branche nom_branche depuis la branche principale
+Après déplacement sur la nouvelle branche créée, il faut la push sur le dépot distant
 ```bash
-git merge nom_branche
+git push origin -u nom_branche
 ```
+[Explications pour fusionner la branche locale à la branche principale](https://blog.mergify.com/how-to-merge-branches-in-github/)

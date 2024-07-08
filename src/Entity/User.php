@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Enum\UserGender;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -65,13 +70,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $studyField = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $gender = null;
+    private ?UserGender $gender = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $certificateYearObtention = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $link = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $lastConnectedAt = null;
+
+    /**
+     * @var Collection<int, Formation>
+     */
+    #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'user_id')]
+    private Collection $formations;
+
+    /**
+     * @var Collection<int, Emploi>
+     */
+    #[ORM\OneToMany(targetEntity: Emploi::class, mappedBy: 'user_id')]
+    private Collection $emplois;
+
+    public function __construct()
+    {
+        $this->formations = new ArrayCollection();
+        $this->emplois = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -123,6 +147,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
     /**
      * @see PasswordAuthenticatedUserInterface
@@ -232,12 +257,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getGender(): ?string
+    public function getGender(): ?Usergender
     {
         return $this->gender;
     }
 
-    public function setGender(?string $gender): static
+    public function setGender(?userGender $gender): static
     {
         $this->gender = $gender;
 
@@ -256,14 +281,74 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLink(): ?string
+    public function getLastConnectedAt(): ?\DateTimeImmutable
     {
-        return $this->link;
+        return $this->lastConnectedAt;
     }
 
-    public function setLink(?string $link): static
+    public function setLastConnectedAt(?\DateTimeImmutable $lastConnectedAt): static
     {
-        $this->link = $link;
+        $this->lastConnectedAt = $lastConnectedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): static
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): static
+    {
+        if ($this->formations->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getUserId() === $this) {
+                $formation->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Emploi>
+     */
+    public function getEmplois(): Collection
+    {
+        return $this->emplois;
+    }
+
+    public function addEmploi(Emploi $emploi): static
+    {
+        if (!$this->emplois->contains($emploi)) {
+            $this->emplois->add($emploi);
+            $emploi->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmploi(Emploi $emploi): static
+    {
+        if ($this->emplois->removeElement($emploi)) {
+            // set the owning side to null (unless already changed)
+            if ($emploi->getUserId() === $this) {
+                $emploi->setUserId(null);
+            }
+        }
 
         return $this;
     }

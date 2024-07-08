@@ -3,12 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Twig\Environment;
 use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
@@ -17,15 +20,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore
 
 class UserCrudController extends AbstractCrudController
 {
-    private MailerInterface $mailer;
     private UserPasswordHasherInterface $userPasswordHasher;
+    private MailerInterface $mailer;
+    private UrlGeneratorInterface $urlGenerator;
+    private Environment $twig;
 
     public function __construct(
+        UserPasswordHasherInterface $userPasswordHasher,
         MailerInterface $mailer,
-        UserPasswordHasherInterface $userPasswordHasher
+        UrlGeneratorInterface $urlGenerator,
+        Environment $twig
     ) {
-        $this->mailer = $mailer;
         $this->userPasswordHasher = $userPasswordHasher;
+        $this->mailer = $mailer;
+        $this->urlGenerator = $urlGenerator;
+        $this->twig = $twig;
     }
 
     public static function getEntityFqcn(): string
@@ -35,16 +44,28 @@ class UserCrudController extends AbstractCrudController
 
     // Fonction pour générer  un mot de passe aléatoire
 
-    private function generateRandomPassword(int $length = 18): string
-    {
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+    function generateRandomPassword(int $length = 18): string {
+    
+        $lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numbers = '0123456789';
+        $specialCharacters = '!@#$%^&*()-_+=<>?';
+    
+        // le mot de passe doit comporter au moins 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial
         $password = '';
-        $max = strlen($characters) - 1;
-
-        for ($i = 0; $i < $length; $i++) {
-            $password .= $characters[random_int(0, $max)];
+        $password .= $lowercase[random_int(0, strlen($lowercase) - 1)];
+        $password .= $uppercase[random_int(0, strlen($uppercase) - 1)];
+        $password .= $numbers[random_int(0, strlen($numbers) - 1)];
+        $password .= $specialCharacters[random_int(0, strlen($specialCharacters) - 1)];
+    
+        $allCharacters = $lowercase . $uppercase . $numbers . $specialCharacters;
+        for ($i = 4; $i < $length; $i++) {
+            $password .= $allCharacters[random_int(0, strlen($allCharacters) - 1)];
         }
-
+    
+        // Crée un mot de passe aléatoire
+        $password = str_shuffle($password);
+    
         return $password;
     }
 
@@ -115,6 +136,8 @@ class UserCrudController extends AbstractCrudController
     
                 // Envoyer l'e-mail avec les identifiants à l'utilisateur
                 $this->sendCredentialsEmail($user, $plainPassword);
+
+                $this->addFlash(type:'info', message: "Les identifiants de connexion ont été envoyés à l'utilisateur");
             }
         });
     }
@@ -141,11 +164,18 @@ class UserCrudController extends AbstractCrudController
 
     private function sendCredentialsEmail(User $user, string $password): void
     {
-        $email = (new Email())
+        $loginUrl = $this->generateUrl('app_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $email = (new TemplatedEmail())
             ->from('your_email@example.com')
             ->to($user->getEmail())
             ->subject('Vos identifiants')
-            ->html(sprintf('Bonjour,<br><br>Votre mot de passe est : <strong>%s</strong><br><br>Cordialement,<br>Votre application', $password));
+            ->htmlTemplate('emails/credentials.html.twig')
+            ->context([
+                'userEmail' => $user->getEmail(),
+                'password' => $password,
+                'loginUrl' => $loginUrl,
+            ]);
     
         $this->mailer->send($email);
     }

@@ -12,7 +12,14 @@
 						<a class="nav-link" aria-disabled="true" href="#">Agenda</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" aria-disabled="true" href="#">Annuaire</a>
+						{# <a class="nav-link" aria-disabled="true" href="#">Annuaire</a> #}
+						<a class="nav-link" aria-disabled="true"
+							{% if user %}
+							href="#" 
+							{% else %}
+							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							{% endif %}
+						 >Annuaire</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" aria-disabled="true" href="#">Emplois</a>
@@ -22,12 +29,17 @@
 					</li>
 				</ul>
 				<div class="d-block d-lg-flex col-lg-3 justify-content-lg-end">
-					<div class="icon-container">
+					<div class="icon-container mx-0">
 						<i class="icon bi bi-people-fill"></i>
+						{# <span class="bg-success rounded-circle text-light py-0 px-1 fs-6 position-absolute top-0 end-0 mr-1 ">{{usersConnected}}</span> #}
+					</div>
+					<div class="icon-container position-relative ms-0">
+						{# <i class="icon bi bi-people-fill"></i> #}
+						<span class="bg-success rounded-circle text-light py-0 px-1 fs-6 position-absolute top-0 start-0 ms-0">{{usersConnected}}</span>
 					</div>
 					<div class="profile-picture">
-						{% if app.user %}
-							<img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+						{% if user %}
+							<img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil">
 						{% else %}
 							<i class="icon bi bi-person-circle"></i>
 						{% endif %}
@@ -40,3 +52,21 @@
 		</div>
 	</nav>
 </header>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Demande d'accès</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Veuillez vous connecter pour accéder au contenu de cette page
+      </div>
+      <div class="modal-footer">
+        {# <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> #}
+        <a href="Connecxion" type="button" class="btn btn-primary">Connectez-vous</a>
+      </div>
+    </div>
+  </div>
+</div>

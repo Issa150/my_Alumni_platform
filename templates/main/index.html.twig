@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="card text-light rounded-0">
 			<img src="{{ asset('assets/img/default/banner.jpg') }}" class="card-img rounded-0" alt="...">
-			{% if app.user %}
+			{% if user %}
 				<div class="my-overlay-gradient card-img-overlay d-flex">
 					<h1 class="card-title mt-auto text-uppercase">
 						Boostez votre carrière
@@ -20,155 +20,99 @@
 
 
 	{# MULTIPLE CAROUSSEL #}
-
-	<div class="container-fluid mt-3 p-3 my-bg-blue-pastel">
-		<div class="container">
-			<div id="carouselExampleAutoplaying" class="carousel carousel-dark slide position-relative" data-bs-ride="true">
-				<div
-					class="carousel-inner">
-
-					{# {% if user == false %} #}
-					<div
-						class="carousel-item active d-flex gap-3">
-						{# <img src="{{ asset('assets/img/default/banner.jpg') }}" class="d-block w-100" alt="..."> #}
-
-						<div class="card my-bg-red-pastel">
-							<div class="card-body ">
-								<div class="row">
-									<span class="w-auto my-text-red">
-										{{ ux_icon('f7:calendar', {'width': '50px', 'height': '50px'}) }}
-									</span>
-									<h3 class="w-auto">AGENDA</h3>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-							</div>
-						</div>
-						<div class="card my-bg-green-pastel">
-							<div class="card-body ">
-								<div class="row">
-									<span class="w-auto my-text-green">
-										{{ ux_icon('bxs:contact', {'width': '50px', 'height': '50px'}) }}
-									</span>
-									<h3 class="w-auto">ANNUAIRE</h3>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-							</div>
-						</div>
-						<div class="card my-bg-yellow-pastel">
-							<div class="card-body ">
-								<div class="row">
-									<span class="w-auto my-text-yellow">
-										{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
-									</span>
-									<h3 class="w-auto">FORMATION</h3>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-							</div>
-						</div>
-					</div>
-
-					<div
-						class="carousel-item active d-flex gap-3">
-						{# <img src="{{ asset('assets/img/default/banner.jpg') }}" class="d-block w-100" alt="..."> #}
-
-						<div class="card my-bg-red-pastel">
-							<div class="card-body ">
-								<div class="row">
-									<span class="w-auto my-text-red">
-										{{ ux_icon('f7:calendar', {'width': '50px', 'height': '50px'}) }}
-									</span>
-									<h3 class="w-auto">AGENDA</h3>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-							</div>
-						</div>
-						<div class="card my-bg-green-pastel">
-							<div class="card-body ">
-								<div class="row">
-									<span class="w-auto my-text-green">
-										{{ ux_icon('bxs:contact', {'width': '50px', 'height': '50px'}) }}
-									</span>
-									<h3 class="w-auto">ANNUAIRE</h3>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-							</div>
-						</div>
-						<div class="card my-bg-yellow-pastel">
-							<div class="card-body ">
-								<div class="row">
-									<span class="w-auto my-text-yellow">
-										{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
-									</span>
-									<h3 class="w-auto">FORMATION</h3>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-							</div>
-						</div>
-					</div>
-
-					{# {% endif %} #}
-
-
+	{% if user == false %}
+		{% include "components/carrousel_cards.twig" %}
+	{% else %}
+		{% include "components/carrousel_user.twig" %}
+	{% endif %}
+	{# <div class="d-flex">
+		<div class="rounded-3 row">
+			<div class="col-4 my-bg-red">
+				<img class="w-100 rounded-circle card_user-profil" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
+			</div>
+			<div class="col-8 p-4 text-center">
+				<div class="text-center">
+					<h4 class="my-2">NOM PRENOM</h4>
 				</div>
-				<button class="carousel-control-prev accordion my-text-dark" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon my-text-dark" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next my-text-dark" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
-					<span class="carousel-control-next-icon my-text-dark" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo? Illum error voluptates sit aspernatur repellendus hic expedita iure vitae possimus assumenda quas, ad rem a placeat nisi, enim veritatis.</p>
 			</div>
 		</div>
-	</div>
-
-	{# Section signed in #}
+	</div> #}
+	{# Section 4 Cards colors  #}
 	{% if user %}
 		<div class="container-fluid my-5">
 			<div class="container">
-				<div class="row row-cols-2">
-					<div class="card my-bg-red-pastel">
-						<div class="card-body ">
-							<div class="row">
-								<span class="w-auto my-text-red">
-									{{ ux_icon('f7:calendar', {'width': '50px', 'height': '50px'}) }}
-								</span>
-								<h3 class="w-auto">AGENDA</h3>
+				<div
+					class="row row-cols-2">
+					{# <div class="grid gap-3 "> #}
+					<div class="p-0">
+						<div class="card m-4 my-bg-red-pastel">
+							<div class=" card-body">
+								<div class="row">
+									<span class="w-auto my-text-red">
+										{{ ux_icon('f7:calendar', {'width': '50px', 'height': '50px'}) }}
+									</span>
+									<h3 class="w-auto">AGENDA</h3>
+								</div>
+								<p class="m-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
+								<div class="p-0 m-0 text-center">
+									<button class="btn my-bg-red text-light fw-bolder my-3 ">Trouver un évènement</button>
+
+								</div>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
 						</div>
 					</div>
-					<div class="card my-bg-green-pastel">
-						<div class="card-body ">
-							<div class="row">
-								<span class="w-auto my-text-green">
-									{{ ux_icon('bxs:contact', {'width': '50px', 'height': '50px'}) }}
-								</span>
-								<h3 class="w-auto">ANNUAIRE</h3>
+
+					<div class="p-0">
+						<div class="card m-4 my-bg-green-pastel">
+							<div class=" card-body ">
+								<div class="row">
+									<span class="w-auto my-text-green">
+										{{ ux_icon('bxs:contact', {'width': '50px', 'height': '50px'}) }}
+									</span>
+									<h3 class="w-auto">ANNUAIRE</h3>
+								</div>
+								<p class="m-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
+								<div class="p-0 m-0 text-center">
+									<button class="btn my-bg-green text-light fw-bolder my-3">Trouver un alumni</button>
+								</div>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
 						</div>
 					</div>
-					<div class="card my-bg-yellow-pastel">
-						<div class="card-body ">
-							<div class="row">
-								<span class="w-auto my-text-yellow">
-									{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
-								</span>
-								<h3 class="w-auto">FORMATION</h3>
+
+					<div class="p-0">
+						<div class="card m-4 my-bg-yellow-pastel">
+							<div class=" card-body ">
+								<div class="row">
+									<span class="w-auto my-text-yellow">
+										{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
+									</span>
+									<h3 class="w-auto">FORMATION</h3>
+								</div>
+								<p class="m-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
+								<div class="p-0 m-0 text-center">
+									<button class="btn my-bg-yellow text-light fw-bolder my-3">Trouver une formation
+									</button>
+								</div>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
 						</div>
 					</div>
-					<div class="card my-bg-yellow-pastel">
-						<div class="card-body ">
-							<div class="row">
-								<span class="w-auto my-text-yellow">
-									{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
-								</span>
-								<h3 class="w-auto">FORMATION</h3>
+
+					<div class="p-0">
+						<div class="card m-4 my-bg-blue-pastel">
+							<div class=" card-body ">
+								<div class="row">
+									<span class="w-auto my-text-blue">
+										{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
+									</span>
+									<h3 class="w-auto">EMPLOI</h3>
+								</div>
+								<p class="m-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
+								<div class="p-0 m-0 text-center">
+									<button class="btn my-bg-blue text-light fw-bolder my-3">Trouver un emploi
+									</button>
+								</div>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
 						</div>
 					</div>
 				</div>
@@ -187,24 +131,9 @@
 
 						{# {% if user == false %} #}
 						<div class="carousel-item active d-flex gap-3">
-							<img
-							class="w-75 mx-auto" src="{{ asset("assets/img/default/Capture d'écran 2024-06-26 162042.png") }}" class="d-block w-100" alt="...">
+							<img class="w-75 mx-auto" src="{{ asset("assets/img/default/Capture d'écran 2024-06-26 162042.png") }}" class="d-block w-100" alt="...">
 
-						{# <div class="card my-bg-red-pastel">
-																															<div class="card-body ">
-																																<div class="row">
-																																	<span class="w-auto my-text-red">
-																																		{{ ux_icon('f7:calendar', {'width': '50px', 'height': '50px'}) }}
-																																	</span>
-																																	<h3 class="w-auto">AGENDA</h3>
-																																</div>
-																																<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-																															</div>
-																														</div> #}
 						</div>
-
-
-						{# {% endif %} #}
 
 
 					</div>
@@ -221,110 +150,6 @@
 		</div>
 	{% endif %}
 
-
-	{# MULTIPLE CAROUSSEL sign in #}
-	{# {% if user %}
-		<div class="container-fluid mt-3 p-3 my-bg-blue-pastel">
-			<div class="container">
-				<div id="carouselExampleAutoplaying" class="carousel carousel-dark slide position-relative" data-bs-ride="true">
-					<div
-						class="carousel-inner">
-
-						<div
-							class="carousel-item active d-flex gap-3">
-							
-
-							<div class="card my-bg-red-pastel">
-								<div class="card-body ">
-									<div class="row">
-										<span class="w-auto my-text-red">
-											{{ ux_icon('f7:calendar', {'width': '50px', 'height': '50px'}) }}
-										</span>
-										<h3 class="w-auto">AGENDA</h3>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-								</div>
-							</div>
-							<div class="card my-bg-green-pastel">
-								<div class="card-body ">
-									<div class="row">
-										<span class="w-auto my-text-green">
-											{{ ux_icon('bxs:contact', {'width': '50px', 'height': '50px'}) }}
-										</span>
-										<h3 class="w-auto">ANNUAIRE</h3>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-								</div>
-							</div>
-							<div class="card my-bg-yellow-pastel">
-								<div class="card-body ">
-									<div class="row">
-										<span class="w-auto my-text-yellow">
-											{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
-										</span>
-										<h3 class="w-auto">FORMATION</h3>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-								</div>
-							</div>
-						</div>
-
-						<div
-							class="carousel-item active d-flex gap-3">
-
-							<div class="card my-bg-red-pastel">
-								<div class="card-body ">
-									<div class="row">
-										<span class="w-auto my-text-red">
-											{{ ux_icon('f7:calendar', {'width': '50px', 'height': '50px'}) }}
-										</span>
-										<h3 class="w-auto">AGENDA</h3>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-								</div>
-							</div>
-							<div class="card my-bg-green-pastel">
-								<div class="card-body ">
-									<div class="row">
-										<span class="w-auto my-text-green">
-											{{ ux_icon('bxs:contact', {'width': '50px', 'height': '50px'}) }}
-										</span>
-										<h3 class="w-auto">ANNUAIRE</h3>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-								</div>
-							</div>
-							<div class="card my-bg-yellow-pastel">
-								<div class="card-body ">
-									<div class="row">
-										<span class="w-auto my-text-yellow">
-											{{ ux_icon('fa:graduation-cap', {'width': '50px', 'height': '50px'}) }}
-										</span>
-										<h3 class="w-auto">FORMATION</h3>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur accusamus quo ad aliquid voluptate expedita ea itaque ut! Consectetur quaerat nam mollitia sunt culpa voluptatem velit vitae consequatur. Obcaecati, perspiciatis!</p>
-								</div>
-							</div>
-						</div>
-
-
-
-					</div>
-					<button class="carousel-control-prev accordion my-text-dark" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon my-text-dark" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next my-text-dark" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
-						<span class="carousel-control-next-icon my-text-dark" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
-			</div>
-		</div>
-
-		{# Formation disponible #}
-
-	{# {% endif %} #} 
 
 	{# --------------------------------- #}
 	<section class="bg-yellow text-white text-center">

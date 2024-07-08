@@ -1,0 +1,152 @@
+css
+
+Open In Editor
+Edit
+Copy code
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  /* ACCCES COLORS */
+  --clr-main: #005259;
+  --clr-bg: #FAFBFF;
+
+  /* ACCENTS COLORS */
+  --clr-red: #EF736A;
+  --clr-blue: #88ACEA ;
+  --clr-yellow: #F9C44E;
+  --clr-green: #005259;
+  
+/* PASTELS  COLORS */
+--clr-red-pastel: #FDEAE8;
+--clr-green-pastel: #EFF9F5;
+--clr-yellow-pastel: #FFF9EB;
+--clr-blue-pastel: #F0F5FD;
+
+  /* CONTRAST COLORS */
+  --clr-light: white;
+  --clr-dark: #404040;
+
+}
+
+/* our own class color utilities */
+.my-text-dark{
+  color: var(--clr-dark);
+}
+.my-text-red {
+  color: var(--clr-red);
+}
+.my-bg-red-pastel {
+  background-color: var(--clr-red-pastel);
+}
+
+/* GREEN */
+.my-text-green {
+  color: var(--clr-green);
+}
+.my-bg-green-pastel {
+  background-color: var(--clr-green-pastel);
+}
+
+/* BLUE */
+.my-text-blue {
+  color: var(--clr-blue);
+}
+.my-bg-blue-pastel {
+  background-color: var(--clr-blue-pastel);
+}
+
+/* YELLOW */
+.my-text-yellow {
+  color: var(--clr-yellow);
+}
+.my-bg-yellow-pastel {
+  background-color: var(--clr-yellow-pastel);
+}
+
+
+
+
+
+
+body {
+    font-family:'Quicksand', sans-serif;
+    font-size: 16px;
+    color: var(--clr-dark);
+    background-color: var(--clr-bg);
+}
+
+.navbar {
+    background-color : var(--clr-main) !important;
+  
+}
+
+/* LOGO */
+.navbar-brand {
+    color : var(--clr-light);
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+/* LIENS  BARRE DE NAVIGATION */
+.nav-link{
+    color : var(--clr-light);
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* ICONES  BARRE DE NAVIGATION */
+.icon {
+    color: var(--clr-light);
+    font-size: 1.7rem;
+}
+
+.icon-container {
+    display: inline-block;
+   
+   
+    margin: 0 20px;
+    padding: 5px;
+  }
+  
+  /* PHOTO BARRE DE NAVIGATION */
+  .profile-picture {
+    display: inline-block;
+    margin: 0 20px;
+    padding: 5px;
+  }
+
+
+
+
+  /* FOOTER */
+  .container-footer {
+    background-color : var(--clr-main)!important;
+  }
+
+  .social-icons {
+    font-size: 1.7rem;
+  }
+
+
+
+  
+
+  /* PAGE INDEX TWIG */
+
+  .bg-yellow {
+    background-color: #F9C44E;
+  }
+
+  .my-overlay-gradient{
+    background: linear-gradient(to top,rgba(0, 0, 0, 0.482), rgba(0, 0, 0, 0.071));
+  }
+
+/* Carroussel */
+/* button.carousel-control-prev{
+  left:  0;
+} */

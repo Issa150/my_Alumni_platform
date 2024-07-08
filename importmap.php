@@ -35,4 +35,7 @@ return [
         'version' => '5.3.3',
         'type' => 'css',
     ],
+    'stimulus-use' => [
+        'version' => '0.52.2',
+    ],
 ];

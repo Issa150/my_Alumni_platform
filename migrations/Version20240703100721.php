@@ -20,7 +20,7 @@ final class Version20240703100721 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user ADD last_connected_at DATE DEFAULT NULL COMMENT \'(DC2Type:date_immutable)\'');
+        // $this->addSql('ALTER TABLE user ADD last_connected_at DATE DEFAULT NULL COMMENT \'(DC2Type:date_immutable)\'');
     }
 
     public function down(Schema $schema): void

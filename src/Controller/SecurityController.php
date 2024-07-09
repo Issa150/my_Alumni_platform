@@ -12,6 +12,13 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+            // Check if user has ROLE_ADMIN
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('admin_dashboard');
+            }
+            // Handle redirection for other roles if needed
+        
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 

@@ -13,7 +13,7 @@ css Open In Editor Edit Copy code * {
   --clr-red: #EF736A;
   --clr-blue: #88ACEA;
   --clr-yellow: #F9C44E;
-  --clr-green: #;
+  --clr-green: #A9E0C9;
 
   /* PASTELS  COLORS */
   --clr-red-pastel: #FDEAE8;
@@ -47,7 +47,7 @@ css Open In Editor Edit Copy code * {
 
 /* GREEN */
 .my-text-green {
-  color: var(--clr-green);
+  color: var(--clr-main);
 }
 
 .my-bg-green {
@@ -83,6 +83,17 @@ css Open In Editor Edit Copy code * {
 .my-bg-yellow-pastel {
   background-color: var(--clr-yellow-pastel);
 }
+
+/* CLEAR-GREEN */
+
+.my-text-clr-green {
+  color: var(--clr-green);
+}
+
+.my-bg-clr-green {
+  background-color: var(--clr-green);
+}
+
 
 
 
@@ -193,4 +204,8 @@ body {
   width: 100%;
   aspect-ratio: 1/1;
   
+}
+
+.carousel-indicators{
+  margin-bottom: -40px !important;
 }

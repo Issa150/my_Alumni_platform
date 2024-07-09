@@ -94,8 +94,10 @@ css Open In Editor Edit Copy code * {
   background-color: var(--clr-green);
 }
 
-
-
+/* taille cards */
+.my-ratio{
+  height: 230px;
+}
 
 
 
@@ -209,3 +211,4 @@ body {
 .carousel-indicators{
   margin-bottom: -40px !important;
 }
+

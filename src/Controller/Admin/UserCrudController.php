@@ -9,6 +9,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -94,10 +95,21 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+
+        $roles = [
+            'Admin' => 'ROLE_ADMIN',
+            'User' => 'ROLE_USER',
+            // Ajoutez d'autres rôles selon vos besoins
+        ];
+
         $fields = [
             IdField::new('id')->hideOnForm(),
             EmailField::new('email'),
-            ArrayField::new('roles', 'Role'),
+            ChoiceField::new('roles')
+            ->setLabel('Roles')
+            ->setChoices($roles)
+            ->allowMultipleChoices()
+            ->renderExpanded(),
             TextField::new('password','Mot de passe')
         ];
 

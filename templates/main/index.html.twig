@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="card text-light rounded-0">
 			<img src="{{ asset('assets/img/default/banner.jpg') }}" class="card-img rounded-0" alt="...">
-			{% if user %}
+			{% if app.user %}
 				<div class="my-overlay-gradient card-img-overlay d-flex">
 					<h1 class="card-title mt-auto text-uppercase">
 						Boostez votre carrière
@@ -20,7 +20,7 @@
 
 
 	{# MULTIPLE CAROUSSEL #}
-	{% if user == false %}
+	{% if app.user == false %}
 		{% include "components/carrousel_cards.twig" %}
 	{% else %}
 		{% include "components/carrousel_user.twig" %}
@@ -39,7 +39,7 @@
 		</div>
 	</div> #}
 	{# Section 4 Cards colors  #}
-	{% if user %}
+	{% if app.user %}
 		<div class="container-fluid my-5">
 			<div class="container">
 				<div
@@ -122,7 +122,7 @@
 
 	{# SINGLE CAROUSSEL #}
 	{# ça va être #}
-	{% if user == false %}
+	{% if app.user == false %}
 		<div class="container-fluid my-5">
 			<div class="container">
 				<div id="carouselExampleAutoplaying" class="carousel carousel-dark slide position-relative" data-bs-ride="true">

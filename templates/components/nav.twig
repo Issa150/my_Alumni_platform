@@ -6,7 +6,7 @@
 			</button>
 
 			<div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-				<a class="navbar-brand col-lg-3" href="#">PACS</a>
+				<a class="navbar-brand col-lg-3" href="{{path('app_main')}}">PACS</a>
 				<ul class="navbar-nav col-lg-6 justify-content-lg-center">
 					<li class="nav-item">
 						<a class="nav-link" aria-disabled="true" href="#">Agenda</a>
@@ -14,7 +14,7 @@
 					<li class="nav-item">
 						{# <a class="nav-link" aria-disabled="true" href="#">Annuaire</a> #}
 						<a class="nav-link" aria-disabled="true"
-							{% if user %}
+							{% if app.user %}
 							href="#" 
 							{% else %}
 							data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -35,17 +35,19 @@
 					</div>
 					<div class="icon-container position-relative ms-0">
 						{# <i class="icon bi bi-people-fill"></i> #}
-						<span class="bg-success rounded-circle text-light py-0 px-1 fs-6 position-absolute top-0 start-0 ms-0">{{usersConnected}}</span>
+						<span class="bg-success rounded-circle text-light py-0 px-1 fs-6 position-absolute top-0 start-0 ms-0"></span>
 					</div>
 					<div class="profile-picture">
-						{% if user %}
+						{% if app.user %}
 							<img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil">
 						{% else %}
-							<i class="icon bi bi-person-circle"></i>
+						<a href="{{path('app_login')}}"><i class="icon bi bi-person-circle"></i></a>
+							
 						{% endif %}
 					</div>
 					<div class="icon-container">
-						<i class="icon bi bi-box-arrow-right"></i>
+					<a href="{{path('app_logout')}}"><i class="icon bi bi-box-arrow-right"></i></a>
+						
 					</div>
 				</div>
 			</div>
@@ -65,7 +67,7 @@
       </div>
       <div class="modal-footer">
         {# <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> #}
-        <a href="Connecxion" type="button" class="btn btn-primary">Connectez-vous</a>
+        <a href="{{path('app_login')}}" type="button" class="btn btn-primary">Connectez-vous</a>
       </div>
     </div>
   </div>

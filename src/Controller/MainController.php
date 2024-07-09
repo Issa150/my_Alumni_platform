@@ -12,10 +12,12 @@ class MainController extends AbstractController
     public function index(): Response
     {
         $user= true;
+
         // $user= false;
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'user'=> $user,
+
         ]);
     }
 }

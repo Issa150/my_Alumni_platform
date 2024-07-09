@@ -13,7 +13,7 @@ css Open In Editor Edit Copy code * {
   --clr-red: #EF736A;
   --clr-blue: #88ACEA;
   --clr-yellow: #F9C44E;
-  --clr-green: #;
+  --clr-green: #A9E0C9;
 
   /* PASTELS  COLORS */
   --clr-red-pastel: #FDEAE8;
@@ -89,6 +89,7 @@ css Open In Editor Edit Copy code * {
   background-color: var(--clr-red);
   transition: .25s;
 
+
   &:hover{
     transform: translateY(-5px);
     background-color: var(--clr-red);
@@ -120,6 +121,21 @@ css Open In Editor Edit Copy code * {
     transform: translateY(-5px);
     background-color: var(--clr-blue);
   }
+
+/* CLEAR-GREEN */
+
+.my-text-clr-green {
+  color: var(--clr-green);
+}
+
+.my-bg-clr-green {
+  background-color: var(--clr-green);
+}
+
+/* taille cards */
+.my-ratio{
+  height: 230px;
+
 }
 
 /* --------------------------------------------- */
@@ -232,3 +248,8 @@ body {
   aspect-ratio: 1/1;
   
 }
+
+.carousel-indicators{
+  margin-bottom: -40px !important;
+}
+

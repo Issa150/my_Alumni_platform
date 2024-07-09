@@ -6,6 +6,7 @@
 
 		<div class="row justify-content-between">
 
+
 			<div class="col-lg-3 col-md-12 col-sm-12 mt-lg-4 mt-sm-5">
 				<h5>Les derniers alumni</h5>
 				<div id="carouselExampleIndicators1" class="carousel carousel-dark slide shadow-sm rounded-3 my-ratio">
@@ -15,53 +16,29 @@
 						<button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
 					</div>
 					<div class="carousel-inner rounded-3">
-						<div class="carousel-item active">
+						{% for user in lastUsers %}
+							<div class="carousel-item {{ loop.index == 1 ? 'active' : '' }}">
 
-							<div class="d-flex">
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-green my-ratio">
-									<img class="w-75 rounded-circle card_user-profil m-3" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">Laure Martin</h6>
+								<div class="d-flex">
+									<div class="col-4 d-flex align-items-center justify-content-center my-bg-green my-ratio">
+										<img class="w-75 rounded-circle card_user-profil m-3" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
 									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?
-									</p>
+									<div class="col-8 p-4 text-center">
+										<div class="text-center">
+											<h6 class="my-2">{{user.email}}</h6>
+										</div>
+										<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
+                                        <button class="btn"><a href="">Voir plus</a></button>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="d-flex">
 
-
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-green my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">NOM PRENOM</h6>
-									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="d-flex">
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-green my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">NOM PRENOM</h6>
-									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 
 				</div>
 			</div>
+
 
 			<div class="col-lg-3 col-md-12 col-sm-12 mt-lg-4 mt-sm-5">
 				<h5>Les dernières formations</h5>
@@ -72,52 +49,29 @@
 						<button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
 					</div>
 					<div class="carousel-inner rounded-3">
-						<div class="carousel-item active">
 
-							<div class="d-flex">
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-yellow my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/colombbusLogo.jpg')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">Chantier d'insertion DWWM</h6>
+						{% for formation in lastFormations %}
+							<div class="carousel-item {{ loop.index == 1 ? 'active' : '' }}">
+
+								<div class="d-flex">
+									<div class="col-4 d-flex align-items-center justify-content-center my-bg-yellow my-ratio">
+										<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/colombbusLogo.jpg')}}" alt="">
 									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
+									<div class="col-8 p-4 text-center">
+										<div class="text-center">
+											<h6 class="my-2">{{formation.name}}</h6>
+										</div>
+										<p>{{ formation.description|striptags|u.truncate(50) }} ...</p>
+                                        <button class="btn"><a href="">Voir plus</a></button>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="d-flex">
-
-
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-yellow my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/colombbusLogo.jpg')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">Chantier d'insertion DWWM</h6>
-									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="d-flex">
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-yellow my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/colombbusLogo.jpg')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">Chantier d'insertion DWWM</h6>
-									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 
 				</div>
 			</div>
+
 
 			<div class="col-lg-3 col-md-12 col-sm-12 mt-lg-4 mt-sm-5">
 				<h5>Les dernières offres d'emploi</h5>
@@ -128,48 +82,24 @@
 						<button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2" aria-label="Slide 3"></button>
 					</div>
 					<div class="carousel-inner rounded-3">
-						<div class="carousel-item active">
+						{% for emploi in lastEmplois %}
+							<div class="carousel-item {{ loop.index == 1 ? 'active' : '' }}">
 
-							<div class="d-flex">
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-blue my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/10MW.png')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">Developpeur full stack</h6>
+								<div class="d-flex">
+									<div class="col-4 d-flex align-items-center justify-content-center my-bg-blue my-ratio">
+										<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/10MW.png')}}" alt="">
 									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?.</p>
+									<div class="col-8 p-4 text-center">
+										<div class="text-center">
+											<h6 class="my-2">{{emploi.name}}</h6>
+										</div>
+										<p>{{ emploi.description|striptags|u.truncate(50) }} ...</p>
+                                        <button class="btn"><a href="">Voir plus</a></button>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="d-flex">
-
-
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-blue my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/10MW.png')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">Developpeur full stack</h6>
-									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="d-flex">
-								<div class="col-4 d-flex align-items-center justify-content-center my-bg-blue my-ratio">
-									<img class="w-75 d-block mx-auto rounded-circle card_user-profil m-3" src="{{asset('assets/img/10MW.png')}}" alt="">
-								</div>
-								<div class="col-8 p-4 text-center">
-									<div class="text-center">
-										<h6 class="my-2">Developpeur full stack</h6>
-									</div>
-									<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo?</p>
-								</div>
-							</div>
-						</div>
+							
+						{% endfor %}
 					</div>
 
 				</div>

@@ -40,4 +40,24 @@ class FormationRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    //    public function findOneBySomeField($value): ?Formation
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+
+    public function findLastThree(): array
+    {
+        return $this->createQueryBuilder('f')
+            ->orderBy('f.id', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
 }

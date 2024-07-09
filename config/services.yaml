@@ -22,3 +22,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # enable twig string extensions
+    Twig\Extra\TwigExtraBundle\String\StringExtension: '@twig.extension.string'

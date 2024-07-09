@@ -121,6 +121,7 @@ css Open In Editor Edit Copy code * {
     transform: translateY(-5px);
     background-color: var(--clr-blue);
   }
+}
 
 /* CLEAR-GREEN */
 
@@ -134,7 +135,7 @@ css Open In Editor Edit Copy code * {
 
 /* taille cards */
 .my-ratio{
-  height: 230px;
+  height: 250px;
 
 }
 

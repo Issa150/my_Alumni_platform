@@ -57,4 +57,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findLastThree(): array
+    {
+         // Obtenir la connexion Doctrine
+    $conn = $this->getEntityManager()->getConnection();
+
+    // Requête SQL native
+    $sql = '
+        SELECT * FROM user
+        WHERE JSON_CONTAINS(roles, :role) = 1
+        ORDER BY id DESC
+        LIMIT 3
+    ';
+
+    // Utiliser executeQuery et fetchAllAssociative
+    $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
+    
+    return $stmt->fetchAllAssociative();
+    }
 }

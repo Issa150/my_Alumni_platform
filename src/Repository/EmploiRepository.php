@@ -40,4 +40,14 @@ class EmploiRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    
+    public function findLastThree(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -48,6 +48,12 @@
 
 							</div>
 						{% endif %}
+						{% if is_granted('ROLE_ADMIN') %}
+						<div class="d-flex justify-content-center align-items-center">
+						<a class="text-white text-decoration-none" href="{{path('admin')}}">Dashboard</a>
+						</div>
+							
+						{% endif %}
 
 
 						{% if app.user %}

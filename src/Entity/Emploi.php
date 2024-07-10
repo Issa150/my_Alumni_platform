@@ -35,10 +35,10 @@ class Emploi
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $field = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $publication_date = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $limit_offer = null;
 
     #[ORM\Column(nullable: true)]

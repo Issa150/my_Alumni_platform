@@ -9,7 +9,6 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -18,6 +17,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
 use EasyCorp\Bundle\EasyAdminBundle\Field\{IdField, EmailField, TextField};
 use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore};
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class UserCrudController extends AbstractCrudController
 {

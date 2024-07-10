@@ -162,7 +162,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address('emma.botti@10mentionweb.org', 'Mail Bot'))
             ->to($user->getEmail())
             ->subject('Votre demande de réinitialisation de mot de passe')
-            ->htmlTemplate('reset_password/email.html.twig')
+            ->htmlTemplate('emails/reset_password_email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
             ])
@@ -175,4 +175,7 @@ class ResetPasswordController extends AbstractController
 
         return $this->redirectToRoute('app_check_email');
     }
+
+
+    
 }

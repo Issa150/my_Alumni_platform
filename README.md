@@ -39,6 +39,15 @@ Il y aura des erreurs après cette ligne : c'est normal, il faut forcer les chan
 ```bash
 symfony console doctrine:schema:update --force
 ```
+## Migrations : général
+A chaque fois qu'un changement est fait dans la base de données, il faut migrer les changements avec les deux lignes suivantes :
+```bash
+symfony console make:migration
+```
+```bash
+symfony console doctrine:migrations:migrate
+```
+
 
 # Notes de test
 
@@ -58,6 +67,10 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `firstname`, `lastname`,
 
 
 ```
+Ajouter ces lignes dans la table Formatin sur PHPMyAdmin :
+```sql
+```
+
 Ensemble des dispositifs pour tester l'application  
 Email des utilisateurs de test pour se connecter via le formulaire de connexion
 - admin@colombbus.org : ROLE_ADMIN

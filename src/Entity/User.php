@@ -93,10 +93,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    /**
+     * @var Collection<int, SocialLinks>
+     */
+    #[ORM\OneToMany(targetEntity: SocialLinks::class, mappedBy: 'user_id')]
+    private Collection $socialLinks;
+
     public function __construct()
     {
         $this->formations = new ArrayCollection();
         $this->emplois = new ArrayCollection();
+        $this->socialLinks = new ArrayCollection();
     }
 
 
@@ -365,6 +372,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SocialLinks>
+     */
+    public function getSocialLinks(): Collection
+    {
+        return $this->socialLinks;
+    }
+
+    public function addSocialLink(SocialLinks $socialLink): static
+    {
+        if (!$this->socialLinks->contains($socialLink)) {
+            $this->socialLinks->add($socialLink);
+            $socialLink->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSocialLink(SocialLinks $socialLink): static
+    {
+        if ($this->socialLinks->removeElement($socialLink)) {
+            // set the owning side to null (unless already changed)
+            if ($socialLink->getUserId() === $this) {
+                $socialLink->setUserId(null);
+            }
+        }
 
         return $this;
     }

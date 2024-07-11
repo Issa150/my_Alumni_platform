@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\FormationRepository;
-use App\Enum\FormationTeleworking;
+use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: FormationRepository::class)]
-class Formation
+#[ORM\Entity(repositoryClass: EventRepository::class)]
+class Event
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,30 +26,25 @@ class Formation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $begin_at = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $degree = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $funding = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?FormationTeleworking $teleworking = null;
-
-    #[ORM\ManyToOne(inversedBy: 'formations')]
-    private ?User $user_id = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $link = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -106,7 +100,7 @@ class Formation
         return $this->begin_at;
     }
 
-    public function setBeginAt(?\DateTimeImmutable $begin_at): static
+    public function setBeginAt(\DateTimeImmutable $begin_at): static
     {
         $this->begin_at = $begin_at;
 
@@ -118,57 +112,9 @@ class Formation
         return $this->end_at;
     }
 
-    public function setEndAt(?\DateTimeImmutable $end_at): static
+    public function setEndAt(\DateTimeImmutable $end_at): static
     {
         $this->end_at = $end_at;
-
-        return $this;
-    }
-
-    public function getDegree(): ?string
-    {
-        return $this->degree;
-    }
-
-    public function setDegree(?string $degree): static
-    {
-        $this->degree = $degree;
-
-        return $this;
-    }
-
-    public function getFunding(): ?string
-    {
-        return $this->funding;
-    }
-
-    public function setFunding(?string $funding): static
-    {
-        $this->funding = $funding;
-
-        return $this;
-    }
-
-    public function isTeleworking(): ?FormationTeleworking
-    {
-        return $this->teleworking;
-    }
-
-    public function setTeleworking(?FormationTeleworking $teleworking): static
-    {
-        $this->teleworking = $teleworking;
-
-        return $this;
-    }
-
-    public function getUserId(): ?User
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?User $user_id): static
-    {
-        $this->user_id = $user_id;
 
         return $this;
     }
@@ -178,7 +124,7 @@ class Formation
         return $this->link;
     }
 
-    public function setLink(string $link): static
+    public function setLink(?string $link): static
     {
         $this->link = $link;
 

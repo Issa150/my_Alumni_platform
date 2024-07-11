@@ -76,4 +76,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     
     return $stmt->fetchAllAssociative();
     }
+
+    public function findByNumberAlumnis(): int
+    {
+         // Obtenir la connexion Doctrine
+    $conn = $this->getEntityManager()->getConnection();
+
+    // Requête SQL native
+    $sql = '
+        SELECT COUNT(*) as count FROM user
+        WHERE JSON_CONTAINS(roles, :role) = 1
+    ';
+
+    // Utiliser executeQuery et fetchAllAssociative
+    $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
+
+    $result = $stmt->fetchAllAssociative();
+    
+    return (int) $result;
+    }
 }

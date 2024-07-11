@@ -97,8 +97,9 @@ class UserCrudController extends AbstractCrudController
     {
 
         $roles = [
-            'Admin' => 'ROLE_ADMIN',
-            'User' => 'ROLE_USER',
+            'Administrateur' => 'ROLE_ADMIN',
+            'Partenaire'=> 'ROLE_PARTNER',
+            'Utilisateur' => 'ROLE_USER',
             // Ajoutez d'autres rôles selon vos besoins
         ];
 

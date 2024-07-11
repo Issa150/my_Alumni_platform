@@ -1,0 +1,95 @@
+{% extends 'profile/profile_base.html.twig' %}
+
+{# {% block title %}Profile!{% endblock %} #}
+
+{% block body %}
+	<div class="container">
+
+		<div
+			class="row w-100 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+
+			{# Colomn Left #}
+
+			<div class="col-lg-3 col-md-6 col-sm-12 min-vh-100 p-1">
+
+				<div
+					class="container-fluid bg-body-secondary rounded-2 p-1 h-100 w-100">
+					{# Img cover #}
+					<img class="my-img-cover w-100" src="https://cdn.pixabay.com/photo/2023/06/15/16/55/klatschmohn-8066026_1280.jpg" alt="Profile image cover">
+					<img class="my-img-profile shadow-sm mx-auto d-block rounded-circle ratio ratio-1x1" style="" src="https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_1280.jpg" alt="Image profile">
+					<h3 class="text-center">Jasmine Bergstrom</h3>
+					<a class="d-block text-center" href="mailto:allumini@gmail.fr">allumini@gmail.fr</a>
+					<p class="text-center">Je suis à la recherche d’un stage dans le domaine du Développement web de 01/02/2024- 01/03/2024. .J'ai acquis HTML,CSS, JavaScript, PHP,SQL</p>
+
+					{# Profile details #}
+					<ul class="menu_container list-unstyled bg-white p-2 rounded">
+						<h2 class="border-bottom border-3 border-success text-success">Profile</h2>
+						<li><a href="my_github">mon github</a></li>
+						<li><a href="my_github">mon linkedin</a></li>
+						<li><span>CV:</span> ...</li>
+						<li><span>Ville:</span> ...</li>
+						<li><span>Pays:</span> ...</li>
+						<li><span>Derniers diplôme:</span> ...</li>
+						<li><span>Domaine recherché:</span> ...</li>
+					</ul>
+
+
+					{# Les options de menu côté gouche #}
+					<ul class="menu_container list-unstyled bg-white p-2 rounded">
+						<h2 class="border-bottom border-3 border-success text-success">Menu</h2>
+						<li>
+							<a href="{{path('my_feeds')}}" class="aside-menu-item {{app.current_route  == 'my_feeds' ? 'my-active' : ''}} btn my-1">Fil d'actualité</a>
+						</li>
+						<li>
+							<a href="{{path('my_sources')}}" class="aside-menu-item {{app.current_route  == 'my_sources' ? 'my-active' : ''}} btn my-1">Ressources & bibliothéque</a>
+						</li>
+						<li>
+							<a href="{{path('my_profile')}}" class="aside-menu-item {{app.current_route  == 'my_profile' ? 'my-active' : ''}} btn my-1">Mon profil</a>
+						</li>
+						<li>
+							<a href="{{path('my_likes')}}" class="aside-menu-item {{app.current_route  == 'my_likes' ? 'my-active' : ''}} btn my-1">Mes likes</a>
+						</li>
+						<li>
+							<a href="{{path('my_abonnement')}}" class="aside-menu-item {{app.current_route  == 'my_abonnement' ? 'my-active' : ''}} btn my-1">Abonnement</a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+
+
+			<main class="col-lg-7 col-md-6 col-sm-12 min-vh-100 p-1">
+				<div class="container-fluid bg-body-secondary rounded-2 p-1 h-100">
+					{# <h2 class="border-bottom border-3 border-success text-success">Fil d'actualité</h2> #}
+					{% block content %}
+
+						{# <!-- Tab contents --> #}
+						{% if app.request.get('_route') == 'profile/actualité' %}
+							{% include 'profile/pages/feeds.twig' %}
+						{% elseif app.request.get('_route') == 'profile/abonnement' %}
+							{% include 'profile/pages/contacts.twig' %}
+						{% elseif app.request.get('_route') == 'profile/my_posts' %}
+							{% include 'profile/pages/my_posts.twig' %}
+						{% else %}
+							{% include 'profile/pages/my_profile.twig' %}
+						{% endif %}
+					{% endblock %}
+				</div>
+			</main>
+
+
+			<div class="col-lg-2 col-md-6 col-sm-12 min-vh-100 p-1">
+				<div class="container-fluid bg-body-secondary rounded-2 p-1 h-100">
+					<h2 class="border-bottom border-3 border-success text-success">Contacts</h2>
+
+					{% for i in 1..4 %}
+						<div class="contact-card d-flex align-items-center gap-2 my-2">
+							<img class="my-circle shadow-sm" src="https://cdn.pixabay.com/photo/2016/11/29/05/11/adult-1867471_1280.jpg" alt="Contacts">
+							<p>Lela Heathcote</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

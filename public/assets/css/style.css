@@ -26,6 +26,7 @@ css Open In Editor Edit Copy code * {
   --clr-dark: #404040;
 
 }
+
 /* COLORS */
 /* our own class color utilities */
 .my-text-dark {
@@ -83,45 +84,6 @@ css Open In Editor Edit Copy code * {
 .my-bg-yellow-pastel {
   background-color: var(--clr-yellow-pastel);
 }
-/* ----------------------------------------- */
-/* ----   Style for elements  ----- */
-.my-btn-red{
-  background-color: var(--clr-red);
-  transition: .25s;
-
-
-  &:hover{
-    transform: translateY(-5px);
-    background-color: var(--clr-red);
-  }
-}
-.my-btn-green{
-  background-color: var(--clr-main);
-  transition: .25s;
-
-  &:hover{
-    transform: translateY(-5px);
-    background-color: var(--clr-main);
-  }
-}
-.my-btn-yellow{
-  background-color: var(--clr-yellow);
-  transition: .25s;
-
-  &:hover{
-    transform: translateY(-5px);
-    background-color: var(--clr-yellow);
-  }
-}
-.my-btn-blue{
-  background-color: var(--clr-blue);
-  transition: .25s;
-
-  &:hover{
-    transform: translateY(-5px);
-    background-color: var(--clr-blue);
-  }
-}
 
 /* CLEAR-GREEN */
 
@@ -133,23 +95,100 @@ css Open In Editor Edit Copy code * {
   background-color: var(--clr-green);
 }
 
+/* ----------------------------------------- */
+/* ----   Style for buttons / elements  ----- */
+.my-btn-red {
+  background-color: var(--clr-red);
+  transition: .25s;
+
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: var(--clr-red);
+  }
+}
+
+.my-btn-green {
+  background-color: var(--clr-main);
+  transition: .25s;
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: var(--clr-main);
+  }
+}
+
+.my-btn-yellow {
+  background-color: var(--clr-yellow);
+  transition: .25s;
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: var(--clr-yellow);
+  }
+}
+
+.my-btn-blue {
+  background-color: var(--clr-blue);
+  transition: .25s;
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: var(--clr-blue);
+  }
+}
+
+/* ----------------------------------------- */
+/* ----   Style for link navigation   ----- */
+.my-link-item-hover {
+
+  &:hover {
+    background: var(--clr-bg);
+    color: var(--clr-main);
+
+  }
+}
+
+a.my-active {
+  background: var(--clr-bg);
+  color: var(--clr-main);
+}
+img.my-active{
+  border: 2px  solid var(--clr-bg);
+}
+
+/* Special situations */
 /* taille cards */
-.my-ratio{
+.my-ratio {
   height: 280px;
 
 }
 
+.my-circle {
+  width: 40px !important;
+  aspect-ratio: 1/1 !important;
+  border-radius: 50%;
+}
+
+.my_slider_tilte_height {
+  height: 50px;
+}
+
 /* --------------------------------------------- */
+/* Reset */
+img {
+  object-fit: cover;
+  width: 100%;
+}
 
 
-
+/* --------------------------------------------- */
 body {
   font-family: 'Quicksand', sans-serif;
   font-size: 16px;
   color: var(--clr-dark);
   background-color: var(--clr-bg);
 }
-
 
 /* NAV NAVIGATION */
 .navbar {
@@ -248,10 +287,49 @@ body {
 .card_user-profil {
   width: 100%;
   aspect-ratio: 1/1;
-  
+
 }
 
-.carousel-indicators{
+.carousel-indicators {
   margin-bottom: -40px !important;
 }
 
+/* ----  Profile page Styles ------*/
+.my-img-cover {
+  height: 150px;
+}
+
+.my-img-profile {
+  width: 150px;
+  aspect-ratio: 1/1;
+  border: 4px solid rgb(255, 255, 255);
+  margin-top: -75px;
+}
+
+.menu_container li a {
+  display: block;
+  text-align: left;
+  border: none;
+  background: transparent;
+  background: var(--clr-text-2);
+  color: var(--clr-text-1);
+
+  &:hover {
+    background: var(--clr-main-pastel);
+    color: var(--clr-text-1);
+  }
+}
+
+.aside-menu-item{
+
+  &:hover{
+    background: var(--clr-green) !important;
+    color: var(--clr-main) !important;
+  }
+
+  &.my-active{
+    background: var(--clr-green);
+    color: var(--clr-main);
+  }
+
+}

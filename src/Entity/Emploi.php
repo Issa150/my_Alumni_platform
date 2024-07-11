@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmploiRepository;
+use App\Enum\EmploiTeleworking;
+use App\Enum\EmploiContract;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -42,13 +44,16 @@ class Emploi
     private ?\DateTimeInterface $limit_offer = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $teleworking = null;
+    private ?EmploiTeleworking $teleworking = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $contract = null;
+    private ?EmploiContract $contract = null;
 
     #[ORM\ManyToOne(inversedBy: 'emplois')]
     private ?user $user_id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $link = null;
 
     public function getId(): ?int
     {
@@ -163,24 +168,24 @@ class Emploi
         return $this;
     }
 
-    public function isTeleworking(): ?bool
+    public function isTeleworking(): ?EmploiTeleworking
     {
         return $this->teleworking;
     }
 
-    public function setTeleworking(?bool $teleworking): static
+    public function setTeleworking(?EmploiTeleworking $teleworking): static
     {
         $this->teleworking = $teleworking;
 
         return $this;
     }
 
-    public function getContract(): ?string
+    public function getContract(): ?EmploiContract
     {
         return $this->contract;
     }
 
-    public function setContract(?string $contract): static
+    public function setContract(?EmploiContract $contract): static
     {
         $this->contract = $contract;
 
@@ -195,6 +200,18 @@ class Emploi
     public function setUserId(?user $user_id): static
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): static
+    {
+        $this->link = $link;
 
         return $this;
     }

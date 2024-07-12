@@ -26,6 +26,7 @@ css Open In Editor Edit Copy code * {
   --clr-dark: #404040;
 
 }
+
 /* COLORS */
 /* our own class color utilities */
 .my-text-dark {
@@ -83,47 +84,56 @@ css Open In Editor Edit Copy code * {
 .my-bg-yellow-pastel {
   background-color: var(--clr-yellow-pastel);
 }
+
+.my-bg-gray{
+  background-color: #f3f3f3;
+}
+
 /* ----------------------------------------- */
 /* ----   Style for elements  ----- */
-.my-btn-red{
+.my-btn-red {
   background-color: var(--clr-red);
   transition: .25s;
 
 
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
     background-color: var(--clr-red);
   }
 }
-.my-btn-green{
+
+.my-btn-green {
   background-color: var(--clr-main);
   transition: .25s;
 
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
     background-color: var(--clr-main);
   }
 }
-.my-btn-yellow{
+
+.my-btn-yellow {
   background-color: var(--clr-yellow);
   transition: .25s;
 
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
     background-color: var(--clr-yellow);
   }
 }
-.my-btn-blue{
+
+.my-btn-blue {
   background-color: var(--clr-blue);
   transition: .25s;
 
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
     background-color: var(--clr-blue);
   }
 }
 
-/* CLEAR-GREEN */
+
+/* PALE-GREEN */
 
 .my-text-clr-green {
   color: var(--clr-green);
@@ -134,9 +144,14 @@ css Open In Editor Edit Copy code * {
 }
 
 /* taille cards */
-.my-ratio{
+.my-ratio {
   height: 280px;
 
+}
+
+/* Supprimer le focus des inputs */
+.inputSearch:focus {
+  outline: none;
 }
 
 /* --------------------------------------------- */
@@ -248,10 +263,21 @@ body {
 .card_user-profil {
   width: 100%;
   aspect-ratio: 1/1;
-  
+
 }
 
-.carousel-indicators{
+.carousel-indicators {
   margin-bottom: -40px !important;
 }
+
+/* PAGE ANNUAIRE */
+
+.searchAnnuaire {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+  height: 80px;
+
+}
+
 

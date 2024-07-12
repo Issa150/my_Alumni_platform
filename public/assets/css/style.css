@@ -85,6 +85,14 @@ css Open In Editor Edit Copy code * {
   background-color: var(--clr-yellow-pastel);
 }
 
+
+.my-bg-gray{
+  background-color: #f3f3f3;
+}
+
+/* ----------------------------------------- */
+/* ----   Style for elements  ----- */
+
 /* CLEAR-GREEN */
 
 .my-text-clr-green {
@@ -97,6 +105,7 @@ css Open In Editor Edit Copy code * {
 
 /* ----------------------------------------- */
 /* ----   Style for buttons / elements  ----- */
+
 .my-btn-red {
   background-color: var(--clr-red);
   transition: .25s;
@@ -138,9 +147,14 @@ css Open In Editor Edit Copy code * {
   }
 }
 
+
+
+/* PALE-GREEN */
+
 /* ----------------------------------------- */
 /* ----   Style for link navigation   ----- */
 .my-link-item-hover {
+
 
   &:hover {
     background: var(--clr-bg);
@@ -164,11 +178,20 @@ img.my-active{
 
 }
 
+
+/* Supprimer le focus des inputs */
+.inputSearch:focus {
+  outline: none;
+}
+
+/* --------------------------------------------- */
+
 .my-circle {
   width: 40px !important;
   aspect-ratio: 1/1 !important;
   border-radius: 50%;
 }
+
 
 .my_slider_tilte_height {
   height: 50px;
@@ -294,6 +317,19 @@ body {
   margin-bottom: -40px !important;
 }
 
+
+/* PAGE ANNUAIRE */
+
+.searchAnnuaire {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+  height: 80px;
+
+}
+
+
+
 /* ----  Profile page Styles ------*/
 .my-img-cover {
   height: 150px;
@@ -333,3 +369,4 @@ body {
   }
 
 }
+

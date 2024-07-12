@@ -85,12 +85,27 @@ css Open In Editor Edit Copy code * {
   background-color: var(--clr-yellow-pastel);
 }
 
+
 .my-bg-gray{
   background-color: #f3f3f3;
 }
 
 /* ----------------------------------------- */
 /* ----   Style for elements  ----- */
+
+/* CLEAR-GREEN */
+
+.my-text-clr-green {
+  color: var(--clr-green);
+}
+
+.my-bg-clr-green {
+  background-color: var(--clr-green);
+}
+
+/* ----------------------------------------- */
+/* ----   Style for buttons / elements  ----- */
+
 .my-btn-red {
   background-color: var(--clr-red);
   transition: .25s;
@@ -133,21 +148,36 @@ css Open In Editor Edit Copy code * {
 }
 
 
+
 /* PALE-GREEN */
 
-.my-text-clr-green {
-  color: var(--clr-green);
+/* ----------------------------------------- */
+/* ----   Style for link navigation   ----- */
+.my-link-item-hover {
+
+
+  &:hover {
+    background: var(--clr-bg);
+    color: var(--clr-main);
+
+  }
 }
 
-.my-bg-clr-green {
-  background-color: var(--clr-green);
+a.my-active {
+  background: var(--clr-bg);
+  color: var(--clr-main);
+}
+img.my-active{
+  border: 2px  solid var(--clr-bg);
 }
 
+/* Special situations */
 /* taille cards */
 .my-ratio {
   height: 280px;
 
 }
+
 
 /* Supprimer le focus des inputs */
 .inputSearch:focus {
@@ -156,15 +186,32 @@ css Open In Editor Edit Copy code * {
 
 /* --------------------------------------------- */
 
+.my-circle {
+  width: 40px !important;
+  aspect-ratio: 1/1 !important;
+  border-radius: 50%;
+}
 
 
+.my_slider_tilte_height {
+  height: 50px;
+}
+
+/* --------------------------------------------- */
+/* Reset */
+img {
+  object-fit: cover;
+  width: 100%;
+}
+
+
+/* --------------------------------------------- */
 body {
   font-family: 'Quicksand', sans-serif;
   font-size: 16px;
   color: var(--clr-dark);
   background-color: var(--clr-bg);
 }
-
 
 /* NAV NAVIGATION */
 .navbar {
@@ -270,6 +317,7 @@ body {
   margin-bottom: -40px !important;
 }
 
+
 /* PAGE ANNUAIRE */
 
 .searchAnnuaire {
@@ -280,4 +328,45 @@ body {
 
 }
 
+
+
+/* ----  Profile page Styles ------*/
+.my-img-cover {
+  height: 150px;
+}
+
+.my-img-profile {
+  width: 150px;
+  aspect-ratio: 1/1;
+  border: 4px solid rgb(255, 255, 255);
+  margin-top: -75px;
+}
+
+.menu_container li a {
+  display: block;
+  text-align: left;
+  border: none;
+  background: transparent;
+  background: var(--clr-text-2);
+  color: var(--clr-text-1);
+
+  &:hover {
+    background: var(--clr-main-pastel);
+    color: var(--clr-text-1);
+  }
+}
+
+.aside-menu-item{
+
+  &:hover{
+    background: var(--clr-green) !important;
+    color: var(--clr-main) !important;
+  }
+
+  &.my-active{
+    background: var(--clr-green);
+    color: var(--clr-main);
+  }
+
+}
 

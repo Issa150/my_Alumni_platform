@@ -9,21 +9,21 @@
 				<div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
 					<a class="navbar-brand col-lg-3" href="{{path('app_main')}}"><img src="{{asset('assets/img/logoOrange.png')}}"  alt="" class="w-50"></a>
 					{% if app.request.attributes.get('_route') != 'app_login' %}
-						<ul class="navbar-nav col-lg-6 justify-content-lg-center">
+						<ul class="navbar-nav col-lg-6 justify-content-lg-center gap-1">
 
 							<li class="nav-item">
-								<a class="nav-link" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Agenda</a>
+								<a class="nav-link rounded-2 my-link-item-hover {{app.current_route  == 'app_aganda' ? 'my-active' : ''}}" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Agenda</a>
 							</li>
 							<li
 								class="nav-item">
 								{# <a class="nav-link" aria-disabled="true" href="#">Annuaire</a> #}
-								<a class="nav-link" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Annuaire</a>
+								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Annuaire</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Emplois</a>
+								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Emplois</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Formations</a>
+								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Formations</a>
 							</li>
 							{# {% endif %} #}
 						</ul>
@@ -41,7 +41,7 @@
 								<div
 									class="profile-picture">
 									{# {% if app.user %} #}
-									<img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil">
+									<a href="{{path('app_profile')}}"><img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil"></a>
 								</div>
 							{% else %}
 								<div class="profile-picture">

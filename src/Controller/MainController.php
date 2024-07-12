@@ -21,11 +21,14 @@ class MainController extends AbstractController
         $lastFormations = $entityManager->getRepository(Formation::class)->findLastThree();
         $lastEmplois = $entityManager->getRepository(Emploi::class)->findLastThree();
 
+        $countUsers = $entityManager->getRepository(User::class)->findByNumberAlumnis();
+
         // $user= false;
         return $this->render('main/index.html.twig', [
             'lastUsers'=> $lastUsers,
             'lastFormations'=> $lastFormations,
             'lastEmplois'=> $lastEmplois,
+            'countUsers' => $countUsers,
 
         ]);
     }

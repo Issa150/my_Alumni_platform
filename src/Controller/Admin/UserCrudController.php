@@ -111,9 +111,11 @@ class UserCrudController extends AbstractCrudController
             ->setChoices($roles)
             ->allowMultipleChoices()
             ->renderExpanded(),
-            TextField::new('password','Mot de passe')
         ];
 
+        if ($pageName === Crud::PAGE_NEW) {
+            $fields[] = TextField::new('password', 'Mot de passe');
+        }
         return $fields;
     }
 

@@ -232,6 +232,14 @@ body {
   font-size: 2rem;
 }
 
+
+@media (max-width: 992px) {
+  .custom-logo {
+      width: 30% !important; /* Smaller size for mobile devices */
+
+  }
+}
+
 /* LIENS  BARRE DE NAVIGATION */
 .nav-link {
   color: var(--clr-light);

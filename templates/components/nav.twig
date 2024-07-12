@@ -1,13 +1,17 @@
 <header class="my-bg-green">
 	<div class="container">
-		<nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Thirteenth navbar example">
-			<div class=" container-fluid">
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+		<nav class="navbar navbar-expand-lg navbar-dark" aria-label="Thirteenth navbar example">
+			<div class=" container-fluid d-flex align-items-center justify-content-between menuBu">
 
-				<div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-					<a class="navbar-brand col-lg-3" href="{{path('app_main')}}"><img src="{{asset('assets/img/logoOrange.png')}}"  alt="" class="w-50"></a>
+				<div class="d-flex justify-content-between">
+					<a class="navbar-brand col-lg-4 col-md-6" href="{{path('app_main')}}"><img src="{{asset('assets/img/logoOrange.png')}}" alt="Logo PACS" class="custom-logo w-100"></a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+
+				<div class="collapse navbar-collapse d-lg-flex justify-content-between" id="navbarsExample11">
+
 					{% if app.request.attributes.get('_route') != 'app_login' %}
 						<ul class="navbar-nav col-lg-6 justify-content-lg-center gap-1">
 
@@ -17,7 +21,7 @@
 							<li
 								class="nav-item">
 								{# <a class="nav-link" aria-disabled="true" href="#">Annuaire</a> #}
-								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Annuaire</a>
+								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="{{path('app_directory')}}" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Annuaire</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Emplois</a>

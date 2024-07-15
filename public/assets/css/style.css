@@ -155,12 +155,32 @@ css Open In Editor Edit Copy code * {
 /* ----   Style for link navigation   ----- */
 .my-link-item-hover {
 
+  position: relative;
+  padding-bottom: 5px; /* Ajustez cette valeur en fonction de vos besoins */
+  display: inline-block;
+  text-decoration: none;
+}
 
-  &:hover {
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px; /* Épaisseur de la ligne */
+  background-color: #fbf8f8; /* Couleur de la ligne */
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out; /* Transition pour l'agrandissement */
+}
+
+.nav-link:hover::after {
+  width: 100%; /* La ligne s'agrandit à 100% */
+  left: 0; /* La ligne s'étend de gauche à droite */
+
+  /* &:hover {
     background: var(--clr-bg);
     color: var(--clr-main);
 
-  }
+  } */
 }
 
 a.my-active {
@@ -178,11 +198,6 @@ img.my-active{
 
 }
 
-
-/* Supprimer le focus des inputs */
-.inputSearch:focus {
-  outline: none;
-}
 
 /* --------------------------------------------- */
 
@@ -219,6 +234,10 @@ body {
 
 }
 
+.navbar-nav{
+  z-index: 2000;
+}
+
 
 .user-profil {
   width: 30px;
@@ -227,11 +246,12 @@ body {
 }
 
 /* LOGO */
-.navbar-brand {
+/* .navbar-brand {
   color: var(--clr-light);
   font-weight: 900;
   font-size: 2rem;
-}
+} */
+
 .custom-logo {
   width: 30% !important; /* Smaller size for mobile devices */
 
@@ -343,6 +363,19 @@ body {
   transform: translateY(50%);
   height: 80px;
 
+}
+
+/* Supprimer le focus des inputs */
+.inputSearch:focus {
+  outline: none;
+}
+
+.directoryTitle{
+  font-size: 60px;
+}
+
+.directoryHero{
+  max-height: 40vh;
 }
 
 

@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
-use EasyCorp\Bundle\EasyAdminBundle\Field\{IdField, EmailField, TextField};
+use EasyCorp\Bundle\EasyAdminBundle\Field\{DateField, IdField, EmailField, TextField};
 use EasyCorp\Bundle\EasyAdminBundle\Config\{Action, Actions, Crud, KeyValueStore};
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
@@ -106,6 +106,7 @@ class UserCrudController extends AbstractCrudController
         $fields = [
             IdField::new('id')->hideOnForm(),
             EmailField::new('email'),
+            DateField::new('lastConnectedAt')->hideOnForm(),
             ChoiceField::new('roles')
             ->setLabel('Roles')
             ->setChoices($roles)

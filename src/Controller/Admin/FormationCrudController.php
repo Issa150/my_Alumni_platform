@@ -6,10 +6,9 @@ use DateTime;
 use App\Entity\Formation;
 use App\Enum\FormationTeleworking;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -29,8 +28,8 @@ class FormationCrudController extends AbstractCrudController
             TextEditorField::new('description','Description'),
             TextField::new('zipcode','Code postal'),
             TextField::new('city','Ville'),
-            DateTimeField::new('begin_at','Date de début'),
-            DateTimeField::new('end_at','Date de fin'),
+            DateField::new('begin_at','Date de début'),
+            DateField::new('end_at','Date de fin'),
             TextField::new('degree','Diplôme'),
             TextField::new('funding','Financement'),
             ChoiceField::new('teleworking', 'Télétravail')

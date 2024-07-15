@@ -6,10 +6,9 @@ use App\Entity\Emploi;
 use App\Enum\EmploiContract;
 use App\Enum\EmploiTeleworking;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -32,8 +31,8 @@ class EmploiCrudController extends AbstractCrudController
             TextField::new('city','Ville'),
             TextEditorField::new('skills', 'Profil recherché / Compétences'),
             TextField::new('field', 'Domaine d\'activité'),
-            DateTimeField::new('publication_date','Date de publication'),
-            DateTimeField::new('limit_offer', 'Expiration de l\'offre'),
+            DateField::new('publication_date','Date de publication'),
+            DateField::new('limit_offer', 'Expiration de l\'offre'),
             ChoiceField::new('teleworking', 'Télétravail')
                 ->setChoices([
                     'Onsite' => EmploiTeleworking::OnSite,

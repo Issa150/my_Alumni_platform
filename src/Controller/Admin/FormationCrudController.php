@@ -26,6 +26,7 @@ class FormationCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name','Nom'),
             TextEditorField::new('description','Description'),
+            TextField::new('link','Lien de la formation'),
             TextField::new('zipcode','Code postal'),
             TextField::new('city','Ville'),
             DateField::new('begin_at','Date de début'),
@@ -38,6 +39,7 @@ class FormationCrudController extends AbstractCrudController
                     'Remote' => FormationTeleworking::Remote,
                     'Hybrid' => FormationTeleworking::Hybrid,
         ]),
+        
         ];
     }
     

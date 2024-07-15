@@ -26,6 +26,7 @@ class EmploiCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name','Intitulé du poste'),
             TextEditorField::new('description','Description'),
+            TextField::new('link','Lien de l\'annonce'),
             TextField::new('entreprise','Entreprise'),
             TextField::new('zipcode','Code postal'),
             TextField::new('city','Ville'),
@@ -49,6 +50,7 @@ class EmploiCrudController extends AbstractCrudController
                     'StageAlternance' => EmploiContract::StageAlternance,
                     'Autre' => EmploiContract::Autre,
         ]),
+        
         ];
     }
     

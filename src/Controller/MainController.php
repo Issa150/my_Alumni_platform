@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Emploi;
 use App\Entity\Formation;
+use App\Entity\Event;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,8 @@ class MainController extends AbstractController
         $lastEmplois = $entityManager->getRepository(Emploi::class)->findLastThree();
 
         $countUsers = $entityManager->getRepository(User::class)->findByNumberAlumnis();
+        $countEmplois = $entityManager->getRepository(Emploi::class)->findByNumberEmplois();
+        $countEvents = $entityManager->getRepository(Event::class)->findByNumberEvents();
 
         // $user= false;
         return $this->render('main/index.html.twig', [
@@ -29,6 +32,8 @@ class MainController extends AbstractController
             'lastFormations'=> $lastFormations,
             'lastEmplois'=> $lastEmplois,
             'countUsers' => $countUsers,
+            'countEmplois' => $countEmplois,
+            'countEvents' => $countEvents,
 
         ]);
     }

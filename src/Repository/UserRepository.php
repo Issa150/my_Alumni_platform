@@ -85,13 +85,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     // Requête SQL native
     $sql = '
         SELECT COUNT(*) as count FROM user
-        WHERE JSON_CONTAINS(roles, :role) = 1
+        WHERE (JSON_CONTAINS(roles, :role) = 1 AND JSON_LENGTH(roles) = 1)
+        OR roles IS NULL
+        OR roles = "[]"
     ';
 
     // Utiliser executeQuery et fetchAllAssociative
     $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
 
-    $result = $stmt->fetchAllAssociative();
+    $result = $stmt->fetchOne();
     
     return (int) $result;
     }

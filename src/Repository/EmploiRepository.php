@@ -50,4 +50,21 @@ class EmploiRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByNumberEmplois(): int
+    {
+         // Obtenir la connexion Doctrine
+    $conn = $this->getEntityManager()->getConnection();
+
+    // Requête SQL native
+    $sql = '
+        SELECT COUNT(*) as count FROM emploi
+    ';
+
+    $stmt = $conn->executeQuery($sql);
+
+    $result = $stmt->fetchOne();
+    
+    return (int) $result;
+    }
 }

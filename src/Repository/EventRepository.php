@@ -40,4 +40,21 @@ class EventRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findByNumberEvents(): int
+    {
+         // Obtenir la connexion Doctrine
+    $conn = $this->getEntityManager()->getConnection();
+
+    // Requête SQL native
+    $sql = '
+        SELECT COUNT(*) as count FROM event
+    ';
+
+    $stmt = $conn->executeQuery($sql);
+
+    $result = $stmt->fetchOne();
+    
+    return (int) $result;
+    }
 }

@@ -21,7 +21,22 @@ class EmploiCrudController extends AbstractCrudController
 
 
     public function configureFields(string $pageName): iterable
-    {
+    {   
+        $contracts = [
+                    'CDI' => 'cdi',
+                    'CDD' => 'cdd',
+                    'Temps plein' => 'tempsPlein',
+                    'Temps partiel' => 'tempsPartiel',
+                    'Apprentissage' => 'apprentissage',
+                    'Contrat pro' => 'contratPro',
+                    'Intérim' => 'interim',
+                    'Stage' => 'stage',
+                    'Alternance' => 'alternance',
+                    'Activité bénévole' => 'activiteBenevole',
+                    'Contrat de volontariat' => 'contratDeVolontariat',
+                    'Freelance/Indépendant' => 'freelanceIndependant',
+            // Ajoutez d'autres rôles selon vos besoins
+        ];
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name','Intitulé du poste'),
@@ -36,20 +51,15 @@ class EmploiCrudController extends AbstractCrudController
             DateField::new('limit_offer', 'Expiration de l\'offre'),
             ChoiceField::new('teleworking', 'Télétravail')
                 ->setChoices([
-                    'Onsite' => EmploiTeleworking::OnSite,
-                    'Remote' => EmploiTeleworking::Remote,
-                    'Hybrid' => EmploiTeleworking::Hybrid,
+                    'Présentiel' => EmploiTeleworking::OnSite,
+                    'Distanciel' => EmploiTeleworking::Remote,
+                    'Hybride' => EmploiTeleworking::Hybrid,
         ]),
         ChoiceField::new('contract', 'Type de contrat')
-                ->setChoices([
-                    'TempsPlein' => EmploiContract::TempsPlein,
-                    'TempsPartiel' => EmploiContract::TempsPartiel,
-                    'Contrat' => EmploiContract::Contrat,
-                    'TravailTemporaire' => EmploiContract::TravailTemporaire,
-                    'Benevolat' => EmploiContract::Benevolat,
-                    'StageAlternance' => EmploiContract::StageAlternance,
-                    'Autre' => EmploiContract::Autre,
-        ]),
+        ->setLabel('Type de contrat')
+        ->setChoices($contracts)
+        ->allowMultipleChoices()
+        ->renderExpanded(),
         
         ];
     }

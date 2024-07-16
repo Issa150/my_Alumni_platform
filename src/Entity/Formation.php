@@ -184,4 +184,9 @@ class Formation
 
         return $this;
     }
+
+    public function getTeleworking(): ?FormationTeleworking
+    {
+        return $this->teleworking;
+    }
 }

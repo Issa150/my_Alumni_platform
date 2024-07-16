@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\EmploiRepository;
 use App\Enum\EmploiTeleworking;
-use App\Enum\EmploiContract;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -46,8 +45,11 @@ class Emploi
     #[ORM\Column(nullable: true)]
     private ?EmploiTeleworking $teleworking = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?EmploiContract $contract = null;
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $contract = [];
 
     #[ORM\ManyToOne(inversedBy: 'emplois')]
     private ?user $user_id = null;
@@ -180,12 +182,12 @@ class Emploi
         return $this;
     }
 
-    public function getContract(): ?EmploiContract
+    public function getContract(): array
     {
         return $this->contract;
     }
 
-    public function setContract(?EmploiContract $contract): static
+    public function setContract(array $contract): static
     {
         $this->contract = $contract;
 
@@ -214,5 +216,10 @@ class Emploi
         $this->link = $link;
 
         return $this;
+    }
+
+    public function getTeleworking(): ?EmploiTeleworking
+    {
+        return $this->teleworking;
     }
 }

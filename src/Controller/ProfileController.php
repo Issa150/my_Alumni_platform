@@ -2,50 +2,72 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/profile', name: 'app_profile')]
-    public function index(): Response
+
+    #[Route('/profile/{id}', name: 'app_profile')]
+    public function profileUser(UserRepository $userRepository, int $id): Response
     {
-        // return $this->render('profile/profile_layout.html.twig', [
+
+        $user =$userRepository->findOneById($id);
+
         return $this->render('profile/pages/feeds.twig', [
             'controller_name' => 'ProfileController',
+            'user' => $user
         ]);
     }
 
-    #[Route('/profile/feeds', name: 'my_feeds')]
-    public function feeds(): Response
+
+    #[Route('/profile/feeds/{id}', name: 'my_feeds')]
+    public function feeds(UserRepository $userRepository, int $id): Response
     {
-        return $this->render('profile/pages/feeds.twig');
+        $user =$userRepository->findOneById($id);
+        return $this->render('profile/pages/feeds.twig',[
+            'user' => $user
+        ]);
+
     }
 
-    #[Route('/profile/resources', name: 'my_sources')]
-    public function sources(): Response
+    #[Route('/profile/resources/{id}', name: 'my_sources')]
+    public function sources(UserRepository $userRepository, int $id): Response
     {
-        return $this->render('profile/pages/resources.twig');
+        $user =$userRepository->findOneById($id);
+        return $this->render('profile/pages/resources.twig',[
+            'user' => $user
+        ]);
     }
 
-    #[Route('/profile/my_profile', name: 'my_profile')]
-    public function myProfile(): Response
+    #[Route('/profile/my_profile/{id}', name: 'my_profile')]
+    public function myProfile(UserRepository $userRepository, int $id): Response
     {
-        return $this->render('profile/pages/my_profile.twig');
+        $user =$userRepository->findOneById($id);
+        return $this->render('profile/pages/my_profile.twig',[
+            'user' => $user
+        ]);
     }
 
     
-    #[Route('/profile/likes', name: 'my_likes')]
-    public function likes(): Response
+    #[Route('/profile/likes/{id}', name: 'my_likes')]
+    public function likes(UserRepository $userRepository, int $id): Response
     {
-        return $this->render('profile/pages/likes.twig');
+        $user =$userRepository->findOneById($id);
+        return $this->render('profile/pages/likes.twig',[
+            'user' => $user
+        ]);
     }
 
-    #[Route('/profile/abonnement', name: 'my_abonnement')]
-    public function contacts(): Response
+    #[Route('/profile/abonnement/{id}', name: 'my_abonnement')]
+    public function contacts(UserRepository $userRepository, int $id): Response
     {
-        return $this->render('profile/pages/follow.twig');
+        $user =$userRepository->findOneById($id);
+        return $this->render('profile/pages/follow.twig',[
+            'user' => $user
+        ]);
     }
 
 

@@ -58,43 +58,67 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //        ;
     //    }
 
+
+    public function findAllByRole(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT * FROM user
+        WHERE (JSON_CONTAINS(roles, :role) = 1 AND JSON_LENGTH(roles) = 1)
+        OR roles IS NULL
+        OR roles = "[]"
+    ';
+
+        $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
+
+        return $stmt->fetchAllAssociative();
+    }
+
+    public function findOneById($id): ?User
+    {
+        return $this->createQueryBuilder('u')
+        ->andWhere('u.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+    }
+
+
+
     public function findLastThree(): array
     {
-         // Obtenir la connexion Doctrine
-    $conn = $this->getEntityManager()->getConnection();
+        $conn = $this->getEntityManager()->getConnection();
 
-    // Requête SQL native
-    $sql = '
+        $sql = '
         SELECT * FROM user
         WHERE JSON_CONTAINS(roles, :role) = 1
         ORDER BY id DESC
         LIMIT 3
     ';
+        $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
 
-    // Utiliser executeQuery et fetchAllAssociative
-    $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
-    
-    return $stmt->fetchAllAssociative();
+        return $stmt->fetchAllAssociative();
     }
+
+
 
     public function findByNumberAlumnis(): int
     {
-         // Obtenir la connexion Doctrine
-    $conn = $this->getEntityManager()->getConnection();
+        $conn = $this->getEntityManager()->getConnection();
 
-    // Requête SQL native
-    $sql = '
+        $sql = '
         SELECT COUNT(*) as count FROM user
         WHERE (JSON_CONTAINS(roles, :role) = 1 AND JSON_LENGTH(roles) = 1)
         OR roles IS NULL
         OR roles = "[]"
     ';
 
-    // Utiliser executeQuery et fetchAllAssociative
-    $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
+        $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
 
-    $result = $stmt->fetchOne();
-    
-    return (int) $result;
+        $result = $stmt->fetchOne();
+
+        return (int) $result;
     }
 }

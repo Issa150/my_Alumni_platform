@@ -28,13 +28,13 @@ class Formation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $begin_at = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $degree = null;
 
     /**
@@ -52,7 +52,7 @@ class Formation
     #[ORM\Column(length: 255)]
     private ?string $link = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?FormationLevel $requiredLevel = null;
 
     public function getId(): ?int

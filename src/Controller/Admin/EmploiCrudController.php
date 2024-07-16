@@ -22,20 +22,30 @@ class EmploiCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {   
-        $contracts = [
-                    'CDI' => 'cdi',
-                    'CDD' => 'cdd',
-                    'Temps plein' => 'tempsPlein',
-                    'Temps partiel' => 'tempsPartiel',
-                    'Apprentissage' => 'apprentissage',
-                    'Contrat pro' => 'contratPro',
-                    'Intérim' => 'interim',
-                    'Stage' => 'stage',
-                    'Alternance' => 'alternance',
-                    'Activité bénévole' => 'activiteBenevole',
-                    'Contrat de volontariat' => 'contratDeVolontariat',
-                    'Freelance/Indépendant' => 'freelanceIndependant',
+        $skills = [
+                    'PHP' => 'php',
+                    'JavaScript' => 'javascript',
+                    'Java' => 'java',
+                    'HTML' => 'html',
+                    'CSS' => 'css',
+                    'C' => 'c',
+                    'C++' => 'cpp',
+                    'Python' => 'python',
         ];
+        $contracts = [
+            'CDI' => 'cdi',
+            'CDD' => 'cdd',
+            'Temps plein' => 'tempsPlein',
+            'Temps partiel' => 'tempsPartiel',
+            'Apprentissage' => 'apprentissage',
+            'Contrat pro' => 'contratPro',
+            'Intérim' => 'interim',
+            'Stage' => 'stage',
+            'Alternance' => 'alternance',
+            'Activité bénévole' => 'activiteBenevole',
+            'Contrat de volontariat' => 'contratDeVolontariat',
+            'Freelance/Indépendant' => 'freelanceIndependant',
+];
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name','Intitulé du poste'),
@@ -44,7 +54,11 @@ class EmploiCrudController extends AbstractCrudController
             TextField::new('entreprise','Entreprise'),
             TextField::new('zipcode','Code postal'),
             TextField::new('city','Ville'),
-            TextEditorField::new('skills', 'Profil recherché / Compétences'),
+            ChoiceField::new('skills', 'Profil recherché / Compétences')
+            ->setLabel('Profil recherché / Compétences')
+            ->setChoices($skills)
+            ->allowMultipleChoices()
+            ->renderExpanded(),
             TextField::new('field', 'Domaine d\'activité'),
             DateField::new('publication_date','Date de publication'),
             DateField::new('limit_offer', 'Expiration de l\'offre'),
@@ -54,11 +68,11 @@ class EmploiCrudController extends AbstractCrudController
                     'Distanciel' => EmploiTeleworking::Remote,
                     'Hybride' => EmploiTeleworking::Hybrid,
         ]),
-        ChoiceField::new('contract', 'Type de contrat')
-        ->setLabel('Type de contrat')
-        ->setChoices($contracts)
-        ->allowMultipleChoices()
-        ->renderExpanded(),
+            ChoiceField::new('contract', 'Type de contrat')
+            ->setLabel('Type de contrat')
+            ->setChoices($contracts)
+            ->allowMultipleChoices()
+            ->renderExpanded(),
         
         ];
     }

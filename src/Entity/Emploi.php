@@ -27,16 +27,19 @@ class Emploi
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $skills = null;
+    /**
+     * @var list<string> les compétences de l'emploi
+     */
+    #[ORM\Column(length: 255)]
+    private array $skills = [];
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $field = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $publication_date = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
@@ -122,12 +125,12 @@ class Emploi
         return $this;
     }
 
-    public function getSkills(): ?string
+    public function getSkills(): array
     {
         return $this->skills;
     }
 
-    public function setSkills(?string $skills): static
+    public function setSkills(array $skills): static
     {
         $this->skills = $skills;
 

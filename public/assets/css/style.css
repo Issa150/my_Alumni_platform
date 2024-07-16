@@ -16,7 +16,7 @@ css Open In Editor Edit Copy code * {
   --clr-green: #A9E0C9;
 
   /* PASTELS  COLORS */
-  --clr-red-pastel: #FDEAE8;
+  --clr-red-pastel:rgba(239, 115, 106, 0.1);
   --clr-green-pastel: #EFF9F5;
   --clr-yellow-pastel: #FFF9EB;
   --clr-blue-pastel: #F0F5FD;

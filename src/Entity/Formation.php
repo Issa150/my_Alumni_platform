@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FormationRepository;
 use App\Enum\FormationTeleworking;
+use App\Enum\FormationLevel;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -50,6 +51,9 @@ class Formation
 
     #[ORM\Column(length: 255)]
     private ?string $link = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?FormationLevel $requiredLevel = null;
 
     public function getId(): ?int
     {
@@ -191,5 +195,17 @@ class Formation
     public function getTeleworking(): ?FormationTeleworking
     {
         return $this->teleworking;
+    }
+
+    public function getRequiredLevel(): ?FormationLevel
+    {
+        return $this->requiredLevel;
+    }
+
+    public function setRequiredLevel(?FormationLevel $requiredLevel): static
+    {
+        $this->requiredLevel = $requiredLevel;
+
+        return $this;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use DateTime;
 use App\Entity\Formation;
 use App\Enum\FormationTeleworking;
+use App\Enum\FormationLevel;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -42,9 +43,18 @@ class FormationCrudController extends AbstractCrudController
             TextField::new('degree','Diplôme'),
             ChoiceField::new('teleworking', 'Télétravail')
                 ->setChoices([
-                    'Onsite' => FormationTeleworking::OnSite,
-                    'Remote' => FormationTeleworking::Remote,
-                    'Hybrid' => FormationTeleworking::Hybrid,
+                    'Présentiel' => FormationTeleworking::OnSite,
+                    'Distanciel' => FormationTeleworking::Remote,
+                    'Hybride' => FormationTeleworking::Hybrid,
+        ]),
+        ChoiceField::new('requiredLevel', 'Niveau requis')
+                ->setChoices([
+                    'CAP' => FormationLevel::Level3,
+                    'BAC' => FormationLevel::Level4,
+                    'BAC+2' => FormationLevel::Level5,
+                    'BAC+3/4' => FormationLevel::Level6,
+                    'BAC+5' => FormationLevel::Level7,
+                    'BAC+8' => FormationLevel::Level8,
         ]),
         ChoiceField::new('funding', 'Type de financement')
         ->setLabel('Type de financement')

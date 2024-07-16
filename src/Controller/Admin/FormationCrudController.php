@@ -22,6 +22,14 @@ class FormationCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
+        $fundings = [
+            'France Travail' => 'franceTravail',
+            'OPCO' => 'opco',
+            'AGEFIPH' => 'agefiph',
+            'Entreprise' => 'entreprise',
+            'CPF' => 'cpf',
+            'Autre' => 'autre',
+        ];
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name','Nom'),
@@ -32,14 +40,17 @@ class FormationCrudController extends AbstractCrudController
             DateField::new('begin_at','Date de début'),
             DateField::new('end_at','Date de fin'),
             TextField::new('degree','Diplôme'),
-            TextField::new('funding','Financement'),
             ChoiceField::new('teleworking', 'Télétravail')
                 ->setChoices([
                     'Onsite' => FormationTeleworking::OnSite,
                     'Remote' => FormationTeleworking::Remote,
                     'Hybrid' => FormationTeleworking::Hybrid,
         ]),
-        
+        ChoiceField::new('funding', 'Type de financement')
+        ->setLabel('Type de financement')
+        ->setChoices($fundings)
+        ->allowMultipleChoices()
+        ->renderExpanded(),
         ];
     }
     

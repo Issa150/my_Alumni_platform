@@ -36,8 +36,11 @@ class Formation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $degree = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $funding = null;
+    /**
+     * @var list<string> les financements de la formation
+     */
+    #[ORM\Column]
+    private array $funding = [];
 
     #[ORM\Column(nullable: true)]
     private ?FormationTeleworking $teleworking = null;
@@ -137,12 +140,12 @@ class Formation
         return $this;
     }
 
-    public function getFunding(): ?string
+    public function getFunding(): array
     {
         return $this->funding;
     }
 
-    public function setFunding(?string $funding): static
+    public function setFunding(array $funding): static
     {
         $this->funding = $funding;
 

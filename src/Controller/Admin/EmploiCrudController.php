@@ -35,7 +35,6 @@ class EmploiCrudController extends AbstractCrudController
                     'Activité bénévole' => 'activiteBenevole',
                     'Contrat de volontariat' => 'contratDeVolontariat',
                     'Freelance/Indépendant' => 'freelanceIndependant',
-            // Ajoutez d'autres rôles selon vos besoins
         ];
         return [
             IdField::new('id')->hideOnForm(),

@@ -46,7 +46,7 @@ class Emploi
     private ?EmploiTeleworking $teleworking = null;
 
     /**
-     * @var list<string> The user roles
+     * @var list<string> les contracts de l'emploi
      */
     #[ORM\Column]
     private array $contract = [];

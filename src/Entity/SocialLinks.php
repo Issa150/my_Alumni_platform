@@ -4,8 +4,14 @@ namespace App\Entity;
 
 use App\Repository\SocialLinksRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as AppAssert;
 
+
+// Pour le validateur de la limite des liens : on ne peut pas mettre un nombre de liens >= limit.
+// La vérification avec les validateurs de symfony n'est pas au niveau de la base de données (on peut rajouter en requete sql autant de liens qu'on veut)
 #[ORM\Entity(repositoryClass: SocialLinksRepository::class)]
+#[AppAssert\MaxLinks(limit:7)]
 class SocialLinks
 {
     #[ORM\Id]

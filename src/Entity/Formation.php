@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FormationRepository;
 use App\Enum\FormationTeleworking;
+use App\Enum\FormationLevel;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,17 +28,20 @@ class Formation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $begin_at = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $degree = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $funding = null;
+    /**
+     * @var list<string> les financements de la formation
+     */
+    #[ORM\Column]
+    private array $funding = [];
 
     #[ORM\Column(nullable: true)]
     private ?FormationTeleworking $teleworking = null;
@@ -47,6 +51,9 @@ class Formation
 
     #[ORM\Column(length: 255)]
     private ?string $link = null;
+
+    #[ORM\Column]
+    private ?FormationLevel $requiredLevel = null;
 
     public function getId(): ?int
     {
@@ -137,12 +144,12 @@ class Formation
         return $this;
     }
 
-    public function getFunding(): ?string
+    public function getFunding(): array
     {
         return $this->funding;
     }
 
-    public function setFunding(?string $funding): static
+    public function setFunding(array $funding): static
     {
         $this->funding = $funding;
 
@@ -181,6 +188,23 @@ class Formation
     public function setLink(string $link): static
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getTeleworking(): ?FormationTeleworking
+    {
+        return $this->teleworking;
+    }
+
+    public function getRequiredLevel(): ?FormationLevel
+    {
+        return $this->requiredLevel;
+    }
+
+    public function setRequiredLevel(?FormationLevel $requiredLevel): static
+    {
+        $this->requiredLevel = $requiredLevel;
 
         return $this;
     }

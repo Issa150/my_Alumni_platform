@@ -99,6 +99,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: SocialLinks::class, mappedBy: 'user_id')]
     private Collection $socialLinks;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $cover = null;
+
+    #[ORM\Column(length: 255, nullable:true)]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 255, nullable:true)]
+    private ?string $country = null;
+
     public function __construct()
     {
         $this->formations = new ArrayCollection();
@@ -402,6 +411,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $socialLink->setUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?string $cover): static
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): static
+    {
+        $this->country = $country;
 
         return $this;
     }

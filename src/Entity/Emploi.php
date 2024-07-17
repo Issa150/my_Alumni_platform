@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\EmploiRepository;
 use App\Enum\EmploiTeleworking;
-use App\Enum\EmploiContract;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,16 +27,19 @@ class Emploi
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $skills = null;
+    /**
+     * @var list<string> les compétences de l'emploi
+     */
+    #[ORM\Column(length: 255)]
+    private array $skills = [];
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $field = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $publication_date = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
@@ -46,8 +48,11 @@ class Emploi
     #[ORM\Column(nullable: true)]
     private ?EmploiTeleworking $teleworking = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?EmploiContract $contract = null;
+    /**
+     * @var list<string> les contracts de l'emploi
+     */
+    #[ORM\Column]
+    private array $contract = [];
 
     #[ORM\ManyToOne(inversedBy: 'emplois')]
     private ?user $user_id = null;
@@ -120,12 +125,12 @@ class Emploi
         return $this;
     }
 
-    public function getSkills(): ?string
+    public function getSkills(): array
     {
         return $this->skills;
     }
 
-    public function setSkills(?string $skills): static
+    public function setSkills(array $skills): static
     {
         $this->skills = $skills;
 
@@ -180,12 +185,12 @@ class Emploi
         return $this;
     }
 
-    public function getContract(): ?EmploiContract
+    public function getContract(): array
     {
         return $this->contract;
     }
 
-    public function setContract(?EmploiContract $contract): static
+    public function setContract(array $contract): static
     {
         $this->contract = $contract;
 
@@ -214,5 +219,10 @@ class Emploi
         $this->link = $link;
 
         return $this;
+    }
+
+    public function getTeleworking(): ?EmploiTeleworking
+    {
+        return $this->teleworking;
     }
 }

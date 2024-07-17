@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Entity\Emploi;
 use App\Entity\Formation;
 use App\Entity\Event;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

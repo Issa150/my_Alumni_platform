@@ -2,87 +2,97 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Annuaire des anciens élèves de Colombbus
-{% endblock %}
+{% block title %}Annuaire des anciens élèves de Colombbus{% endblock %}
 
 {% block body %}
-	<div class="container position-relative">
-		<div class="card text-light rounded-0">
-			<img src="{{ asset('assets/img/default/banner.jpg') }}" class="card-img rounded-0 directoryHero" alt="...">
-			<div class="my-overlay-gradient card-img-overlay d-flex justify-content-center align-items-center">
-				<h1 class="card-title text-uppercase mb-5 directoryTitle">annuaire</h1>
-			</div>
-		</div>
+<div class="container position-relative">
+    <div class="card text-light rounded-0">
+        <img src="{{ asset('assets/img/default/banner.jpg') }}" class="card-img rounded-0 directoryHero" alt="...">
+        <div class="my-overlay-gradient card-img-overlay d-flex justify-content-center align-items-center">
+            <h1 class="card-title text-uppercase mb-5 directoryTitle">annuaire</h1>
+        </div>
+    </div>
 
-		{# BARRE DE RECHERCHE NOM ET PRENOM #}
-		<div class="d-flex justify-content-center ">
-			<div class="searchAnnuaire d-flex justify-content-between align-items-center rounded-pill w-75 p-2 shadow bg-white">
-				<div class="input-container- w-100 h-100 border-end d-flex align-items-center">
-					<input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Nom">
-				</div>
-				<div class="input-container w-100">
-					<input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Prenom">
-				</div>
-				<button type="submit" class="btn end-0 p-0">
-					<i class="fa-solid fa-magnifying-glass text-white my-btn-red p-4 rounded-circle"></i>
-				</button>
-			</div>
-		</div>
-	</div>
+    {# BARRE DE RECHERCHE NOM ET PRENOM #}
+    <div class="d-flex justify-content-center ">
+        <div class="searchAnnuaire d-flex justify-content-between align-items-center rounded-pill w-75 p-2 shadow bg-white">
+            <div class="input-container- w-100 h-100 border-end d-flex align-items-center">
+                <input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Nom">
+            </div>
+            <div class="input-container w-100">
+                <input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Prenom">
+            </div>
+            <button type="submit" class="btn end-0 p-0">
+                <i class="fa-solid fa-magnifying-glass text-white my-btn-red p-4 rounded-circle"></i>
+            </button>
+        </div>
+    </div>
+</div>
 
-	{# MENU AFFINER SA RECHERCHE #}
-	<div class="row container mx-auto mt-5">
-		<div class="col-3 my-bg-gray p-5 my-5">
-			<div class="d-flex justify-content-around mb-5">
-				<i class="fa-solid fa-sliders"></i>
-				<h6>Affiner la recherche</h6>
-			</div>
-			<select id="filter-year" class="form-select mb-3" aria-label="Default select example">
-				<option value="">Année de promotion</option>
-				{% for year in certificateYears %}
-					<option value="{{ year.certificateObtention }}">{{ year.certificateObtention }}</option>
-				{% endfor %}
-			</select>
-			<select id="filter-domain" class="form-select mb-3" aria-label="Default select example">
-				<option value="">Domaine d'activité</option>
-				{% for domain in activityDomains %}
-					<option value="{{ domain.studyField }}">{{ domain.studyField }}</option>
-				{% endfor %}
-			</select>
-			<select id="filter-location" class="form-select mb-3" aria-label="Default select example">
-				<option value="">Lieu</option>
-				{% for location in locations %}
-					<option value="{{ location.city }}">{{ location.city }}</option>
-				{% endfor %}
-			</select>
-			<button type="button" id="reset-filters" class="btn btn-secondary mt-3">Réinitialiser</button>
-		</div>
+{# MENU AFFINER SA RECHERCHE #}
+<div class="row container mx-auto mt-5">
+    <div class="col-3 my-bg-gray p-5 my-5">
+        <div class="d-flex justify-content-around mb-5">
+            <i class="fa-solid fa-sliders"></i>
+            <h6>Affiner la recherche</h6>
+        </div>
+        <form id="filter-form">
+            <select id="filter-year" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Année de promotion</option>
+                {% for year in certificateYears %}
+                    <option value="{{ year.certificateObtention }}">{{ year.certificateObtention }}</option>
+                {% endfor %}
+            </select>
+            <select id="filter-domain" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Domaine d'activité</option>
+                {% for domain in activityDomains %}
+                    <option value="{{ domain.studyField }}">{{ domain.studyField }}</option>
+                {% endfor %}
+            </select>
+            <select id="filter-location" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Lieu</option>
+                {% for location in locations %}
+                    <option value="{{ location.city }}">{{ location.city }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" id="reset-filters" class="btn btn-secondary mt-3">Réinitialiser</button>
+        </form>
+    </div>
 
-		{# L'ENDROIT OU DOIT APPARAITRE LE RESULTAT DE LA RECHERCHE #}
-		<div class="col my-5 ms-5" id="user-cards">
-			{% include 'directory/_user_cards.html.twig' with {'users': users} %}
-		</div>
-	</div>
+    {# L'ENDROIT OU DOIT APPARAITRE LE RESULTAT DE LA RECHERCHE #}
+    <div class="col my-5 ms-5" id="user-cards">
+        {% include 'directory/_user_cards.html.twig' with {'users': users} %}
+    </div>
+</div>
 
-	{# RECUPERATION ET AFFICHAGE fETCH #}
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-		const filters = document.querySelectorAll('#filter-year, #filter-domain, #filter-location');
+{# RECUPERATION ET AFFICHAGE fETCH #}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const filters = document.querySelectorAll('#filter-year, #filter-domain, #filter-location');
 
-		filters.forEach(filter => {
-		filter.addEventListener('change', function () {
-		const year = document.querySelector('#filter-year').value;
-		const domain = document.querySelector('#filter-domain').value;
-		const location = document.querySelector('#filter-location').value;
+        function submitForm() {
+            const year = document.querySelector('#filter-year').value;
+            const domain = document.querySelector('#filter-domain').value;
+            const location = document.querySelector('#filter-location').value;
 
-		fetch(`/directory/filter?year=${year}&domain=${domain}&location=${location}`).then(response => response.text()).then(html => {
-		document.querySelector('#user-cards').innerHTML = html;
+            fetch(`/directory/filter?year=${year}&domain=${domain}&location=${location}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector('#user-cards').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        }
 
-		}).catch(error => console.error('Error:', error));
-		});
-		});
-		});
+        filters.forEach(filter => {
+            filter.addEventListener('change', function () {
+                submitForm();
+            });
+        });
 
-
-	</script>
+        document.getElementById('reset-filters').addEventListener('click', function () {
+            document.querySelector('#filter-form').reset();
+            submitForm();
+        });
+    });
+</script>
 {% endblock %}

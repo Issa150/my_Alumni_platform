@@ -47,7 +47,7 @@ class FormationCrudController extends AbstractCrudController
                     'Distanciel' => FormationTeleworking::Remote,
                     'Hybride' => FormationTeleworking::Hybrid,
         ]),
-        ChoiceField::new('requiredLevel', 'Niveau requis')
+        ChoiceField::new('required_level', 'Niveau requis')
                 ->setChoices([
                     'CAP' => FormationLevel::Level3,
                     'BAC' => FormationLevel::Level4,

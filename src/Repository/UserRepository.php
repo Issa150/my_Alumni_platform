@@ -133,7 +133,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findAllCertificateYearObtention(): array
     {
         return $this->createQueryBuilder('u')
-            ->select('DISTINCT u.certificateYearObtention')
+            ->select('DISTINCT u.certificateObtention')
             ->getQuery()
             ->getResult();
     }

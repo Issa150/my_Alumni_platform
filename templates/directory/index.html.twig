@@ -24,10 +24,10 @@
 			<div class="searchAnnuaire d-flex justify-content-between align-items-center rounded-pill w-75 p-2 shadow bg-white">
 
 				<div class="input-container- w-100 h-100 border-end d-flex align-items-center">
-				<input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Nom">
+					<input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Nom">
 				</div>
 				<div class="input-container w-100">
-				<input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Prenom">
+					<input type="text" class="w-100 ms-3 border-0 inputSearch" placeholder="Prenom">
 				</div>
 				<button type="submit" class="btn end-0 p-0">
 					<i class="fa-solid fa-magnifying-glass text-white my-btn-red p-4 rounded-circle"></i>
@@ -44,50 +44,56 @@
 
 		{# AFFINER LA RECHERCHE #}
 		<div class="col-3 my-bg-gray p-5 my-5">
-		<div class="d-flex justify-content-around mb-5">
-		<i class="fa-solid fa-sliders"></i>
-		<h6>Affiner la recherche</h6>
-		</div>
+			<div class="d-flex justify-content-around mb-5">
+				<i class="fa-solid fa-sliders"></i>
+				<h6>Affiner la recherche</h6>
+			</div>
 			<select class="form-select mb-3" aria-label="Default select example">
-				<option selected>Année de promotion</option>
-				<option value="1">One</option>
+				{% for year in promotionYears %}
+					<option selected>Année de promotion</option>
+					<option value="{{ year.certificateYearObtention }}">{{ year.certificateYearObtention }}</option>
+				{% endfor %}
 
 			</select>
 			<select class="form-select mb-3" aria-label="Default select example">
-				<option selected>Domaine d'activité</option>
-				<option value="1">One</option>
+				{% for domain in activityDomains %}
+					<option selected>Domaine d'activité</option>
+					<option value="{{ domain.studyField }}">{{ domain.studyField }}</option>
+				{% endfor %}
 
 			</select>
 			<select class="form-select mb-3" aria-label="Default select example">
-				<option selected>Lieu</option>
-				<option value="1">One</option>
-
+				{% for location in locations %}
+					<option selected>Lieu</option>
+					<option value="{{ location.city }}">{{ location.city }}</option>
+				{% endfor %}
 			</select>
 
 		</div>
 
 		{# CARDS ANNUAIRE #}
-		<div class="col mt-5 ms-5">
-
-			<div class="card mb-3">
-				<div class="row g-0">
-					<div class="col-4 d-flex align-items-center justify-content-center my-bg-green rounded-start">
-						<img class="w-50 rounded-circle card_user-profil m-3" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
-					</div>
-					<div class="col-8">
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-							<p class="card-text">
-								<button class="btn my-btn-green">
-									<a href="{{path('app_profile')}}" class="text-white text-decoration-none">Voir le profil</a>
-								</button>
-							</p>
+		<div class="col my-5 ms-5">
+			{% for user in users %}
+				<div class="card mb-3">
+					<div class="row g-0">
+						<div class="col-4 d-flex align-items-center justify-content-center my-bg-green rounded-start">
+							<img class="w-50 rounded-circle card_user-profil m-3" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
+						</div>
+						<div class="col-8">
+							<div class="card-body">
+								<h5 class="card-title">{{user.firstname}}
+									{{user.lastname}}</h5>
+								<p class="card-text">{{user.bio}}</p>
+								<p class="card-text">
+									<button class="btn my-btn-green">
+										<a href="{{ path('app_profile', {'id': user.id}) }}" class="text-white text-decoration-none">Voir le profil</a>
+									</button>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
+			{% endfor %}
 		</div>
 		{# ----------------------------------------- #}
 

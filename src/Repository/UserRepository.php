@@ -59,21 +59,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //    }
 
 
-    public function findAllByRole(): array
+    // public function findAllByRole(): array
+    // {
+    //     $conn = $this->getEntityManager()->getConnection();
+
+    //     $sql = '
+    //     SELECT * FROM user
+    //     WHERE (JSON_CONTAINS(roles, :role) = 1 AND JSON_LENGTH(roles) = 1)
+    //     OR roles IS NULL
+    //     OR roles = "[]"
+    // ';
+
+    //     $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
+
+    //     return $stmt->fetchAllAssociative();
+    // }
+
+    public function findAllUsers(): array
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-        SELECT * FROM user
-        WHERE (JSON_CONTAINS(roles, :role) = 1 AND JSON_LENGTH(roles) = 1)
-        OR roles IS NULL
-        OR roles = "[]"
-    ';
-
-        $stmt = $conn->executeQuery($sql, ['role' => json_encode('ROLE_USER')]);
-
-        return $stmt->fetchAllAssociative();
+        return $this->createQueryBuilder('u')
+            ->getQuery()
+            ->getResult();
     }
+
 
     public function findOneById($id): ?User
     {
@@ -120,5 +128,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $result = $stmt->fetchOne();
 
         return (int) $result;
+    }
+
+    public function findAllCertificateYearObtention(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->select('DISTINCT u.certificateYearObtention')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllStudyField(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->select('DISTINCT u.studyField')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllCities(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->select('DISTINCT u.city')
+            ->getQuery()
+            ->getResult();
     }
 }

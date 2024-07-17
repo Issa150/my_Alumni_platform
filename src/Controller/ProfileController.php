@@ -49,6 +49,7 @@ class ProfileController extends AbstractController
         return $this->render('profile/pages/my_profile.twig',[
             'user' => $user
         ]);
+        
     }
 
     

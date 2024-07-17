@@ -31,7 +31,7 @@ Raccourcis : Ctrl Shift r
 ## Première initialisation de base de données et migrations
 Il faut déjà créer la base de données
 ```bash
-symfony console doctrine:data:create
+symfony console doctrine:database:create
 ```
 Une fois que c'est fait, il faut migrer les changements pour récupérer les entités de cette base de données
 ```bash

@@ -355,7 +355,7 @@ body {
 }
 
 
-/* CAROUSEL TITLE */
+/* CAROUSEL TITLE HR */
 
 .hr {
   align-items: center;
@@ -365,10 +365,10 @@ body {
 
 .hr::before,
 .hr::after {
-  background: #404040;
+  background: #a6a4a47b;
   content: "";
   flex: 1;
-  height: .025em;
+  height: 0.06em;
   margin: 0 .5em;
 
 }

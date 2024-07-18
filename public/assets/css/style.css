@@ -16,7 +16,7 @@ css Open In Editor Edit Copy code * {
   --clr-green: #A9E0C9;
 
   /* PASTELS  COLORS */
-  --clr-red-pastel:rgba(239, 115, 106, 0.1);
+  --clr-red-pastel:rgba(239, 115, 106, 0.071);
   --clr-green-pastel: #EFF9F5;
   --clr-yellow-pastel: #FFF9EB;
   --clr-blue-pastel: #F0F5FD;
@@ -353,6 +353,27 @@ body {
 .carousel-indicators {
   margin-bottom: -40px !important;
 }
+
+
+/* CAROUSEL TITLE */
+
+.hr {
+  align-items: center;
+  display: flex;
+  text-align: center;
+}
+
+.hr::before,
+.hr::after {
+  background: #404040;
+  content: "";
+  flex: 1;
+  height: .025em;
+  margin: 0 .5em;
+
+}
+
+
 
 
 /* PAGE ANNUAIRE */

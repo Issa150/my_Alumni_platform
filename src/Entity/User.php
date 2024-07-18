@@ -72,8 +72,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?UserGender $gender = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $certificateYearObtention = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $lastConnectedAt = null;
@@ -107,6 +105,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable:true)]
     private ?string $country = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $certificateObtention = null;
 
     public function __construct()
     {
@@ -289,17 +290,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCertificateYearObtention(): ?\DateTimeImmutable
-    {
-        return $this->certificateYearObtention;
-    }
-
-    public function setCertificateYearObtention(?\DateTimeImmutable $certificateYearObtention): static
-    {
-        $this->certificateYearObtention = $certificateYearObtention;
-
-        return $this;
-    }
 
     public function getLastConnectedAt(): ?\DateTimeImmutable
     {
@@ -447,6 +437,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCountry(string $country): static
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCertificateObtention(): ?int
+    {
+        return $this->certificateObtention;
+    }
+
+    public function setCertificateObtention(?int $certificateObtention): static
+    {
+        $this->certificateObtention = $certificateObtention;
 
         return $this;
     }

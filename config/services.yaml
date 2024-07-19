@@ -4,7 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    uploads_directory: '%kernel.project_dir%/public/uploads/logosPartenaires'
+    uploads_public_directory: '/uploads/logosPartenaires'
 
 services:
     # default configuration for services in *this* file
@@ -26,7 +27,6 @@ services:
     # please note that last definitions always *replace* previous ones
 
 
-
     # Service personnalisé pour gérer la réussite de l'authentification
     App\Security\CustomAuthenticationSuccessHandler:
         arguments:
@@ -34,7 +34,20 @@ services:
         tags:
             - { name: 'monolog.logger', channel: 'security' }
 
+    # Configuration explicite pour LogoService
+    App\Service\LogoService:
+        arguments:
+            $uploadsDir: '%uploads_directory%'
+            $uploadsPublicDir: '%uploads_public_directory%'
+    
+    # Configuration explicite pour EmploiCrudController
+    App\Controller\Admin\EmploiCrudController:
+        arguments:
+            $uploadsDirectory: '%uploads_directory%'
 
+    App\Controller\Admin\FormationCrudController:
+        arguments:
+            $uploadsDirectory: '%uploads_directory%'
 
     # enable twig string extensions
     Twig\Extra\TwigExtraBundle\String\StringExtension: '@twig.extension.string'

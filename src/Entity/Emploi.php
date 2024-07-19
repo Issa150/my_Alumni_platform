@@ -60,6 +60,9 @@ class Emploi
     #[ORM\Column(length: 255)]
     private ?string $link = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $logo = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -224,5 +227,17 @@ class Emploi
     public function getTeleworking(): ?EmploiTeleworking
     {
         return $this->teleworking;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): static
+    {
+        $this->logo = $logo;
+
+        return $this;
     }
 }

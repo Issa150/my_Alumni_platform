@@ -55,6 +55,9 @@ class Formation
     #[ORM\Column]
     private ?FormationLevel $requiredLevel = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $logo = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -205,6 +208,18 @@ class Formation
     public function setRequiredLevel(?FormationLevel $requiredLevel): static
     {
         $this->requiredLevel = $requiredLevel;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): static
+    {
+        $this->logo = $logo;
 
         return $this;
     }

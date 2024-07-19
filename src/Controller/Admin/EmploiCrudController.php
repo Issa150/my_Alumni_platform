@@ -3,17 +3,23 @@ namespace App\Controller\Admin;
 
 use App\Entity\Emploi;
 use App\Service\LogoService;
+use App\Enum\EmploiTeleworking;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Form\FormBuilderInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use App\Form\DataTransformer\EnumToStringTransformer;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class EmploiCrudController extends AbstractCrudController
 {
@@ -84,11 +90,11 @@ class EmploiCrudController extends AbstractCrudController
             DateField::new('publication_date', 'Date de publication'),
             DateField::new('limit_offer', 'Expiration de l\'offre'),
             ChoiceField::new('teleworking', 'Télétravail')
-                ->setChoices([
-                    'Présentiel' => 'on_site',
-                    'Distanciel' => 'remote',
-                    'Hybride' => 'hybrid',
-                ]),
+            ->setChoices([
+                'Présentiel' => EmploiTeleworking::OnSite,
+                'Distanciel' => EmploiTeleworking::Remote,
+                'Hybride' => EmploiTeleworking::Hybrid,
+            ]),
             ChoiceField::new('contract', 'Type de contrat')
                 ->setChoices($contracts)
                 ->allowMultipleChoices()
@@ -98,12 +104,13 @@ class EmploiCrudController extends AbstractCrudController
                 ->setChoices($logoChoicesWithLabels)
                 ->renderExpanded()
                 ->setTemplatePath('admin/field/logo_choice.html.twig'),
-            TextField::new('newLogo', 'Upload New Logo')->setFormType(FileType::class)->setFormTypeOptions([
+            TextField::new('newLogo', 'Téléchargement d\'un nouveau logo')->setFormType(FileType::class)->setFormTypeOptions([
                 'mapped' => false,
                 'required' => false,
             ]),
         ];
     }
+
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {

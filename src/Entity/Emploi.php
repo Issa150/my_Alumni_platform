@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EmploiRepository;
-use App\Enum\EmploiTeleworking;
+use App\Enum\EmploiStatus;
 use Doctrine\DBAL\Types\Types;
+use App\Enum\EmploiTeleworking;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EmploiRepository;
 
 #[ORM\Entity(repositoryClass: EmploiRepository::class)]
 class Emploi
@@ -40,10 +41,10 @@ class Emploi
     private ?string $field = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $publication_date = null;
+    private ?\DateTimeInterface $publicationDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $limit_offer = null;
+    private ?\DateTimeInterface $limitOffer = null;
 
     #[ORM\Column(nullable: true)]
     private ?EmploiTeleworking $teleworking = null;
@@ -62,6 +63,10 @@ class Emploi
 
     #[ORM\Column(length: 255)]
     private ?string $logo = null;
+    
+
+    #[ORM\Column(type: 'string', enumType: EmploiStatus::class, length: 255)]
+    private ?EmploiStatus $status = EmploiStatus::PENDING;
 
     public function getId(): ?int
     {
@@ -154,24 +159,24 @@ class Emploi
 
     public function getPublicationDate(): ?\DateTimeInterface
     {
-        return $this->publication_date;
+        return $this->publicationDate;
     }
 
-    public function setPublicationDate(?\DateTimeInterface $publication_date): static
+    public function setPublicationDate(?\DateTimeInterface $publicationDate): static
     {
-        $this->publication_date = $publication_date;
+        $this->publicationDate = $publicationDate;
 
         return $this;
     }
 
     public function getLimitOffer(): ?\DateTimeInterface
     {
-        return $this->limit_offer;
+        return $this->limitOffer;
     }
 
-    public function setLimitOffer(?\DateTimeInterface $limit_offer): static
+    public function setLimitOffer(?\DateTimeInterface $limitOffer): static
     {
-        $this->limit_offer = $limit_offer;
+        $this->limitOffer = $limitOffer;
 
         return $this;
     }
@@ -186,6 +191,11 @@ class Emploi
         $this->teleworking = $teleworking;
 
         return $this;
+    }
+
+    public function getTeleworking(): ?EmploiTeleworking
+    {
+        return $this->teleworking;
     }
 
     public function getContract(): array
@@ -224,10 +234,7 @@ class Emploi
         return $this;
     }
 
-    public function getTeleworking(): ?EmploiTeleworking
-    {
-        return $this->teleworking;
-    }
+
 
     public function getLogo(): ?string
     {
@@ -237,6 +244,23 @@ class Emploi
     public function setLogo(string $logo): static
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function isStatus(): ?EmploiStatus
+    {
+        return $this->status;
+    }
+
+    public function getStatus(): ?EmploiStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(EmploiStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

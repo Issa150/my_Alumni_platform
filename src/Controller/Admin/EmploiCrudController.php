@@ -2,19 +2,20 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Emploi;
+use App\Enum\EmploiStatus;
 use App\Service\LogoService;
+use App\Service\EmailService;
 use App\Enum\EmploiTeleworking;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use App\Form\DataTransformer\EnumToStringTransformer;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -26,12 +27,16 @@ class EmploiCrudController extends AbstractCrudController
     private $logoService;
     private $requestStack;
     private $uploadsDirectory;
+    private $emailService;
+    private $superAdminEmail;
 
-    public function __construct(LogoService $logoService, RequestStack $requestStack, string $uploadsDirectory)
+    public function __construct(LogoService $logoService, RequestStack $requestStack, string $uploadsDirectory, EmailService $emailService, string $superAdminEmail)
     {
         $this->logoService = $logoService;
         $this->requestStack = $requestStack;
         $this->uploadsDirectory = $uploadsDirectory;
+        $this->emailService = $emailService;
+        $this->superAdminEmail = $superAdminEmail;
     }
 
     public static function getEntityFqcn(): string
@@ -90,11 +95,11 @@ class EmploiCrudController extends AbstractCrudController
             DateField::new('publication_date', 'Date de publication'),
             DateField::new('limit_offer', 'Expiration de l\'offre'),
             ChoiceField::new('teleworking', 'Télétravail')
-            ->setChoices([
-                'Présentiel' => EmploiTeleworking::OnSite,
-                'Distanciel' => EmploiTeleworking::Remote,
-                'Hybride' => EmploiTeleworking::Hybrid,
-            ]),
+                ->setChoices([
+                    'Présentiel' => EmploiTeleworking::OnSite,
+                    'Distanciel' => EmploiTeleworking::Remote,
+                    'Hybride' => EmploiTeleworking::Hybrid,
+                ]),
             ChoiceField::new('contract', 'Type de contrat')
                 ->setChoices($contracts)
                 ->allowMultipleChoices()
@@ -104,13 +109,19 @@ class EmploiCrudController extends AbstractCrudController
                 ->setChoices($logoChoicesWithLabels)
                 ->renderExpanded()
                 ->setTemplatePath('admin/field/logo_choice.html.twig'),
-            TextField::new('newLogo', 'Téléchargement d\'un nouveau logo')->setFormType(FileType::class)->setFormTypeOptions([
+            TextField::new('newLogo', 'Téléchargement d\'un nouveau logo')->setFormType(FileType::class)->hideOnIndex()->setFormTypeOptions([
                 'mapped' => false,
                 'required' => false,
             ]),
+            ChoiceField::new('status', 'Statut')
+                ->setChoices([
+                    EmploiStatus::PENDING->getLabel() => EmploiStatus::PENDING,
+                    EmploiStatus::VALIDATED->getLabel() => EmploiStatus::VALIDATED,
+                    EmploiStatus::REFUSED->getLabel() => EmploiStatus::REFUSED,
+                ])
+                ->hideOnForm(),
         ];
     }
-
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
@@ -123,7 +134,9 @@ class EmploiCrudController extends AbstractCrudController
             $entityInstance->setLogo($newFilename);
         }
 
+        $entityInstance->setStatus(EmploiStatus::PENDING);
         parent::persistEntity($entityManager, $entityInstance);
+        $this->emailService->sendJobPreview($entityInstance, $this->superAdminEmail);
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
@@ -139,4 +152,20 @@ class EmploiCrudController extends AbstractCrudController
 
         parent::updateEntity($entityManager, $entityInstance);
     }
+
+    #[Route('/admin/job-validation/{id}/{action}', name: 'admin_job_validation')]
+    public function validateJob(Request $request, Emploi $emploi, string $action, EntityManagerInterface $entityManager): RedirectResponse
+    {
+        if ($action === 'valide') {
+            $emploi->setStatus(EmploiStatus::VALIDATED);
+        } elseif ($action === 'refuse') {
+            $emploi->setStatus(EmploiStatus::REFUSED);
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin');
+    }
+
+    
 }

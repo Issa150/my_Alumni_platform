@@ -7,6 +7,8 @@ parameters:
     uploads_directory: '%kernel.project_dir%/public/uploads/logosPartenaires'
     uploads_public_directory: '/uploads/logosPartenaires'
 
+    super_admin_email: 'superadmin@example.com'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -26,6 +28,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\Service\EmailService:
+        arguments:
+            $mailer: '@mailer.mailer'
+            $twig: '@twig'
 
     # Service personnalisé pour gérer la réussite de l'authentification
     App\Security\CustomAuthenticationSuccessHandler:
@@ -44,6 +50,7 @@ services:
     App\Controller\Admin\EmploiCrudController:
         arguments:
             $uploadsDirectory: '%uploads_directory%'
+            $superAdminEmail: '%super_admin_email%'
 
     App\Controller\Admin\FormationCrudController:
         arguments:

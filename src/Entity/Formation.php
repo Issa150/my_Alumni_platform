@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\FormationRepository;
-use App\Enum\FormationTeleworking;
 use App\Enum\FormationLevel;
+use App\Enum\FormationStatus;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\FormationTeleworking;
+use App\Repository\FormationRepository;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
 class Formation
@@ -57,6 +58,9 @@ class Formation
 
     #[ORM\Column(length: 255)]
     private ?string $logo = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
 
     public function getId(): ?int
     {
@@ -220,6 +224,23 @@ class Formation
     public function setLogo(string $logo): static
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function isStatus(): ?FormationStatus
+    {
+        return $this->status;
+    }
+
+    public function getStatus(): ?FormationStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(FormationStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

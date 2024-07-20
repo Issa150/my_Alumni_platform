@@ -137,6 +137,7 @@ class EmploiCrudController extends AbstractCrudController
         $entityInstance->setStatus(EmploiStatus::PENDING);
         parent::persistEntity($entityManager, $entityInstance);
         $this->emailService->sendJobPreview($entityInstance, $this->superAdminEmail);
+        $this->addFlash(type:'info', message: "Un email de validation de l'annonce a été envoyé à l'administrateur ");
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void

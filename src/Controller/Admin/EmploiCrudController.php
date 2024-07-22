@@ -58,6 +58,16 @@ class EmploiCrudController extends AbstractCrudController
             'C++' => 'cpp',
             'Python' => 'python',
         ];
+        $fields = [
+            'Web' => 'web',
+            'Réseaux' => 'reseaux',
+            'Base de données' => 'baseDeDonnees',
+            'Sécurité' => 'securite',
+            'Design' => 'design',
+            'Back' => 'back',
+            'Front' => 'front',
+            'Full stack' => 'fullStack',
+        ];
 
         $contracts = [
             'CDI' => 'cdi',
@@ -91,7 +101,10 @@ class EmploiCrudController extends AbstractCrudController
                 ->setChoices($skills)
                 ->allowMultipleChoices()
                 ->renderExpanded(),
-            TextField::new('field', 'Domaine d\'activité'),
+            ChoiceField::new('field', 'Domaine d\'activité')
+                ->setChoices($fields)
+                ->allowMultipleChoices()
+                ->renderExpanded(),
             DateField::new('publication_date', 'Date de publication'),
             DateField::new('limit_offer', 'Expiration de l\'offre'),
             ChoiceField::new('teleworking', 'Télétravail')

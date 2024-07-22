@@ -40,24 +40,45 @@ class EmploiController extends AbstractController
     #[Route('/emploi/filter', name: 'emploi_filter')]
     public function filter(Request $request, EmploiRepository $emploiRepository): Response
     {
-        $teleworking = $request->query->get('teleworking');
+        $keyword = $request->query->get('keyword');
         $location = $request->query->get('location');
-        $requiredLevel = $request->query->get('requiredLevel');
-        $contract = $request->query->get('contract');
-        $skills = $request->query->get('skills');
-        $domain = $request->query->get('domain');
         $publicationDate = $request->query->get('publicationDate');
+        $domain = $request->query->get('domain');
+        $skills = $request->query->get('skills');
+        $contract = $request->query->get('contract');
+        $requiredLevel = $request->query->get('requiredLevel');
+        $teleworking = $request->query->get('teleworking');
 
         $queryBuilder = $emploiRepository->createQueryBuilder('e');
 
-        if ($teleworking) {
-            $queryBuilder->andWhere('e.teleworking = :teleworking')
-                ->setParameter('teleworking', $teleworking);
+        if ($keyword) {
+            $queryBuilder->andWhere('e.name LIKE :keyword OR e.description LIKE :keyword OR e.skills LIKE :keyword')
+                ->setParameter('keyword', '%' . $keyword . '%');
         }
 
         if ($location) {
-            $queryBuilder->andWhere('e.city = :location')
-                ->setParameter('location', $location);
+            $queryBuilder->andWhere('e.city LIKE :location')
+                ->setParameter('location', '%' . $location . '%');
+        }
+
+        if ($publicationDate) {
+            $queryBuilder->andWhere('e.publicationDate = :publicationDate')
+                ->setParameter('publicationDate', $publicationDate);
+        }
+
+        if ($domain) {
+            $queryBuilder->andWhere('e.field LIKE :domain')
+                ->setParameter('domain', '%' . $domain . '%');
+        }
+
+        if ($skills) {
+            $queryBuilder->andWhere('e.skills LIKE :skills')
+                ->setParameter('skills', '%' . $skills . '%');
+        }
+
+        if ($contract) {
+            $queryBuilder->andWhere('e.contract LIKE :contract')
+                ->setParameter('contract', '%' . $contract . '%');
         }
 
         if ($requiredLevel) {
@@ -65,24 +86,9 @@ class EmploiController extends AbstractController
                 ->setParameter('requiredLevel', $requiredLevel);
         }
 
-        if ($contract) {
-            $queryBuilder->andWhere('e.contract = :contract')
-                ->setParameter('contract', $contract);
-        }
-
-        if ($skills) {
-            $queryBuilder->andWhere('e.skills = :skills')
-                ->setParameter('skills', $skills);
-        }
-
-        if ($domain) {
-            $queryBuilder->andWhere('e.field = :domain')
-                ->setParameter('domain', $domain);
-        }
-
-        if ($publicationDate) {
-            $queryBuilder->andWhere('e.publicationDate = :publicationDate')
-                ->setParameter('publicationDate', $publicationDate);
+        if ($teleworking) {
+            $queryBuilder->andWhere('e.teleworking = :teleworking')
+                ->setParameter('teleworking', $teleworking);
         }
 
         $emplois = $queryBuilder->getQuery()->getResult();

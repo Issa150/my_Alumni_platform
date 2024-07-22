@@ -41,11 +41,23 @@ class DirectoryController extends AbstractController
     #[Route('/directory/filter', name: 'directory_filter')]
     public function filter(Request $request, UserRepository $userRepository): Response
     {
+        $firstname = $request->query->get('firstname');
+        $lastname = $request->query->get('lasttname');
         $year = $request->query->get('year');
         $domain = $request->query->get('domain');
         $location = $request->query->get('location');
 
         $queryBuilder = $userRepository->createQueryBuilder('u');
+
+        if ($firstname) {
+            $queryBuilder->andWhere('u.firstname = :firstname')
+                ->setParameter('firstname', $firstname);
+        }
+
+        if ($lastname) {
+            $queryBuilder->andWhere('u.lastname = :lastname')
+                ->setParameter('lastname', $lastname);
+        }
 
         if ($year) {
             $queryBuilder->andWhere('u.certificateObtention = :year')
@@ -64,7 +76,7 @@ class DirectoryController extends AbstractController
 
         $users = $queryBuilder->getQuery()->getResult();
 
-        return $this->render('directory/_user_cards.html.twig', [
+        return $this->render('directory/_user_cards1.html.twig', [
             'users' => $users,
         ]);
     }

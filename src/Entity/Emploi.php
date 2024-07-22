@@ -37,8 +37,11 @@ class Emploi
     #[ORM\Column(length: 255)]
     private array $skills = [];
 
+    /**
+     * @var list<string> les domaines d'activité de l'emploi
+     */
     #[ORM\Column(length: 255)]
-    private ?string $field = null;
+    private array $field = [];
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $publicationDate = null;
@@ -61,7 +64,7 @@ class Emploi
     #[ORM\Column(length: 255)]
     private ?string $link = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $logo = null;
     
 
@@ -145,12 +148,12 @@ class Emploi
         return $this;
     }
 
-    public function getField(): ?string
+    public function getField(): array
     {
         return $this->field;
     }
 
-    public function setField(?string $field): static
+    public function setField(array $field): static
     {
         $this->field = $field;
 

@@ -394,6 +394,7 @@ body {
 
 }
 
+
 /* Supprimer le focus des inputs */
 .inputSearch:focus {
   outline: none;

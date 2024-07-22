@@ -37,24 +37,18 @@
 							{% if app.user %}
 								<div class="icon-container mx-0">
 									<i class="icon bi bi-people-fill"></i>
-									{# <span class="bg-success rounded-circle text-light py-0 px-1 fs-6 position-absolute top-0 end-0 mr-1 ">{{usersConnected}}</span> #}
 									<div
 										class="icon-container position-relative ms-0 onlineSpan">
-										{# <i class="icon bi bi-people-fill"></i> #}
 										<span class="bg-success rounded-circle text-light py-0 px-1 position-absolute bottom-0 start-0 ms-0">23</span>
 									</div>
 								</div>
 								<div
 									class="profile-picture m-0 me-3">
-									{# {% if app.user %} #}
-
 
 									<a href="{{ path('app_profile', {'id': app.user.id}) }}" data-toggle="tooltip" title="Voir le profil">
 										<img src="{% if app.user and app.user.picture %}{{ asset('uploads/' ~ app.user.picture) }}{% else %}{{ asset('assets/img/default/user-default.jpg') }}{% endif %}" alt="Photo de profil" class="rounded-circle user-profil">
 									</a>
 
-
-									{# <a href="{{ path('app_profile', {'id': app.user.id}) }}" ><img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil"  ></a> #}
 
 								</div>
 							{% else %}

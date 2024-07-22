@@ -90,7 +90,7 @@ class FormationCrudController extends AbstractCrudController
                     ->setChoices($logoChoicesWithLabels)
                     ->renderExpanded()
                     ->setTemplatePath('admin/field/logo_choice.html.twig'),
-                TextField::new('newLogo', 'Upload New Logo')->setFormType(FileType::class)->setFormTypeOptions([
+                TextField::new('newLogo', 'Téléchargement d\'un nouveau logo')->setFormType(FileType::class)->setFormTypeOptions([
                     'mapped' => false,
                     'required' => false,
                 ]),

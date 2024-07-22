@@ -56,7 +56,7 @@ class Formation
     #[ORM\Column]
     private ?FormationLevel $requiredLevel = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $logo = null;
 
     #[ORM\Column(length: 255)]

@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class EmploiCrudController extends AbstractCrudController
@@ -84,7 +83,7 @@ class EmploiCrudController extends AbstractCrudController
             'Freelance/Indépendant' => 'freelanceIndependant',
         ];
 
-        $logoChoicesWithLabels = [];
+        $logoChoicesWithLabels = ['Aucun des logos existants' => ''];
         foreach ($logoChoices as $logoName => $logoPath) {
             $logoChoicesWithLabels[sprintf('<img src="%s" style="max-height: 50px; margin-right: 10px;"/> %s', $logoPath, $logoName)] = $logoName;
         }
@@ -118,10 +117,9 @@ class EmploiCrudController extends AbstractCrudController
                 ->allowMultipleChoices()
                 ->renderExpanded(),
             FormField::addPanel('Logo'),
-            ChoiceField::new('logo', 'Logo')
+            ChoiceField::new('logo', 'Bibliothèque de logos')
                 ->setChoices($logoChoicesWithLabels)
-                ->renderExpanded()
-                ->setTemplatePath('admin/field/logo_choice.html.twig'),
+                ->renderExpanded(),
             TextField::new('newLogo', 'Téléchargement d\'un nouveau logo')->setFormType(FileType::class)->hideOnIndex()->setFormTypeOptions([
                 'mapped' => false,
                 'required' => false,
@@ -145,6 +143,11 @@ class EmploiCrudController extends AbstractCrudController
             $newFilename = uniqid().'.'.$newLogoFile->guessExtension();
             $newLogoFile->move($this->uploadsDirectory, $newFilename);
             $entityInstance->setLogo($newFilename);
+        } else {
+            $logo = $request->request->get('Emploi')['logo'];
+            if ($logo) {
+                $entityInstance->setLogo($logo);
+            }
         }
 
         $entityInstance->setStatus(EmploiStatus::PENDING);
@@ -162,6 +165,11 @@ class EmploiCrudController extends AbstractCrudController
             $newFilename = uniqid().'.'.$newLogoFile->guessExtension();
             $newLogoFile->move($this->uploadsDirectory, $newFilename);
             $entityInstance->setLogo($newFilename);
+        } else {
+            $logo = $request->request->get('Emploi')['logo'];
+            if ($logo) {
+                $entityInstance->setLogo($logo);
+            }
         }
 
         parent::updateEntity($entityManager, $entityInstance);
@@ -180,6 +188,4 @@ class EmploiCrudController extends AbstractCrudController
 
         return $this->redirectToRoute('admin');
     }
-
-    
 }

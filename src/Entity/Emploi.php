@@ -64,7 +64,7 @@ class Emploi
     #[ORM\Column(length: 255)]
     private ?string $link = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $logo = null;
     
 

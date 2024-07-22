@@ -5,40 +5,42 @@
 		{# Img cover #}
 		<img class="my-img-cover w-100" src="https://cdn.pixabay.com/photo/2023/06/15/16/55/klatschmohn-8066026_1280.jpg" alt="Profile image cover">
 		<img class="my-img-profile shadow-sm mx-auto d-block rounded-circle ratio ratio-1x1" style="" src="https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_1280.jpg" alt="Image profile">
-		<h3 class="text-center">Jasmine Bergstrom</h3>
-		<a class="d-block text-center" href="mailto:allumini@gmail.fr">allumini@gmail.fr</a>
-		<p class="text-center">Je suis à la recherche d’un stage dans le domaine du Développement web de 01/02/2024- 01/03/2024. .J'ai acquis HTML,CSS, JavaScript, PHP,SQL</p>
+		<h3 class="text-center">{{user.firstname}}
+			{{user.lastname}}</h3>
+		<a class="d-block text-center" href="mailto:allumini@gmail.fr">{{user.email}}</a>
+		<p class="text-center">{{user.bio|striptags|u.truncate(150, '...') }}</p>
 
-
+		{# Profile details #}
 		<ul class="menu_container list-unstyled bg-white p-2 rounded">
-			<h2 class="border-bottom border-3 border-success text-success">Profile</h2>
-			<li>
-				<span>Nom</span>
-				Bergstrom</li>
-			<li>
-				<span>Prénom</span>Jasmin</li>
-			<li>
-				<span>address:</span>allumini@gmail.fr</li>
-			<li>Mes likes</li>
-			<li>Abonnement</li>
+			<h2 class="border-bottom border-3 border-success text-success">Profil</h2>
+			<li><span>CV:</span>...</li>
+			<li><span>Ville:</span>{{user.city}}</li>
+			<li><span>Pays:</span>{{user.country}}</li>
+			<li><span>Domaine de compétences:</span>{{user.studyField}}</li>
+			<div class="d-flex gap-3 my-1">
+				<li><a target="_blank" href="https://github.com/"><i class="fa-brands fa-github fs-4"></i></a></li>
+				<li><a target="_blank" href="https://www.linkedin.com"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
+			</div>
 		</ul>
+
+
 		{# Les options de menu côté gouche #}
 		<ul class="menu_container list-unstyled bg-white p-2 rounded">
 			<h2 class="border-bottom border-3 border-success text-success">Menu</h2>
 			<li>
-				<a href="actualité" class="btn btn-secondary">Fil d'actualité</a>
+				<a href="{{path('my_feeds', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_feeds' ? 'my-active' : ''}} btn my-1">Fil d'actualité</a>
 			</li>
 			<li>
-				<a href="actualité" class="btn btn-secondary">Ressource & bibliotéque</a>
+				<a href="{{path('my_sources', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_sources' ? 'my-active' : ''}} btn my-1">Ressources & bibliothéque</a>
 			</li>
 			<li>
-				<a href="profil" class="btn btn-secondary">Mon profil</a>
+				<a href="{{path('my_profile', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_profile' ? 'my-active' : ''}} btn my-1">Mon profil</a>
 			</li>
 			<li>
-				<a href="likes" class="btn btn-secondary">Mes likes</a>
+				<a href="{{path('my_likes', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_likes' ? 'my-active' : ''}} btn my-1">Mes likes</a>
 			</li>
 			<li>
-				<a href="abonnement" class="btn btn-secondary">Abonnement</a>
+				<a href="{{path('my_abonnement', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_abonnement' ? 'my-active' : ''}} btn my-1">Abonnement</a>
 			</li>
 		</ul>
 

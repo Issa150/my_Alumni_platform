@@ -50,11 +50,11 @@
 
 
 									<a href="{{ path('app_profile', {'id': app.user.id}) }}" data-toggle="tooltip" title="Voir le profil">
-										<img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil">
+										<img src="{% if app.user and app.user.picture %}{{ asset('uploads/' ~ app.user.picture) }}{% else %}{{ asset('assets/img/default/user-default.jpg') }}{% endif %}" alt="Photo de profil" class="rounded-circle user-profil">
 									</a>
 
 
-									<a href="{{ path('app_profile', {'id': app.user.id}) }}" ><img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil"  ></a>
+									{# <a href="{{ path('app_profile', {'id': app.user.id}) }}" ><img src="{{ asset('assets/img/profil/img_profil.jpg') }}" alt="Photo de profil" class="rounded-circle user-profil"  ></a> #}
 
 								</div>
 							{% else %}

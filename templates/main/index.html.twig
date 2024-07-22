@@ -25,20 +25,7 @@
 	{% else %}
 		{% include "components/carrousel_user.twig" %}
 	{% endif %}
-	{# <div class="d-flex">
-		<div class="rounded-3 row">
-			<div class="col-4 my-bg-red">
-				<img class="w-100 rounded-circle card_user-profil" src="{{asset('assets/img/profil/img_profil.jpg')}}" alt="">
-			</div>
-			<div class="col-8 p-4 text-center">
-				<div class="text-center">
-					<h4 class="my-2">NOM PRENOM</h4>
-				</div>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, explicabo? Illum error voluptates sit aspernatur repellendus hic expedita iure vitae possimus assumenda quas, ad rem a placeat nisi, enim veritatis.</p>
-			</div>
-		</div>
-	</div> #}
-	{# Section 4 Cards colors  #}
+	
 	{% if app.user %}
 		<div class="container-fluid my-5 mb-5">
 			<div class="container">
@@ -47,7 +34,7 @@
 		</h2>
 				<div
 					class="row row-cols-2">
-					{# <div class="grid gap-3 "> #}
+
 					<div class="p-0">
 						<div class="card m-4 my-bg-red-pastel">
 							<div class=" card-body">
@@ -162,22 +149,22 @@
 					<div class="text-center">
 						{{ ux_icon('fa:graduation-cap', {'width': '105px', 'height': '105px'}) }}
 					</div>
-					<h3 class="fs-2">ALUMNI</h3>
 					<p class="fs-3 fw-bold">{{ countUsers }}</p>
+					<h3 class="fs-2">ALUMNI</h3>
 				</div>
 				<div class="feature col">
 					<div class="text-center">
 						{{ ux_icon('ion:calendar-sharp', {'width': '100px', 'height': '100px'}) }}
 					</div>
-					<h3 class="fs-2">EVENEMENT</h3>
 					<p class="fs-3 fw-bold">{{ countEvents }}</p>
+					<h3 class="fs-2">EVENEMENTS</h3>
 				</div>
 				<div class="feature col">
 					<div class="text-center">
 						{{ ux_icon('fa-solid:hands-helping', {'width': '100px', 'height': '100px'}) }}
 					</div>
-					<h3 class="fs-2">OFFRE D'EMPLOI</h3>
 					<p class="fs-3 fw-bold">{{ countEmplois }}</p>
+					<h3 class="fs-2">OFFRES D'EMPLOI</h3>
 				</div>
 			</div>
 		</div>

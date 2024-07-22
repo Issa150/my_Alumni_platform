@@ -42,27 +42,6 @@ class EmploiRepository extends ServiceEntityRepository
     //    }
 
 
-    public function findAllEmplois(): array
-    {
-        return $this->createQueryBuilder('e')
-            ->getQuery()
-            ->getResult();
-    }
-
-
-
-    public function findOneById($id): ?Emploi
-    {
-        return $this->createQueryBuilder('e')
-        ->andWhere('e.id = :id')
-        ->setParameter('id', $id)
-        ->getQuery()
-        ->getOneOrNullResult()
-        ;
-    }
-
-
-    
     public function findLastThree(): array
     {
         return $this->createQueryBuilder('e')
@@ -74,18 +53,27 @@ class EmploiRepository extends ServiceEntityRepository
 
     public function findByNumberEmplois(): int
     {
-         // Obtenir la connexion Doctrine
-    $conn = $this->getEntityManager()->getConnection();
+        // Obtenir la connexion Doctrine
+        $conn = $this->getEntityManager()->getConnection();
 
-    // Requête SQL native
-    $sql = '
+        // Requête SQL native
+        $sql = '
         SELECT COUNT(*) as count FROM emploi
     ';
 
-    $stmt = $conn->executeQuery($sql);
+        $stmt = $conn->executeQuery($sql);
 
-    $result = $stmt->fetchOne();
-    
-    return (int) $result;
+        $result = $stmt->fetchOne();
+
+        return (int) $result;
     }
+
+    public function findAllLogos(): array
+{
+    return $this->createQueryBuilder('e')
+        ->select('DISTINCT e.logo')
+        ->where('e.logo IS NOT NULL')
+        ->getQuery()
+        ->getResult();
+}
 }

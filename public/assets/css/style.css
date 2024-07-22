@@ -58,9 +58,6 @@ css Open In Editor Edit Copy code * {
 .my-bg-green-pastel {
   background-color: var(--clr-green-pastel);
 }
-.my-bg-green-medium {
-  background-color: var(--clr-green);
-}
 
 /* BLUE */
 .my-text-blue {

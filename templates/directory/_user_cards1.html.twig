@@ -6,8 +6,10 @@
 	{% for user in users %}
 
 		<div class="card col-lg-4 col-md-6 col-sm-12 col-xs-12 m-2" style="width: 18rem;">
-			<div class=" p-3  border-bottom d-flex">
-				<img src="{{ asset('uploads/logosPartenaires/' ~ user.picture) }}" class="card-img-top w-25 rounded-circle card_user-profil m-3" alt="...">
+			<div class=" p-3  border-bottom d-flex justify-content-around align-items-center">
+				
+                <img src="{{ asset('uploads/logosPartenaires/' ~ user.picture) }}" class="card-img-top w-25 rounded-circle card_user-profil m-3" alt="...">
+                
 				<h5>{{ user.firstname }}
 					{{ user.lastname }}</h5>
 			</div>

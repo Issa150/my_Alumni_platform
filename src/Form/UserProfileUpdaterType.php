@@ -3,12 +3,16 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Enum\UserGender;
+use App\Form\SocialLinksType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserProfileUpdaterType extends AbstractType
 {
@@ -25,7 +29,16 @@ class UserProfileUpdaterType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('studyField')
-            ->add('gender')
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                    'Femme' => UserGender::Woman,
+                    'Homme' => UserGender::Man,
+                    'Non renseigné' => UserGender::Unavailable,
+                ],
+                'expanded' => true,
+                'multiple' => false,
+                'label' => 'Gender',
+            ])
             // ->add('picture')
             ->add('picture', FileType::class, [
                 'label' => "L'image profil (Image file)",
@@ -54,6 +67,14 @@ class UserProfileUpdaterType extends AbstractType
             ->add('city')
             ->add('country')
             ->add('certificateObtention')
+            ->add('socialLinks', CollectionType::class, [
+                'entry_type' => SocialLinksType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false
+            ])
             // ->add('save', SubmitType::class, [
             //     'label' => 'Sauvgarder'
             // ]);

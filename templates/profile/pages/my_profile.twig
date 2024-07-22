@@ -1,4 +1,51 @@
 {% extends 'profile/profile_layout.html.twig' %}
 {% block content %}
+	<h2 class="border-bottom border-3 border-success text-success">Profile</h2>
+	{# <img class="h-100 w-100 object-fit-cover" src="{{ asset('assets/uploads/' ~ profileForm.picture.vars.value) }}" alt=""> #}
+
+
+	{# {{ form(profileForm) }} #}
+	{{ form_start(profileForm) }}
+
+	{# <div class=""> #}
+
+	<div class="col">
+		{{ form_row(profileForm.picture) }}
+	</div>
+	<div class="col">
+		{{ form_row(profileForm.cover) }}
+	</div>
+	<div class="row row-cols-2">
+
+		{{ form_row(profileForm.firstname) }}
+		{{ form_row(profileForm.lastname) }}
+
+	</div>
+	{{ form_row(profileForm.email) }}
+	{{ form_row(profileForm.phoneNumber) }}
+	{{ form_row(profileForm.bio) }}
+	{{ form_row(profileForm.cv) }}
+	<div class="row row-cols-2">
+
+		{{ form_row(profileForm.dateOfBirth) }}
+		{{ form_row(profileForm.gender) }}
+
+	</div>
+	<div class="row row-cols-2">
+
+		{{ form_row(profileForm.studyField) }}
+		{{ form_row(profileForm.certificateYearObtention) }}
+
+	</div>
+	{{ form_row(profileForm.city) }}
+	{{ form_row(profileForm.country) }}
+
+	{# </div> #}
+	<div class="text-center">
+		<button type="submit" class="btn my-bg-green-medium px-5 fs-5 fw-bolder">Sauvgarder</button>
+	</div>
+
+
+	{{ form_end(profileForm) }}
 
 {% endblock %}

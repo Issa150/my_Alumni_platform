@@ -41,6 +41,27 @@ class EmploiRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+
+    public function findAllEmplois(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+    public function findOneById($id): ?Emploi
+    {
+        return $this->createQueryBuilder('e')
+        ->andWhere('e.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+    }
+
+
     
     public function findLastThree(): array
     {

@@ -63,7 +63,7 @@ class ProfileController extends AbstractController
         $formProfileUpdater = $this->createForm(UserProfileUpdaterType::class, $user);
         $formProfileUpdater->handleRequest($request);
         
-        if ($formProfileUpdater->isSubmitted() && $formProfileUpdater->isValid()) {
+        if ($formProfileUpdater->isSubmitted()) {
             /** @var UploadedFile $pictureFile */
             $pictureFile = $formProfileUpdater->get('picture')->getData();
 

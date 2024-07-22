@@ -54,6 +54,14 @@ css Open In Editor Edit Copy code * {
 .my-bg-green {
   background-color: var(--clr-main);
 }
+.my-bg-green-medium {
+  color: var(--clr-main);
+  background-color: var(--clr-green);
+  &:hover{
+    color: var(--clr-main);
+    background-color: var(--clr-green);
+  }
+}
 
 .my-bg-green-pastel {
   background-color: var(--clr-green-pastel);

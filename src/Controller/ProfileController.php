@@ -2,10 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserProfileUpdaterType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfileController extends AbstractController
 {
@@ -43,13 +51,53 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profile/my_profile/{id}', name: 'my_profile')]
-    public function myProfile(UserRepository $userRepository, int $id): Response
+    public function myProfile(
+        User $user,
+        Request $request, 
+        EntityManagerInterface $em,
+        SluggerInterface $slugger,
+        #[Autowire('%kernel.project_dir%/public/uploads')] string $profilePicturesDirectory
+    ): Response
     {
-        $user =$userRepository->findOneById($id);
-        return $this->render('profile/pages/my_profile.twig',[
-            'user' => $user
-        ]);
+        $user = $this->getUser();
+        $formProfileUpdater = $this->createForm(UserProfileUpdaterType::class, $user);
+        $formProfileUpdater->handleRequest($request);
         
+        if ($formProfileUpdater->isSubmitted()) {
+            /** @var UploadedFile $pictureFile */
+            $pictureFile = $formProfileUpdater->get('picture')->getData();
+
+            // Process the uploaded picture file
+            if ($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureFile->guessExtension();
+
+                // Move the file to the directory where profile pictures are stored
+                try {
+                    $pictureFile->move($profilePicturesDirectory, $newFilename);
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                    $this->addFlash('error', 'An error occurred while uploading your profile picture.');
+                    return $this->redirectToRoute('my_profile');
+                }
+
+                // Update the 'picture' property to store the file name
+                $user->setPicture($newFilename);
+            }
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'Profile updated successfully.');
+
+            return $this->redirectToRoute('my_profile', ['id' => $user->getId()]);
+        }
+
+        return $this->render('profile/pages/my_profile.twig', [
+            'user' => $user,
+            'form' => $formProfileUpdater->createView(),
+        ]);
     }
 
     

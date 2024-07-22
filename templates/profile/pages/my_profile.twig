@@ -93,14 +93,18 @@
 
     {{ form_end(form) }}
 
-    <script>
+	<script>
         document.addEventListener('DOMContentLoaded', function () {
             var collectionHolder = document.getElementById('social-links-list');
             var addLinkButton = document.getElementById('add-social-link');
 
             addLinkButton.addEventListener('click', function (e) {
                 e.preventDefault();
-                addSocialLinkForm(collectionHolder);
+                if (collectionHolder.querySelectorAll('.social-link-item').length < 5) {
+                    addSocialLinkForm(collectionHolder);
+                } else {
+                    alert('Vous ne pouvez ajouter que 5 liens de réseaux sociaux.');
+                }
             });
 
             // Set the index to the number of current inputs
@@ -121,7 +125,7 @@
             // Increase the index with one for the next item
             collectionHolder.dataset.index = parseInt(index) + 1;
 
-            // Display the form in the page before the "Add a tag" link anchor
+            // Display the form in the page before the "Add a link" link
             var newFormDiv = document.createElement('div');
             newFormDiv.className = 'social-link-item';
             newFormDiv.innerHTML = newForm;

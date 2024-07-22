@@ -16,6 +16,73 @@ class EmploiRepository extends ServiceEntityRepository
         parent::__construct($registry, Emploi::class);
     }
 
+
+    public function findAllEmplois(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function findOneById($id): ?Emploi
+    {
+        return $this->createQueryBuilder('e')
+        ->andWhere('e.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+    }
+
+    public function findAllPublicationDates(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('DISTINCT e.publicationDate')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllDomains(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('DISTINCT e.field')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllCities(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('DISTINCT e.city')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllSkills(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('DISTINCT e.skills')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllTeleworkings(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('DISTINCT e.teleworking')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllContracts(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('DISTINCT e.contract')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Emploi[] Returns an array of Emploi objects
     //     */

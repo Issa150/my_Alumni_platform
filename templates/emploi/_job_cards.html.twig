@@ -1,0 +1,24 @@
+{% for emploi in emplois %}
+	<div class="card mb-3">
+		<div class="row g-0">
+			<div class="col-4 d-flex align-items-center justify-content-center my-bg-green rounded-start">
+				<img class="w-50  m-3" src="{{ emploi.logo }}" alt="">
+			</div>
+			<div class="col-8">
+				<div class="card-body">
+					<h5 class="card-title">{{ emploi.name }}</h5>
+					<p class="card-text">{{ emploi.description }}</p>
+					<p class="card-text">
+						<div class="d-flex justify-content-end align-items-center">
+							<button type="submit" class="btn end-0 p-0">
+								<i class="fa-solid  text-white my-btn-blue p-4 rounded-circle"></i>
+							</button>
+							<a href="" class="btn me-5">Suivre</a>
+						</div>
+
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfor %}

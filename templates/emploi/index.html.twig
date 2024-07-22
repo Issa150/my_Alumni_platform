@@ -1,81 +1,122 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}retrouvez les emplois de la plateforme
-{% endblock %}
+{% block title %}Retrouvez les emplois de la plateforme{% endblock %}
 
 {% block body %}
-	<div class="container position-relative">
-		<div class="card text-light rounded-0">
-			<img src="{{ asset('assets/img/default/banner.jpg') }}" class="card-img rounded-0 directoryHero" alt="...">
-			<div class="my-overlay-gradient card-img-overlay d-flex justify-content-center align-items-center">
-				<h1 class="card-title text-uppercase mb-5 directoryTitle">emplois</h1>
-			</div>
-		</div>
+<div class="container position-relative">
+    <div class="card text-light rounded-0">
+        <img src="{{ asset('assets/img/default/banner.jpg') }}" class="card-img rounded-0 directoryHero" alt="...">
+        <div class="my-overlay-gradient card-img-overlay d-flex justify-content-center align-items-center">
+            <h1 class="card-title text-uppercase mb-5 directoryTitle">emplois</h1>
+        </div>
+    </div>
 
-		{# BARRE DE RECHERCHE QUOI? ET OU? #}
-		<div class="d-flex justify-content-center ">
-			<div class="searchAnnuaire d-flex justify-content-between align-items-center rounded-pill w-75 p-2 shadow bg-white">
-				<div class="input-container- w-100 h-100 border-end ">
-					<p class="input-title mb-0 ms-3">QUOI ?</p>
-					<input type="text" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="rechercher par mot clés">
-				</div>
-				<div class="input-container w-100 h-100 ">
-					<p class="input-title mb-0 ms-3">OÙ?</p>
-					<input type="text" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="...">
-				</div>
-				<button type="submit" class="btn end-0 p-0">
-					<i class="fa-solid fa-magnifying-glass text-white my-btn-red p-4 rounded-circle"></i>
-				</button>
-			</div>
-		</div>
-	</div>
+    {# BARRE DE RECHERCHE QUOI? ET OU? #}
+    <div class="d-flex justify-content-center ">
+        <div class="searchAnnuaire d-flex justify-content-between align-items-center rounded-pill w-75 p-2 shadow bg-white">
+            <div class="input-container- w-100 h-100 border-end ">
+                <p class="input-title mb-0 ms-3">QUOI ?</p>
+                <input type="text" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="rechercher par mot clés">
+            </div>
+            <div class="input-container w-100 h-100 ">
+                <p class="input-title mb-0 ms-3">OÙ?</p>
+                <input type="text" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="...">
+            </div>
+            <button type="submit" class="btn end-0 p-0">
+                <i class="fa-solid fa-magnifying-glass text-white my-btn-red p-4 rounded-circle"></i>
+            </button>
+        </div>
+    </div>
+</div>
 
-	{# MENU AFFINER SA RECHERCHE #}
-	<div class="row container mx-auto mt-5">
-		<div class="col-3 my-bg-gray p-5 my-5">
-			<div class="d-flex justify-content-around mb-5">
-				<i class="fa-solid fa-sliders"></i>
-				<h6>Affiner la recherche</h6>
-			</div>
-			<form id="filter-form">
-				<select id="filter-publication-date" class="form-select mb-3" aria-label="Default select example">
-					<option value="">Date de publication</option>
-					  
-				</select>
-				<select id="filter-domain" class="form-select mb-3" aria-label="Default select example">
-					<option value="">Domaine</option>
+{# MENU AFFINER SA RECHERCHE #}
+<div class="row container mx-auto mt-5">
+    <div class="col-3 my-bg-gray p-5 my-5">
+        <div class="d-flex justify-content-around mb-5">
+            <i class="fa-solid fa-sliders"></i>
+            <h6>Affiner la recherche</h6>
+        </div>
+        <form id="filter-form">
+            <select id="filter-publicationDate" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Date de publication</option>
+                {% for date in filterPublicationDates %}
+                    <option value="{{ date.publicationDate|date('Y-m-d') }}">{{ date.publicationDate|date('Y-m-d') }}</option>
+                {% endfor %}
+            </select>
+            <select id="filter-domain" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Domaine</option>
+                {% for domain in domains %}
+                    <option value="{{ domain.field|join(', ') }}">{{ domain.field|join(', ') }}</option>
+                {% endfor %}
+            </select>
+            <select id="filter-skills" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Compétences</option>
+                {% for skill in skills %}
+                    <option value="{{ skill.skills|join(', ') }}">{{ skill.skills|join(', ') }}</option>
+                {% endfor %}
+            </select>
+            <select id="filter-contract" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Contrat</option>
+                {% for contract in contracts %}
+                    <option value="{{ contract.contract|join(', ') }}">{{ contract.contract|join(', ') }}</option>
+                {% endfor %}
+            </select>
+            <select id="filter-requiredLevel" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Niveau requis</option>
+            </select>
+            <select id="filter-location" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Lieu</option>
+                {% for location in locations %}
+                    <option value="{{ location.city }}">{{ location.city }}</option>
+                {% endfor %}
+            </select>
+            <select id="filter-teleworking" class="form-select mb-3" aria-label="Default select example">
+                <option value="">Télétravail</option>
+                {% for teleworking in teleworkings %}
+                    <option value="{{ teleworking.teleworking ? teleworking.teleworking.getLabel() : 'Non spécifié' }}">{{ teleworking.teleworking ? teleworking.teleworking.getLabel() : 'Non spécifié' }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" id="reset-filters" class="btn btn-secondary mt-3">Réinitialiser</button>
+        </form>
+    </div>
 
-				</select>
-				<select id="filter-skills" class="form-select mb-3" aria-label="Default select example">
-					<option value="">Compétences</option>
+    <div class="col my-5 ms-5" id="job-cards">
+        {% include 'emploi/_job_cards.html.twig' with {'emplois': emplois} %}
+    </div>
+</div>
 
-				</select>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const filters = document.querySelectorAll('#filter-teleworking, #filter-location, #filter-requiredLevel,#filter-contract, #filter-skills, #filter-domain ,#filter-publicationDate');
 
-				<select id="filter-contract" class="form-select mb-3" aria-label="Default select example">
-					<option value="">Contrat</option>
+        function submitForm() {
+            const teleworking = document.querySelector('#filter-teleworking').value;
+            const location = document.querySelector('#filter-location').value;
+            const requiredLevel = document.querySelector('#filter-requiredLevel').value;
+            const contract = document.querySelector('#filter-contract').value;
+            const skills = document.querySelector('#filter-skills').value;
+            const domain = document.querySelector('#filter-domain').value;
+            const publicationDate = document.querySelector('#filter-publicationDate').value;
 
-				</select>
+            fetch(`/emploi/filter?teleworking=${teleworking}&location=${location}&requiredLevel=${requiredLevel}&contract=${contract}&skills=${skills}&domain=${domain}&publicationDate=${publicationDate}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector('#job-cards').innerHTML = html;
+                })
+                .catch(error => console.error('Error:', error));
+        }
 
-				<select id="filter-required-level" class="form-select mb-3" aria-label="Default select example">
-					<option value="">Niveau requis</option>
+        filters.forEach(filter => {
+            filter.addEventListener('change', function () {
+                submitForm();
+            });
+        });
 
-				</select>
+        document.getElementById('reset-filters').addEventListener('click', function () {
+            document.querySelector('#filter-form').reset();
+            submitForm();
+        });
+    });
+</script>
 
-				<select id="filter-location" class="form-select mb-3" aria-label="Default select example">
-					<option value="">Lieu</option>
-
-				</select>
-
-
-				<select id="filter-teleworking" class="form-select mb-3" aria-label="Default select example">
-					<option value="">Télétravail</option>
-
-				</select>
-
-
-				<button type="button" id="reset-filters" class="btn btn-secondary mt-3">Réinitialiser</button>
-			</form>
-		</div>
-
-
-	{% endblock %}
+{% endblock %}

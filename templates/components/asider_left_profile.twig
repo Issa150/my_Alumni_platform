@@ -7,7 +7,7 @@
 		<img class="my-img-profile shadow-sm mx-auto d-block rounded-circle ratio ratio-1x1" src="{% if app.user and app.user.picture %}{{ asset('uploads/' ~ app.user.picture) }}{% else %}{{ asset('assets/img/default/user-default.jpg') }}{% endif %}" alt="Photo de profil" class="rounded-circle user-profil">
 		<h3 class="text-center">{{user.firstname}}
 			{{user.lastname}}</h3>
-		<a class="d-block text-center" href="mailto:allumini@gmail.fr">{{user.email}}</a>
+		<a class="d-block text-center" href="mailto:{{user.email}}">{{user.email}}</a>
 		<p class="text-center">{{user.bio|striptags|u.truncate(150, '...') }}</p>
 
 		{# Profile details #}
@@ -16,7 +16,7 @@
 			<li><span>CV:</span>...</li>
 			<li><span>Ville:</span>{{user.city}}</li>
 			<li><span>Pays:</span>{{user.country}}</li>
-			<li><span>Domaine de compétences:</span>{{user.studyField}}</li>
+			<li><span>Compétences:</span>{{user.studyField}}</li>
 			<div class="d-flex gap-3 my-1">
 				<li><a target="_blank" href="https://github.com/"><i class="fa-brands fa-github fs-4"></i></a></li>
 				<li><a target="_blank" href="https://www.linkedin.com"><i class="fa-brands fa-linkedin fs-4"></i></a></li>

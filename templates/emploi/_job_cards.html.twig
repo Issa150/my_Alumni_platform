@@ -1,0 +1,22 @@
+{% if emplois is empty %}
+	<div class="alert" role="alert">
+		Aucun emploi trouvé avec ces critères.
+	</div>
+{% else %}
+	{% for emploi in emplois %}
+
+		<div class="card col-lg-4 col-md-6 col-sm-12 col-xs-12 m-2" style="width: 18rem;">
+			<div class=" p-3  border-bottom">
+				<img src="{{ asset('uploads/logosPartenaires/' ~ emploi.logo) }}" class="card-img-top" alt="...">
+			</div>
+			<div class="card-body">
+				<p class="card-text">{{ emploi.entreprise }}</p>
+				<h5 class="card-title">{{ emploi.name }}</h5>
+			</div>
+			<div class="d-flex justify-content-center mb-3">
+				<a href="#" class="btn my-btn-blue mt-3 w-50 fw-bold text-white">Voir l'offre</a>
+			</div>
+		</div>
+
+	{% endfor %}
+{% endif %}

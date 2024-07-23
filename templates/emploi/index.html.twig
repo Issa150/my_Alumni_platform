@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}retrouvez les emplois de la plateforme
+{% block title %}Retrouvez les emplois de la plateforme
 {% endblock %}
 
 {% block body %}
@@ -12,25 +12,25 @@
 			</div>
 		</div>
 
-		{# BARRE DE RECHERCHE QUOI? ET OU? #}
-		<div class="d-flex justify-content-center ">
-			<div class="searchAnnuaire d-flex justify-content-between align-items-center rounded-pill w-75 p-2 shadow bg-white">
-				<div class="input-container- w-100 h-100 border-end ">
+		<!-- Barre de recherche QUOI? et OÙ? -->
+		<div class="d-flex justify-content-center">
+			<form id="search-form" class="searchAnnuaire d-flex justify-content-between align-items-center rounded-pill w-75 p-2 shadow bg-white">
+				<div class="input-container w-100 h-100 border-end">
 					<p class="input-title mb-0 ms-3">QUOI ?</p>
-					<input type="text" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="rechercher par mot clés">
+					<input type="text" name="keyword" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="rechercher par mot clés">
 				</div>
-				<div class="input-container w-100 h-100 ">
+				<div class="input-container w-100 h-100">
 					<p class="input-title mb-0 ms-3">OÙ?</p>
-					<input type="text" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="...">
+					<input type="text" name="location" class="w-75 ms-3 border-0 inputSearch d-flex" placeholder="...">
 				</div>
 				<button type="submit" class="btn end-0 p-0">
 					<i class="fa-solid fa-magnifying-glass text-white my-btn-red p-4 rounded-circle"></i>
 				</button>
-			</div>
+			</form>
 		</div>
 	</div>
 
-	{# MENU AFFINER SA RECHERCHE #}
+	<!-- Formulaire de filtres -->
 	<div class="row container mx-auto mt-5">
 		<div class="col-3 my-bg-gray p-5 my-5">
 			<div class="d-flex justify-content-around mb-5">
@@ -38,44 +38,107 @@
 				<h6>Affiner la recherche</h6>
 			</div>
 			<form id="filter-form">
-				<select id="filter-publication-date" class="form-select mb-3" aria-label="Default select example">
+				<select name="publicationDate" id="filter-publicationDate" class="form-select mb-3" aria-label="Default select example">
 					<option value="">Date de publication</option>
-					  
+					{% for date in filterPublicationDates %}
+						<option value="{{ date.publicationDate|date('Y-m-d') }}">{{ date.publicationDate|date('Y-m-d') }}</option>
+					{% endfor %}
 				</select>
-				<select id="filter-domain" class="form-select mb-3" aria-label="Default select example">
+				<select name="domain" id="filter-domain" class="form-select mb-3" aria-label="Default select example">
 					<option value="">Domaine</option>
-
+					{% for domain in domains %}
+						<option value="{{ domain.field|join(', ') }}">{{ domain.field|join(', ') }}</option>
+					{% endfor %}
 				</select>
-				<select id="filter-skills" class="form-select mb-3" aria-label="Default select example">
+				<select name="skills" id="filter-skills" class="form-select mb-3" aria-label="Default select example">
 					<option value="">Compétences</option>
-
+					{% for skill in skills %}
+						<option value="{{ skill.skills|join(', ') }}">{{ skill.skills|join(', ') }}</option>
+					{% endfor %}
 				</select>
-
-				<select id="filter-contract" class="form-select mb-3" aria-label="Default select example">
+				<select name="contract" id="filter-contract" class="form-select mb-3" aria-label="Default select example">
 					<option value="">Contrat</option>
-
+					{% for contract in contracts %}
+						<option value="{{ contract.contract|join(', ') }}">{{ contract.contract|join(', ') }}</option>
+					{% endfor %}
 				</select>
-
-				<select id="filter-required-level" class="form-select mb-3" aria-label="Default select example">
+				<select name="requiredLevel" id="filter-requiredLevel" class="form-select mb-3" aria-label="Default select example">
 					<option value="">Niveau requis</option>
-
 				</select>
-
-				<select id="filter-location" class="form-select mb-3" aria-label="Default select example">
+				<select name="location" id="filter-location" class="form-select mb-3" aria-label="Default select example">
 					<option value="">Lieu</option>
-
+					{% for location in locations %}
+						<option value="{{ location.city }}">{{ location.city }}</option>
+					{% endfor %}
 				</select>
-
-
-				<select id="filter-teleworking" class="form-select mb-3" aria-label="Default select example">
+				<select name="teleworking" id="filter-teleworking" class="form-select mb-3" aria-label="Default select example">
 					<option value="">Télétravail</option>
-
+					{% for teleworking in teleworkings %}
+						<option value="{{ teleworking.teleworking ? teleworking.teleworking.getLabel() : 'Non spécifié' }}">{{ teleworking.teleworking ? teleworking.teleworking.getLabel() : 'Non spécifié' }}</option>
+					{% endfor %}
 				</select>
-
-
+				
 				<button type="button" id="reset-filters" class="btn btn-secondary mt-3">Réinitialiser</button>
 			</form>
 		</div>
 
+		<!-- Section pour afficher les résultats -->
+		<div class="col-9 my-5">
+			<div class="row ms-3" id="job-cards">
+				{% include 'emploi/_job_cards.html.twig' with {'emplois': emplois} %}
+			</div>
+		</div>
+	</div>
 
-	{% endblock %}
+	<!-- JavaScript pour gérer la soumission des formulaires avec AJAX -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+const searchForm = document.getElementById('search-form');
+const filterForm = document.getElementById('filter-form');
+const jobCards = document.getElementById('job-cards');
+
+// Fonction pour soumettre le formulaire de recherche
+function submitSearchForm(event) {
+event.preventDefault();
+const formData = new FormData(searchForm);
+const queryString = new URLSearchParams(formData).toString();
+
+fetch (`/emploi/filter?${queryString}`).then(response => response.text()).then(html => {
+jobCards.innerHTML = html;
+}).catch(error => console.error('Error:', error));
+}
+
+// Fonction pour soumettre le formulaire de filtres
+function submitFilterForm(event) {
+if (event) 
+event.preventDefault();
+
+// Prevent default form submission if the event is provided (e.g., on submit)
+const formData = new FormData(filterForm);
+const queryString = new URLSearchParams(formData).toString();
+
+fetch (`/emploi/filter?${queryString}`).then(response => response.text()).then(html => {
+jobCards.innerHTML = html;
+}).catch(error => console.error('Error:', error));
+}
+
+// Écouter les événements de soumission des formulaires
+searchForm.addEventListener('submit', submitSearchForm);
+filterForm.addEventListener('submit', submitFilterForm);
+
+// Écouter les changements sur les filtres individuels
+const filters = document.querySelectorAll('#filter-teleworking, #filter-location, #filter-requiredLevel,#filter-contract, #filter-skills, #filter-domain ,#filter-publicationDate');
+filters.forEach(filter => {
+filter.addEventListener('change', function () {
+submitFilterForm();
+});
+});
+
+document.getElementById('reset-filters').addEventListener('click', function () {
+filterForm.reset();
+submitFilterForm();
+});
+});
+	</script>
+
+{% endblock %}

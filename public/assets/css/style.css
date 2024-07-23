@@ -7,7 +7,7 @@ css Open In Editor Edit Copy code * {
 :root {
   /* ACCCES COLORS */
   --clr-main: #005259;
-  --clr-bg: #FAFBFF;
+  --clr-bg: #fcfcfc;
 
   /* ACCENTS COLORS */
   --clr-red: #EF736A;
@@ -49,6 +49,10 @@ css Open In Editor Edit Copy code * {
 /* GREEN */
 .my-text-green {
   color: var(--clr-main);
+}
+
+.my-border-green{
+  border-color: var(--clr-main) !important;
 }
 
 .my-bg-green {

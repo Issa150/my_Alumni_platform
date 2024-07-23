@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
@@ -8,8 +7,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -17,12 +16,10 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfileController extends AbstractController
 {
-
     #[Route('/profile/{id}', name: 'app_profile')]
     public function profileUser(UserRepository $userRepository, int $id): Response
     {
-
-        $user =$userRepository->findOneById($id);
+        $user = $userRepository->findOneById($id);
 
         return $this->render('profile/pages/feeds.twig', [
             'controller_name' => 'ProfileController',
@@ -30,22 +27,20 @@ class ProfileController extends AbstractController
         ]);
     }
 
-
     #[Route('/profile/feeds/{id}', name: 'my_feeds')]
     public function feeds(UserRepository $userRepository, int $id): Response
     {
-        $user =$userRepository->findOneById($id);
-        return $this->render('profile/pages/feeds.twig',[
+        $user = $userRepository->findOneById($id);
+        return $this->render('profile/pages/feeds.twig', [
             'user' => $user
         ]);
-
     }
 
     #[Route('/profile/resources/{id}', name: 'my_sources')]
     public function sources(UserRepository $userRepository, int $id): Response
     {
-        $user =$userRepository->findOneById($id);
-        return $this->render('profile/pages/resources.twig',[
+        $user = $userRepository->findOneById($id);
+        return $this->render('profile/pages/resources.twig', [
             'user' => $user
         ]);
     }
@@ -148,12 +143,11 @@ class ProfileController extends AbstractController
     ]);
     }
 
-    
     #[Route('/profile/likes/{id}', name: 'my_likes')]
     public function likes(UserRepository $userRepository, int $id): Response
     {
-        $user =$userRepository->findOneById($id);
-        return $this->render('profile/pages/likes.twig',[
+        $user = $userRepository->findOneById($id);
+        return $this->render('profile/pages/likes.twig', [
             'user' => $user
         ]);
     }
@@ -161,17 +155,9 @@ class ProfileController extends AbstractController
     #[Route('/profile/abonnement/{id}', name: 'my_abonnement')]
     public function contacts(UserRepository $userRepository, int $id): Response
     {
-        $user =$userRepository->findOneById($id);
-        return $this->render('profile/pages/follow.twig',[
+        $user = $userRepository->findOneById($id);
+        return $this->render('profile/pages/follow.twig', [
             'user' => $user
         ]);
     }
-
-
-
-    // #[Route('/profile/my_posts', name: 'my_posts')]
-    // public function posts(): Response
-    // {
-    //     return $this->render('profile/my_posts.twig');
-    // }
 }

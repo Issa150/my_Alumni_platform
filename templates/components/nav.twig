@@ -26,7 +26,7 @@
 								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="{{path('app_directory')}}" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Annuaire</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Emplois</a>
+								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="{{path('app_emploi')}}" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Emplois</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link rounded-2 my-link-item-hover" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Formations</a>

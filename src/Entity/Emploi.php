@@ -59,7 +59,7 @@ class Emploi
     private array $contract = [];
 
     #[ORM\ManyToOne(inversedBy: 'emplois')]
-    private ?user $user_id = null;
+    private ?User $user_id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $link = null;

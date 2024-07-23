@@ -20,7 +20,20 @@ class UserProfileUpdaterType extends AbstractType
             ->add('lastname')
             ->add('phoneNumber')
             ->add('bio')
-            ->add('cv')
+            ->add('cv', FileType::class, [
+                'label' => "CV (PDF file)",
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '3M',
+                        'mimeTypes' => [
+                            'application/pdf',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF file',
+                    ])
+                ],
+            ])
             ->add('dateOfBirth', null, [
                 'widget' => 'single_text',
             ])
@@ -41,7 +54,7 @@ class UserProfileUpdaterType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '5M',
+                        'maxSize' => '3M',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
@@ -50,7 +63,21 @@ class UserProfileUpdaterType extends AbstractType
                     ])
                 ],
             ])
-            ->add('cover')
+            ->add('cover', FileType::class, [
+                'label' => "L'image de couverture (Image file)",
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '3M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF)',
+                    ])
+                ],
+            ])
             ->add('city')
             ->add('country')
             ->add('certificateObtention')

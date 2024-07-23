@@ -3,7 +3,7 @@
 	<div
 		class="container-fluid bg-body-secondary rounded-2 p-1 h-100 w-100">
 		{# Img cover #}
-		<img class="my-img-cover w-100" src="https://cdn.pixabay.com/photo/2023/06/15/16/55/klatschmohn-8066026_1280.jpg" alt="Profile image cover">
+		<img class="my-img-cover w-100" src="{% if app.user and app.user.cover %}{{ asset('uploads/' ~ app.user.cover) }}{% else %}{{ asset('assets/img/default/cover-default.jpg') }}{% endif %}" alt="Profile image cover">
 		<img class="my-img-profile shadow-sm mx-auto d-block rounded-circle ratio ratio-1x1" src="{% if app.user and app.user.picture %}{{ asset('uploads/' ~ app.user.picture) }}{% else %}{{ asset('assets/img/default/user-default.jpg') }}{% endif %}" alt="Photo de profil" class="rounded-circle user-profil">
 		<h3 class="text-center">{{user.firstname}}
 			{{user.lastname}}</h3>
@@ -12,15 +12,25 @@
 
 		{# Profile details #}
 		<ul class="menu_container list-unstyled bg-white p-2 rounded">
-			<h2 class="border-bottom border-3 border-success text-success">Profil</h2>
-			<li><span>CV:</span>...</li>
-			<li><span>Ville:</span>{{user.city}}</li>
-			<li><span>Pays:</span>{{user.country}}</li>
-			<li><span>Domaine de compétences:</span>{{user.studyField}}</li>
+			<h2 class="border-bottom border-3 my-border-clr-main my-text-green">Profil</h2>
+			<li><span class="fw-bolder">CV:</span>{{ user.cv|length > 15 ? user.cv|slice(0, 15) ~ '...' : user.cv ?: '...' }}</li>
+			<li><span class="fw-bolder">Ville:</span>{{ user.city ?: '...' }}</li>
+			<li><span class="fw-bolder">Pays:</span>{{ user.country ?: '...' }}</li>
+			<li><span class="fw-bolder">Compétences:</span>{{ user.studyField ?: '...' }}</li>
 			<div class="d-flex gap-3 my-1">
 				<li><a target="_blank" href="https://github.com/"><i class="fa-brands fa-github fs-4"></i></a></li>
 				<li><a target="_blank" href="https://www.linkedin.com"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
 			</div>
+			{# <div class="d-flex gap-3 my-1">
+				{% for link in user.links %}
+					{% if link.url matches '/github.com/' %}
+						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-github fs-4"></i></a></li>
+					{% endif %}
+					{% if link.url matches '/linkedin.com/' %}
+						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
+					{% endif %}
+				{% endfor %}
+			</div> #}
 		</ul>
 
 

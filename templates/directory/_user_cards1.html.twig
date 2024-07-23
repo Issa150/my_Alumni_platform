@@ -1,31 +1,26 @@
 {% if users is empty %}
-	<div class="alert" role="alert">
-		Aucun alumni trouvé avec ces critères.
-	</div>
+    <div class="alert alert-warning" role="alert">
+        Aucun alumni trouvé avec ces critères.
+    </div>
 {% else %}
-	{% for user in users %}
-
-		<div class="card col-lg-4 col-md-6 col-sm-12 col-xs-12 m-2" style="width: 18rem;">
-			<div class=" p-3  border-bottom d-flex justify-content-around align-items-center">
-				
-                <img src="{{ asset('uploads/logosPartenaires/' ~ user.picture) }}" class="card-img-top w-25 rounded-circle card_user-profil m-3" alt="...">
-                
-				<h5>{{ user.firstname }}
-					{{ user.lastname }}</h5>
-			</div>
-			<div class="card-body">
-				{% if 'ROLE_ADMIN' in user.roles %}
-					<button class="btn my-bg-yellow-pastel mb-3">Administrateur</button>
-				{% endif %}
-				{% if 'ROLE_USER' in user.roles %}
-					<button class="ms-2 btn my-bg-green-pastel mb-3">Alumni</button>
-				{% endif %}
-				<p class="card-text">{{ user.bio|striptags|u.truncate(50) }} ... </p>
-			</div>
-			<button class="btn my-btn-green mx-auto my-3">
-				<a href="{{ path('app_profile', {'id': user.id}) }}" class="text-white text-decoration-none">Voir le profil</a>
-			</button>
-		</div>
-
-	{% endfor %}
+    {% for user in users %}
+        <div class="card col-lg-4 col-md-6 col-sm-12 col-xs-12 m-2" style="width: 18rem;">
+            <div class="p-3 border-bottom d-flex justify-content-around align-items-center">
+                <img src="{{ asset('uploads/userPictures/' ~ user.picture) }}" class="card-img-top w-25 rounded-circle card_user-profil m-3" alt="...">
+                <h5>{{ user.firstname }} {{ user.lastname }}</h5>
+            </div>
+            <div class="card-body">
+                {% if 'ROLE_ADMIN' in user.roles %}
+                    <button class="btn my-bg-yellow-pastel mb-3">Administrateur</button>
+                {% endif %}
+                {% if 'ROLE_USER' in user.roles %}
+                    <button class="ms-2 btn my-bg-green-pastel mb-3">Alumni</button>
+                {% endif %}
+                <p class="card-text">{{ user.bio|striptags|u.truncate(50) }} ... </p>
+            </div>
+            <button class="btn my-btn-green mx-auto my-3">
+                <a href="{{ path('app_profile', {'id': user.id}) }}" class="text-white text-decoration-none">Voir le profil</a>
+            </button>
+        </div>
+    {% endfor %}
 {% endif %}

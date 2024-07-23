@@ -19,9 +19,9 @@ class SocialLinks
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'socialLinks')]
+    #[ORM\ManyToOne(targetEntity:"App\Entity\User", inversedBy: "socialLinks")]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user_id = null;
+    private ?User $user = null;
 
     #[ORM\Column(length: 255)]
     private ?string $url = null;
@@ -38,14 +38,14 @@ class SocialLinks
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(?User $user_id): static
+    public function setUser(?User $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
@@ -55,10 +55,15 @@ class SocialLinks
         return $this->url;
     }
 
-    public function setUrl(string $url): static
+    public function setUrl(string $url): self
     {
         $this->url = $url;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->id;
     }
 }

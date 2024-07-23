@@ -7,7 +7,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DirectoryController extends AbstractController
@@ -15,20 +15,10 @@ class DirectoryController extends AbstractController
     #[Route('/annuaire', name: 'app_directory')]
     public function index(EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
-        // Utilisation de la méthode findAllUsers de l'entity manager
-        $users = $entityManager->getRepository(User::class)->findAllUsers();
-
-        // Récupération des années de promotion
-
+        $users = $entityManager->getRepository(User::class)->findAll();
         $certificateYears = $userRepository->findAllCertificateYearObtention();
-
-
-        // Récupération des domaines d'activité
         $activityDomains = $userRepository->findAllStudyField();
-
-        // Récupération des localisations
         $locations = $userRepository->findAllCities();
-
 
         return $this->render('directory/index.html.twig', [
             'users' => $users,
@@ -42,7 +32,7 @@ class DirectoryController extends AbstractController
     public function filter(Request $request, UserRepository $userRepository): Response
     {
         $firstname = $request->query->get('firstname');
-        $lastname = $request->query->get('lasttname');
+        $lastname = $request->query->get('lastname');
         $year = $request->query->get('year');
         $domain = $request->query->get('domain');
         $location = $request->query->get('location');
@@ -50,13 +40,13 @@ class DirectoryController extends AbstractController
         $queryBuilder = $userRepository->createQueryBuilder('u');
 
         if ($firstname) {
-            $queryBuilder->andWhere('u.firstname = :firstname')
-                ->setParameter('firstname', $firstname);
+            $queryBuilder->andWhere('u.firstname LIKE :firstname')
+                ->setParameter('firstname', '%' . $firstname . '%');
         }
 
         if ($lastname) {
-            $queryBuilder->andWhere('u.lastname = :lastname')
-                ->setParameter('lastname', $lastname);
+            $queryBuilder->andWhere('u.lastname LIKE :lastname')
+                ->setParameter('lastname', '%' . $lastname . '%');
         }
 
         if ($year) {

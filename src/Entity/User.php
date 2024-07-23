@@ -94,7 +94,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, SocialLinks>
      */
-    #[ORM\OneToMany(targetEntity: SocialLinks::class, mappedBy: 'user_id')]
+    #[ORM\OneToMany(targetEntity: SocialLinks::class, mappedBy: 'user', cascade: ['persist'])]
     private Collection $socialLinks;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -387,7 +387,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->socialLinks->contains($socialLink)) {
             $this->socialLinks->add($socialLink);
-            $socialLink->setUserId($this);
+            $socialLink->setUser($this);
         }
 
         return $this;
@@ -397,8 +397,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->socialLinks->removeElement($socialLink)) {
             // set the owning side to null (unless already changed)
-            if ($socialLink->getUserId() === $this) {
-                $socialLink->setUserId(null);
+            if ($socialLink->getUser() === $this) {
+                $socialLink->setUser(null);
             }
         }
 

@@ -51,7 +51,7 @@ class ProfileController extends AbstractController
         Request $request, 
         EntityManagerInterface $em,
         SluggerInterface $slugger,
-        #[Autowire('%kernel.project_dir%/public/uploads')] string $profilePicturesDirectory,
+        #[Autowire('%kernel.project_dir%/public/uploads/userPictures')] string $profilePicturesDirectory,
         int $id
     ): Response
     {

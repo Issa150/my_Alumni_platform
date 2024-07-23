@@ -1,6 +1,6 @@
 {% extends 'profile/profile_layout.html.twig' %}
 {% block content %}
-    <h1 class="border-bottom border-3 my-border-green my-text-green">Mon profil</h1>
+    <h2 class="border-bottom border-3 my-border-green my-text-green">Mon profil</h2>
 
     {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
@@ -84,11 +84,11 @@
                 </div>
             {% endfor %}
         </div>
-        <button type="button" class="btn my-bg-green-pastel" id="add-social-link">Ajouter un lien de réseau social</button>
+        <button type="button" class="btn my-bg-green-medium" id="add-social-link">Ajouter un lien de réseau social</button>
     </div>
 
     <div class="text-center">
-        <button type="submit" class="btn my-bg-green-medium my-2 fw-bolder px-5 fs-5">Sauvegarder</button>
+        <button type="submit" class="btn my-bg-green-medium mt-4 mb-2 fw-bolder px-5 fs-5">Sauvegarder</button>
     </div>
 
     {{ form_end(form) }}

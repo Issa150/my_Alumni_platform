@@ -71,7 +71,7 @@ css Open In Editor Edit Copy code * {
   background-color: var(--clr-green-pastel);
 }
 .my-border-clr-main{
-  border-color: var(--clr-main);
+  border-bottom-color: var(--clr-main) !important;
 }
 
 /* BLUE */
@@ -139,6 +139,15 @@ css Open In Editor Edit Copy code * {
   &:hover {
     transform: translateY(-5px);
     background-color: var(--clr-main);
+  }
+}
+.my-btn-green-pastel {
+  background-color: var(--clr-green-pastel);
+  transition: .25s;
+
+  &:hover {
+    /* transform: translateY(-5px); */
+    background-color: var(--clr-green-pastel);
   }
 }
 

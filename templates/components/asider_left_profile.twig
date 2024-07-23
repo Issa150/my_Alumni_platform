@@ -12,25 +12,19 @@
 
 		{# Profile details #}
 		<ul class="menu_container list-unstyled bg-white p-2 rounded">
-<<<<<<< HEAD
+
 			<h2 class="border-bottom border-3 my-border-clr-main my-text-green">Profil</h2>
 			<li><span class="fw-bolder">CV:</span>{{ user.cv|length > 15 ? user.cv|slice(0, 15) ~ '...' : user.cv ?: '...' }}</li>
 			<li><span class="fw-bolder">Ville:</span>{{ user.city ?: '...' }}</li>
 			<li><span class="fw-bolder">Pays:</span>{{ user.country ?: '...' }}</li>
 			<li><span class="fw-bolder">Compétences:</span>{{ user.studyField ?: '...' }}</li>
-=======
-			<h2 class="border-bottom border-3 my-border-green my-text-green ">Profil</h2>
-			<li><span>CV:</span>...</li>
-			<li><span>Ville:</span>{{user.city}}</li>
-			<li><span>Pays:</span>{{user.country}}</li>
-			<li><span>Compétences:</span>{{user.studyField}}</li>
->>>>>>> ef498c780431e1dcaaa049d776f0a9148fc3932d
-			<div class="d-flex gap-3 my-1">
+
+			{# <div class="d-flex gap-3 my-1">
 				<li><a target="_blank" href="https://github.com/"><i class="fa-brands fa-github fs-4"></i></a></li>
 				<li><a target="_blank" href="https://www.linkedin.com"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
-			</div>
-			{# <div class="d-flex gap-3 my-1">
-				{% for link in user.links %}
+			</div> #}
+			<div class="d-flex gap-3 my-1">
+				{% for link in user.socialLinks %}
 					{% if link.url matches '/github.com/' %}
 						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-github fs-4"></i></a></li>
 					{% endif %}
@@ -38,7 +32,7 @@
 						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
 					{% endif %}
 				{% endfor %}
-			</div> #}
+			</div>
 		</ul>
 
 

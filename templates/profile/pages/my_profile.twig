@@ -1,135 +1,136 @@
 {% extends 'profile/profile_layout.html.twig' %}
 {% block content %}
-    <h1 class="border-bottom border-3 my-border-green my-text-green">Mon profil</h1>
+	<h2 class="border-bottom border-3 my-border-green my-text-green">Mon profil</h2>
 
-    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+	{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
-    <div>
-        <label for="picture">Photo de profil</label>
-        {{ form_widget(form.picture) }}
-    </div>
+	<div>
+		<label for="picture">Photo de profil</label>
+		{{ form_widget(form.picture) }}
+	</div>
 
-    <div>
-        <label for="cover">Photo de couverture</label>
-        {{ form_widget(form.cover) }}
-    </div>
+	<div>
+		<label for="cover">Photo de couverture</label>
+		{{ form_widget(form.cover) }}
+	</div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <label for="firstname">Prénom</label>
-            {{ form_widget(form.firstname) }}
-        </div>
-        <div class="col-md-6">
-            <label for="lastname">Nom</label>
-            {{ form_widget(form.lastname) }}
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-md-6">
+			<label for="firstname">Prénom</label>
+			{{ form_widget(form.firstname) }}
+		</div>
+		<div class="col-md-6">
+			<label for="lastname">Nom</label>
+			{{ form_widget(form.lastname) }}
+		</div>
+	</div>
 
-    <div>
-        <label for="email">Adresse e-mail</label>
-        {{ form_widget(form.email) }}
-    </div>
+	<div>
+		<label for="email">Adresse e-mail</label>
+		{{ form_widget(form.email) }}
+	</div>
 
-    <div>
-        <label for="phoneNumber">Numéro de téléphone</label>
-        {{ form_widget(form.phoneNumber) }}
-    </div>
+	<div>
+		<label for="phoneNumber">Numéro de téléphone</label>
+		{{ form_widget(form.phoneNumber) }}
+	</div>
 
-    <div>
-        <label for="bio">Biographie</label>
-        {{ form_widget(form.bio) }}
-    </div>
+	<div>
+		<label for="bio">Biographie</label>
+		{{ form_widget(form.bio) }}
+	</div>
 
-    <div>
-        <label for="cv">CV</label>
-        {{ form_widget(form.cv) }}
-    </div>
+	<div>
+		<label for="cv">CV</label>
+		{{ form_widget(form.cv) }}
+	</div>
 
-    <div>
-        <label for="dateOfBirth">Date de naissance</label>
-        {{ form_widget(form.dateOfBirth) }}
-    </div>
 
-    <div>
-        <label for="gender">Genre</label>
-        {{ form_widget(form.gender) }}
-    </div>
+	<div class="row align-items-center">
+		<div class="col-md-6">
+			<label for="dateOfBirth">Date de naissance</label>
+			{{ form_widget(form.dateOfBirth) }}
+		</div>
+		<div class="col-md-6">
+			<label for="gender">Genre</label>
+			{{ form_widget(form.gender) }}
+		</div>
+	</div>
 
-    <div>
-        <label for="studyField">Domaine d'étude</label>
-        {{ form_widget(form.studyField) }}
-    </div>
+	<div>
+		<label for="studyField">Domaine d'étude</label>
+		{{ form_widget(form.studyField) }}
+	</div>
 
-    <div>
-        <label for="certificateObtention">Obtention du certificat</label>
-        {{ form_widget(form.certificateObtention) }}
-    </div>
+	<div>
+		<label for="certificateObtention">Obtention du certificat</label>
+		{{ form_widget(form.certificateObtention) }}
+	</div>
 
-    <div>
-        <label for="city">Ville</label>
-        {{ form_widget(form.city) }}
-    </div>
+	<div>
+		<label for="city">Ville</label>
+		{{ form_widget(form.city) }}
+	</div>
 
-    <div>
-        <label for="country">Pays</label>
-        {{ form_widget(form.country) }}
-    </div>
+	<div>
+		<label for="country">Pays</label>
+		{{ form_widget(form.country) }}
+	</div>
 
-    <div>
-        <label for="socialLinks">Liens de réseaux sociaux</label>
-        <div id="social-links-list" data-prototype="{{ form_widget(form.socialLinks.vars.prototype)|e('html_attr') }}">
-            {% for socialLink in form.socialLinks %}
-                <div class="social-link-item">
-                    {{ form_row(socialLink) }}
-                </div>
-            {% endfor %}
-        </div>
-        <button type="button" class="btn my-bg-green-pastel" id="add-social-link">Ajouter un lien de réseau social</button>
-    </div>
+	<div>
+		<label for="socialLinks">Liens de réseaux sociaux</label>
+		<div id="social-links-list" data-prototype="{{ form_widget(form.socialLinks.vars.prototype)|e('html_attr') }}">
+			{% for socialLink in form.socialLinks %}
+				<div class="social-link-item">
+					{{ form_row(socialLink) }}
+				</div>
+			{% endfor %}
+		</div>
+		<button type="button" class="btn my-bg-green-medium" id="add-social-link">Ajouter un lien de réseau social</button>
+	</div>
 
-    <div class="text-center">
-        <button type="submit" class="btn my-bg-green-medium my-2 fw-bolder px-5 fs-5">Sauvegarder</button>
-    </div>
+	<div class="text-center">
+		<button type="submit" class="btn my-bg-green-medium mt-4 mb-2 fw-bolder px-5 fs-5">Sauvegarder</button>
+	</div>
 
-    {{ form_end(form) }}
+	{{ form_end(form) }}
 
 	<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var collectionHolder = document.getElementById('social-links-list');
-            var addLinkButton = document.getElementById('add-social-link');
+		document.addEventListener('DOMContentLoaded', function () {
+var collectionHolder = document.getElementById('social-links-list');
+var addLinkButton = document.getElementById('add-social-link');
 
-            addLinkButton.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (collectionHolder.querySelectorAll('.social-link-item').length < 5) {
-                    addSocialLinkForm(collectionHolder);
-                } else {
-                    alert('Vous ne pouvez ajouter que 5 liens de réseaux sociaux.');
-                }
-            });
+addLinkButton.addEventListener('click', function (e) {
+e.preventDefault();
+if (collectionHolder.querySelectorAll('.social-link-item').length < 5) {
+addSocialLinkForm(collectionHolder);
+} else {
+alert('Vous ne pouvez ajouter que 5 liens de réseaux sociaux.');
+}
+});
 
-            // Set the index to the number of current inputs
-            collectionHolder.dataset.index = collectionHolder.querySelectorAll('.social-link-item').length;
-        });
+// Set the index to the number of current inputs
+collectionHolder.dataset.index = collectionHolder.querySelectorAll('.social-link-item').length;
+});
 
-        function addSocialLinkForm(collectionHolder) {
-            // Get the data-prototype explained earlier
-            var prototype = collectionHolder.getAttribute('data-prototype');
+function addSocialLinkForm(collectionHolder) { // Get the data-prototype explained earlier
+var prototype = collectionHolder.getAttribute('data-prototype');
 
-            // Get the new index
-            var index = collectionHolder.dataset.index;
+// Get the new index
+var index = collectionHolder.dataset.index;
 
-            // Replace '__name__' in the prototype's HTML to
-            // instead be a number based on how many items we have
-            var newForm = prototype.replace(/__name__/g, index);
+// Replace '__name__' in the prototype's HTML to
+// instead be a number based on how many items we have
+var newForm = prototype.replace(/__name__/g, index);
 
-            // Increase the index with one for the next item
-            collectionHolder.dataset.index = parseInt(index) + 1;
+// Increase the index with one for the next item
+collectionHolder.dataset.index = parseInt(index) + 1;
 
-            // Display the form in the page before the "Add a link" link
-            var newFormDiv = document.createElement('div');
-            newFormDiv.className = 'social-link-item';
-            newFormDiv.innerHTML = newForm;
-            collectionHolder.appendChild(newFormDiv);
-        }
-    </script>
+// Display the form in the page before the "Add a link" link
+var newFormDiv = document.createElement('div');
+newFormDiv.className = 'social-link-item';
+newFormDiv.innerHTML = newForm;
+collectionHolder.appendChild(newFormDiv);
+}
+	</script>
 {% endblock %}

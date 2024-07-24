@@ -1,102 +1,103 @@
 {% extends 'profile/profile_layout.html.twig' %}
 {% block content %}
-	<h2 class="border-bottom border-3 my-border-green my-text-green">Mon profil</h2>
+	{% if app.user.id == id %}
+		<h2 class="border-bottom border-3 my-border-green my-text-green">Mon profil</h2>
 
-	{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+		{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
-	<div>
-		<label for="picture">Photo de profil</label>
-		{{ form_widget(form.picture) }}
-	</div>
-
-	<div>
-		<label for="cover">Photo de couverture</label>
-		{{ form_widget(form.cover) }}
-	</div>
-
-	<div class="row">
-		<div class="col-md-6">
-			<label for="firstname">Prénom</label>
-			{{ form_widget(form.firstname) }}
+		<div>
+			<label for="picture">Photo de profil</label>
+			{{ form_widget(form.picture) }}
 		</div>
-		<div class="col-md-6">
-			<label for="lastname">Nom</label>
-			{{ form_widget(form.lastname) }}
+
+		<div>
+			<label for="cover">Photo de couverture</label>
+			{{ form_widget(form.cover) }}
 		</div>
-	</div>
 
-	<div>
-		<label for="email">Adresse e-mail</label>
-		{{ form_widget(form.email) }}
-	</div>
-
-	<div>
-		<label for="phoneNumber">Numéro de téléphone</label>
-		{{ form_widget(form.phoneNumber) }}
-	</div>
-
-	<div>
-		<label for="bio">Biographie</label>
-		{{ form_widget(form.bio) }}
-	</div>
-
-	<div>
-		<label for="cv">CV</label>
-		{{ form_widget(form.cv) }}
-	</div>
-
-
-	<div class="row align-items-center">
-		<div class="col-md-6">
-			<label for="dateOfBirth">Date de naissance</label>
-			{{ form_widget(form.dateOfBirth) }}
+		<div class="row">
+			<div class="col-md-6">
+				<label for="firstname">Prénom</label>
+				{{ form_widget(form.firstname) }}
+			</div>
+			<div class="col-md-6">
+				<label for="lastname">Nom</label>
+				{{ form_widget(form.lastname) }}
+			</div>
 		</div>
-		<div class="col-md-6">
-			<label for="gender">Genre</label>
-			{{ form_widget(form.gender) }}
+
+		<div>
+			<label for="email">Adresse e-mail</label>
+			{{ form_widget(form.email) }}
 		</div>
-	</div>
 
-	<div>
-		<label for="studyField">Domaine d'étude</label>
-		{{ form_widget(form.studyField) }}
-	</div>
-
-	<div>
-		<label for="certificateObtention">Obtention du certificat</label>
-		{{ form_widget(form.certificateObtention) }}
-	</div>
-
-	<div>
-		<label for="city">Ville</label>
-		{{ form_widget(form.city) }}
-	</div>
-
-	<div>
-		<label for="country">Pays</label>
-		{{ form_widget(form.country) }}
-	</div>
-
-	<div>
-		<label for="socialLinks">Liens de réseaux sociaux</label>
-		<div id="social-links-list" data-prototype="{{ form_widget(form.socialLinks.vars.prototype)|e('html_attr') }}">
-			{% for socialLink in form.socialLinks %}
-				<div class="social-link-item">
-					{{ form_row(socialLink) }}
-				</div>
-			{% endfor %}
+		<div>
+			<label for="phoneNumber">Numéro de téléphone</label>
+			{{ form_widget(form.phoneNumber) }}
 		</div>
-		<button type="button" class="btn my-bg-green-medium" id="add-social-link">Ajouter un lien de réseau social</button>
-	</div>
 
-	<div class="text-center">
-		<button type="submit" class="btn my-bg-green-medium mt-4 mb-2 fw-bolder px-5 fs-5">Sauvegarder</button>
-	</div>
+		<div>
+			<label for="bio">Biographie</label>
+			{{ form_widget(form.bio) }}
+		</div>
 
-	{{ form_end(form) }}
+		<div>
+			<label for="cv">CV</label>
+			{{ form_widget(form.cv) }}
+		</div>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
+
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<label for="dateOfBirth">Date de naissance</label>
+				{{ form_widget(form.dateOfBirth) }}
+			</div>
+			<div class="col-md-6">
+				<label for="gender">Genre</label>
+				{{ form_widget(form.gender) }}
+			</div>
+		</div>
+
+		<div>
+			<label for="studyField">Domaine d'étude</label>
+			{{ form_widget(form.studyField) }}
+		</div>
+
+		<div>
+			<label for="certificateObtention">Obtention du certificat</label>
+			{{ form_widget(form.certificateObtention) }}
+		</div>
+
+		<div>
+			<label for="city">Ville</label>
+			{{ form_widget(form.city) }}
+		</div>
+
+		<div>
+			<label for="country">Pays</label>
+			{{ form_widget(form.country) }}
+		</div>
+
+		<div>
+			<label for="socialLinks">Liens de réseaux sociaux</label>
+			<div id="social-links-list" data-prototype="{{ form_widget(form.socialLinks.vars.prototype)|e('html_attr') }}">
+				{% for socialLink in form.socialLinks %}
+					<div class="social-link-item">
+						{{ form_row(socialLink) }}
+					</div>
+				{% endfor %}
+			</div>
+			<button type="button" class="btn my-bg-green-medium" id="add-social-link">Ajouter un lien de réseau social</button>
+		</div>
+
+		<div class="text-center">
+			<button type="submit" class="btn my-bg-green-medium mt-4 mb-2 fw-bolder px-5 fs-5">Sauvegarder</button>
+		</div>
+
+		{{ form_end(form) }}
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
 var collectionHolder = document.getElementById('social-links-list');
 var addLinkButton = document.getElementById('add-social-link');
 
@@ -132,5 +133,98 @@ newFormDiv.className = 'social-link-item';
 newFormDiv.innerHTML = newForm;
 collectionHolder.appendChild(newFormDiv);
 }
-	</script>
+		</script>
+	{% else %}
+		<div class="menu_container list-unstyled bg-white p-2 rounded">
+			<div class="border-bottom border-3 my-border-green my-text-green d-flex align-items-center gap-3">
+				<h2>Profil:
+				</h2>
+				<p class="m-0">{{ user.firstname|default('...') }}</p>
+			</div>
+			<ul class="list-unstyled">
+				<li>
+					<strong class="my-text-green fs-6">Prénom:
+					</strong>
+					{{ user.firstname|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Nom:
+					</strong>
+					{{ user.lastname|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Adresse e-mail:
+					</strong>
+					{{ user.email|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Numéro de téléphone</strong>
+					{{ user.phoneNumber|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Biographie:
+					</strong>
+					{{ user.bio|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">CV:
+					</strong>
+					{{ user.cv|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Date de naissance:
+					</strong>
+					{{ user.dateOfBirth|date('Y-m-d')|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Genre:
+					</strong>
+					{{ user.gender? user.gender.getLabel() : '...' }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Domaine d'étude:
+					</strong>
+					{{ user.studyField|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Obtention du certificat:
+					</strong>
+					{{ user.certificateObtention|date('Y-m-d')|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Ville:
+					</strong>
+					{{ user.city|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Pays:
+					</strong>
+					{{ user.country|default('...') }}
+				</li>
+				<li>
+					<strong class="my-text-green fs-6">Liens de réseaux sociaux:
+					</strong>
+					<ul>
+						{% for socialLink in user.socialLinks %}
+							{# <li>{{ socialLink.url|default('...') }}</li> #}
+							{% if socialLink.url matches '/github.com/' %}
+								<li>
+									<a target="_blank" href="{{ socialLink.url }}">
+										<i class="fa-brands fa-github fs-4"></i>
+									</a>
+								</li>
+							{% endif %}
+							{% if socialLink.url matches '/linkedin.com/' %}
+								<li>
+									<a target="_blank" href="{{ socialLink.url }}">
+										<i class="fa-brands fa-linkedin fs-4"></i>
+									</a>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</li>
+			</ul>
+		</div>
+	{% endif %}
 {% endblock %}

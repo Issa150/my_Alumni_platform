@@ -201,7 +201,8 @@
 
 			addLinkButton.addEventListener('click', function (e) {
 			e.preventDefault();
-			if (collectionHolder.querySelectorAll('.social-link-item').length < 5) {
+			if (collectionHolder.querySelectorAll('.social-link-item').length < 3) {
+
 			addSocialLinkForm(collectionHolder);
 			} else {
 			alert('Vous ne pouvez ajouter que 5 liens de réseaux sociaux.');

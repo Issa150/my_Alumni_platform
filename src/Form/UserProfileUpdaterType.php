@@ -18,6 +18,7 @@ class UserProfileUpdaterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
             ->add('email', null, [
                 'required' => true,
                 'constraints' => [
@@ -45,6 +46,7 @@ class UserProfileUpdaterType extends AbstractType
             ])
             ->add('phoneNumber', null, ['required' => false])
             ->add('bio', null, ['required' => false])
+
             ->add('cv', FileType::class, [
                 'label' => "CV (PDF file)",
                 'mapped' => false,
@@ -52,8 +54,13 @@ class UserProfileUpdaterType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '3M',
-                        'mimeTypes' => ['application/pdf'],
+
+                        'mimeTypes' => [
+                            'application/pdf',
+                        ],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+
+
                     ])
                 ],
             ])
@@ -79,9 +86,12 @@ class UserProfileUpdaterType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'label' => 'Genre',
-                'required' => true,
+              'required' => true,
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner votre genre']),
+                    new NotBlank([
+                        'message' => 'Le genre est requis.',
+                    ]),
+
                 ],
             ])
             ->add('picture', FileType::class, [
@@ -92,7 +102,8 @@ class UserProfileUpdaterType extends AbstractType
                     new File([
                         'maxSize' => '3M',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG).',
+                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF)',
+
                     ])
                 ],
             ])
@@ -104,7 +115,8 @@ class UserProfileUpdaterType extends AbstractType
                     new File([
                         'maxSize' => '3M',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG).',
+                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF)',
+
                     ])
                 ],
             ])
@@ -126,11 +138,9 @@ class UserProfileUpdaterType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => false,
+                'required' => false,
             ]);
-            // Uncomment below if you want to add a save button
-            // ->add('save', SubmitType::class, [
-            //     'label' => 'Sauvegarder'
-            // ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

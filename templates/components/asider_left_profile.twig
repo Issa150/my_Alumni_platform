@@ -26,11 +26,12 @@
 			<div class="d-flex gap-3 my-1">
 				{% for link in user.socialLinks %}
 					{% if link.url matches '/github.com/' %}
-						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-github fs-4"></i></a></li>
-					{% endif %}
-					{% if link.url matches '/linkedin.com/' %}
-						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
-					{% endif %}
+					<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-github fs-4"></i></a></li>
+				{% elseif link.url matches '/linkedin.com/' %}
+					<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
+				{% else %}
+					<li><a target="_blank" href="{{ link.url }}"><i class="fa-solid fa-link fs-4"></i></a></li>
+				{% endif %}
 				{% endfor %}
 			</div>
 		</ul>

@@ -18,18 +18,18 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<label for="firstname">Prénom</label>
+				<label for="firstname">Prénom<span class="my-required">*</span></label>
 				{{ form_widget(form.firstname) }}
 				{{ form_errors(form.firstname) }}
 			</div>
 			<div class="col-md-6">
-				<label for="lastname">Nom</label>
+				<label for="lastname">Nom<span class="my-required">*</span></label>
 				{{ form_widget(form.lastname) }}
 			</div>
 		</div>
 
 		<div>
-			<label for="email">Adresse e-mail</label>
+			<label for="email">Adresse e-mail<span class="my-required">*</span></label>
 			{{ form_widget(form.email) }}
 		</div>
 
@@ -55,18 +55,18 @@
 				{{ form_widget(form.dateOfBirth) }}
 			</div>
 			<div class="col-md-6">
-				<label for="gender">Genre</label>
+				<label for="gender">Genre<span class="my-required">*</span></label>
 				{{ form_widget(form.gender) }}
 			</div>
 		</div>
 
 		<div>
-			<label for="studyField">Domaine d'étude</label>
+			<label for="studyField">Domaine d'étude<span class="my-required">*</span></label>
 			{{ form_widget(form.studyField) }}
 		</div>
 
 		<div>
-			<label for="certificateObtention">Obtention du certificat</label>
+			<label for="certificateObtention">Obtention du certificat<span class="my-required">*</span></label>
 			{{ form_widget(form.certificateObtention) }}
 		</div>
 
@@ -98,44 +98,8 @@
 
 		{{ form_end(form) }}
 
-		<script>
-			document.addEventListener('DOMContentLoaded', function () {
-var collectionHolder = document.getElementById('social-links-list');
-var addLinkButton = document.getElementById('add-social-link');
+		
 
-addLinkButton.addEventListener('click', function (e) {
-e.preventDefault();
-if (collectionHolder.querySelectorAll('.social-link-item').length < 5) {
-addSocialLinkForm(collectionHolder);
-} else {
-alert('Vous ne pouvez ajouter que 5 liens de réseaux sociaux.');
-}
-});
-
-// Set the index to the number of current inputs
-collectionHolder.dataset.index = collectionHolder.querySelectorAll('.social-link-item').length;
-});
-
-function addSocialLinkForm(collectionHolder) { // Get the data-prototype explained earlier
-var prototype = collectionHolder.getAttribute('data-prototype');
-
-// Get the new index
-var index = collectionHolder.dataset.index;
-
-// Replace '__name__' in the prototype's HTML to
-// instead be a number based on how many items we have
-var newForm = prototype.replace(/__name__/g, index);
-
-// Increase the index with one for the next item
-collectionHolder.dataset.index = parseInt(index) + 1;
-
-// Display the form in the page before the "Add a link" link
-var newFormDiv = document.createElement('div');
-newFormDiv.className = 'social-link-item';
-newFormDiv.innerHTML = newForm;
-collectionHolder.appendChild(newFormDiv);
-}
-		</script>
 	{% else %}
 		<div class="menu_container list-unstyled bg-white p-2 rounded">
 			<div class="border-bottom border-3 my-border-green my-text-green d-flex align-items-center gap-3">
@@ -229,4 +193,43 @@ collectionHolder.appendChild(newFormDiv);
 			</ul>
 		</div>
 	{% endif %}
+
+	<script>
+			{# document.addEventListener('DOMContentLoaded', function () { #}
+			var collectionHolder = document.getElementById('social-links-list');
+			var addLinkButton = document.getElementById('add-social-link');
+
+			addLinkButton.addEventListener('click', function (e) {
+			e.preventDefault();
+			if (collectionHolder.querySelectorAll('.social-link-item').length < 5) {
+			addSocialLinkForm(collectionHolder);
+			} else {
+			alert('Vous ne pouvez ajouter que 5 liens de réseaux sociaux.');
+			}
+			});
+
+			// Set the index to the number of current inputs
+			collectionHolder.dataset.index = collectionHolder.querySelectorAll('.social-link-item').length;
+			{# }); #}
+
+			function addSocialLinkForm(collectionHolder) { // Get the data-prototype explained earlier
+			var prototype = collectionHolder.getAttribute('data-prototype');
+
+			// Get the new index
+			var index = collectionHolder.dataset.index;
+
+			// Replace '__name__' in the prototype's HTML to
+			// instead be a number based on how many items we have
+			var newForm = prototype.replace(/__name__/g, index);
+
+			// Increase the index with one for the next item
+			collectionHolder.dataset.index = parseInt(index) + 1;
+
+			// Display the form in the page before the "Add a link" link
+			var newFormDiv = document.createElement('div');
+			newFormDiv.className = 'social-link-item';
+			newFormDiv.innerHTML = newForm;
+			collectionHolder.appendChild(newFormDiv);
+			}
+		</script>
 {% endblock %}

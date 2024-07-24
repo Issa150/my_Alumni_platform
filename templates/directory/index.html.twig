@@ -67,7 +67,7 @@
 
 <!-- JavaScript for AJAX Form Submission -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+{# document.addEventListener('DOMContentLoaded', function () { #}
     const searchForm = document.getElementById('search-form');
     const filterForm = document.getElementById('filter-form');
     const userCards = document.getElementById('user-cards');
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event listener for reset button
     document.getElementById('reset-filters').addEventListener('click', resetAndSubmitForm);
-});
+{# }); #}
 </script>
 
 {% endblock %}

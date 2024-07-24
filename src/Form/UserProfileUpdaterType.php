@@ -18,23 +18,33 @@ class UserProfileUpdaterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('firstname', null, [
+            ->add('email', null, [
+                'required' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Le prénom est requis.',
-                    ]),
+                    new NotBlank(['message' => 'Veuillez entrer votre adresse e-mail']),
+                ],
+                'help' => 'Veuillez entrer votre adresse e-mail',
+            ])
+            ->add('firstname', null, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez entrer votre prénom']),
+                ],
+                'attr' => [
+                    'placeholder' => 'Entrez votre prénom',
                 ],
             ])
             ->add('lastname', null, [
+                'required' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Le nom est requis.',
-                    ]),
+                    new NotBlank(['message' => 'Veuillez entrer votre nom']),
+                ],
+                'attr' => [
+                    'placeholder' => 'Entrez votre nom',
                 ],
             ])
-            ->add('phoneNumber')
-            ->add('bio')
+            ->add('phoneNumber', null, ['required' => false])
+            ->add('bio', null, ['required' => false])
             ->add('cv', FileType::class, [
                 'label' => "CV (PDF file)",
                 'mapped' => false,
@@ -42,17 +52,24 @@ class UserProfileUpdaterType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '3M',
-                        'mimeTypes' => [
-                            'application/pdf',
-                        ],
+                        'mimeTypes' => ['application/pdf'],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
                     ])
                 ],
             ])
             ->add('dateOfBirth', null, [
                 'widget' => 'single_text',
+                'required' => false,
             ])
-            ->add('studyField')
+            ->add('studyField', null, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez entrer votre domaine d\'étude']),
+                ],
+                'attr' => [
+                    'placeholder' => 'Entrez votre domaine d\'étude',
+                ],
+            ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                     'Femme' => UserGender::Woman,
@@ -62,45 +79,46 @@ class UserProfileUpdaterType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'label' => 'Genre',
+                'required' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Le genre est requis.',
-                    ]),
+                    new NotBlank(['message' => 'Veuillez sélectionner votre genre']),
                 ],
             ])
             ->add('picture', FileType::class, [
-                'label' => "L'image profil (Image file)",
+                'label' => "Image profil (Image file)",
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '3M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG, GIF).',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG).',
                     ])
                 ],
             ])
             ->add('cover', FileType::class, [
-                'label' => "L'image de couverture (Image file)",
+                'label' => "Image de couverture (Image file)",
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '3M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG, GIF).',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (JPEG, PNG).',
                     ])
                 ],
             ])
-            ->add('city')
-            ->add('country')
-            ->add('certificateObtention')
+            ->add('city', null, ['required' => false])
+            ->add('country', null, ['required' => false])
+            ->add('certificateObtention', null, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez entrer l\'obtention du certificat']),
+                ],
+                'attr' => [
+                    'placeholder' => 'Entrez l\'obtention du certificat',
+                ],
+            ])
             ->add('socialLinks', CollectionType::class, [
                 'entry_type' => SocialLinksType::class,
                 'entry_options' => ['label' => false],
@@ -111,7 +129,7 @@ class UserProfileUpdaterType extends AbstractType
             ]);
             // Uncomment below if you want to add a save button
             // ->add('save', SubmitType::class, [
-            //     'label' => 'Sauvgarder'
+            //     'label' => 'Sauvegarder'
             // ]);
     }
 

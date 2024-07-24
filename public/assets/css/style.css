@@ -259,6 +259,10 @@ body {
 }
 
 .navbar-nav{
+  z-index: 100;
+}
+
+.my-modal-container{
   z-index: 2000;
 }
 

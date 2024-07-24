@@ -17,7 +17,7 @@
 			<li><span class="fw-bolder">CV:</span>{{ user.cv|length > 15 ? user.cv|slice(0, 15) ~ '...' : user.cv ?: '...' }}</li>
 			<li><span class="fw-bolder">Ville:</span>{{ user.city ?: '...' }}</li>
 			<li><span class="fw-bolder">Pays:</span>{{ user.country ?: '...' }}</li>
-			<li><span class="fw-bolder">Compétences:</span>{{ user.studyField ?: '...' }}</li>
+			<li><span class="fw-bolder">Domaine d'étude:</span>{{ user.studyField ?: '...' }}</li>
 
 			{# <div class="d-flex gap-3 my-1">
 				<li><a target="_blank" href="https://github.com/"><i class="fa-brands fa-github fs-4"></i></a></li>
@@ -37,24 +37,43 @@
 
 
 		{# Les options de menu côté gouche #}
-		<ul class="menu_container list-unstyled bg-white p-2 rounded">
-			<h2 class="border-bottom border-3 my-border-green my-text-green">Menu</h2>
-			<li>
-				<a href="{{path('my_feeds', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_feeds' ? 'my-active' : ''}} btn my-1">Fil d'actualité</a>
-			</li>
-			<li>
-				<a href="{{path('my_sources', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_sources' ? 'my-active' : ''}} btn my-1">Ressources & bibliothéque</a>
-			</li>
-			<li>
-				<a href="{{path('my_profile', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_profile' ? 'my-active' : ''}} btn my-1">Mon profil</a>
-			</li>
-			<li>
-				<a href="{{path('my_likes', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_likes' ? 'my-active' : ''}} btn my-1">Mes likes</a>
-			</li>
-			<li>
-				<a href="{{path('my_abonnement', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_abonnement' ? 'my-active' : ''}} btn my-1">Abonnement</a>
-			</li>
-		</ul>
+		{# Only for the persone connected #}
+		{% if app.user.id == id %}
+			<ul class="menu_container list-unstyled bg-white p-2 rounded">
+				<h2 class="border-bottom border-3 my-border-green my-text-green">Menu</h2>
+				<li>
+					<a href="{{path('my_feeds', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_feeds' ? 'my-active' : ''}} btn my-1">Fil d'actualité</a>
+				</li>
+				<li>
+					<a href="{{path('my_sources', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_sources' ? 'my-active' : ''}} btn my-1">Ressources & bibliothéque</a>
+				</li>
+				<li>
+					<a href="{{path('my_profile', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_profile' ? 'my-active' : ''}} btn my-1">Mon profil</a>
+				</li>
+				<li>
+					<a href="{{path('my_likes', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_likes' ? 'my-active' : ''}} btn my-1">Mes likes</a>
+				</li>
+				<li>
+					<a href="{{path('my_abonnement', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_abonnement' ? 'my-active' : ''}} btn my-1">Abonnement</a>
+				</li>
+			</ul>
+		{% else %}
+			<ul class="menu_container list-unstyled bg-white p-2 rounded">
+				<h2 class="border-bottom border-3 my-border-green my-text-green">Menu</h2>
+				
+				<li>
+					<a href="{{path('my_profile', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_profile' ? 'my-active' : ''}} btn my-1">Profil</a>
+				</li>
+				<li>
+					<a href="{{path('my_sources', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_sources' ? 'my-active' : ''}} btn my-1">Ressources & bibliothéque</a>
+				</li>
+				
+				<li>
+					<a href="{{path('my_abonnement', {'id': user.id})}}" class="aside-menu-item {{app.current_route  == 'my_abonnement' ? 'my-active' : ''}} btn my-1">Abonnement</a>
+				</li>
+			</ul>
+
+		{% endif %}
 
 	</div>
 </div>

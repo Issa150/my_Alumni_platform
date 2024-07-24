@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\User;
@@ -12,7 +11,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserProfileUpdaterType extends AbstractType
@@ -20,6 +18,7 @@ class UserProfileUpdaterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
             ->add('email', null, [
                 'required' => true,
                 'constraints' => [
@@ -47,6 +46,7 @@ class UserProfileUpdaterType extends AbstractType
             ])
             ->add('phoneNumber', null, ['required' => false])
             ->add('bio', null, ['required' => false])
+
             ->add('cv', FileType::class, [
                 'label' => "CV (PDF file)",
                 'mapped' => false,
@@ -54,8 +54,13 @@ class UserProfileUpdaterType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '3M',
-                        'mimeTypes' => ['application/pdf'],
-                        'mimeTypesMessage' => 'Please upload a valid PDF file',
+
+                        'mimeTypes' => [
+                            'application/pdf',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+
+
                     ])
                 ],
             ])
@@ -80,10 +85,13 @@ class UserProfileUpdaterType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => false,
-                'label' => 'Gender',
-                'required' => true,
+                'label' => 'Genre',
+              'required' => true,
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner votre genre']),
+                    new NotBlank([
+                        'message' => 'Le genre est requis.',
+                    ]),
+
                 ],
             ])
             ->add('picture', FileType::class, [
@@ -95,6 +103,7 @@ class UserProfileUpdaterType extends AbstractType
                         'maxSize' => '3M',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
                         'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF)',
+
                     ])
                 ],
             ])
@@ -107,6 +116,7 @@ class UserProfileUpdaterType extends AbstractType
                         'maxSize' => '3M',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
                         'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF)',
+
                     ])
                 ],
             ])
@@ -130,6 +140,7 @@ class UserProfileUpdaterType extends AbstractType
                 'label' => false,
                 'required' => false,
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

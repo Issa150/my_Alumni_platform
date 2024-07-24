@@ -25,6 +25,13 @@ class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
         // Get user ID
         $user = $token->getUser();
         $id = $user->getId();
+        $first_name = $user->getFirstname();
+        $last_name = $user->getLastname();
+        $study_field = $user->getStudyField();
+        $gender = $user->getGender();
+        $certificate_obtention = $user->getCertificateObtention();
+        $city = $user->getCity();
+        $country = $user->getCountry();
 
         // Check if the user has the admin role
         if (in_array('ROLE_ADMIN', $roles)) {
@@ -32,7 +39,12 @@ class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler
             return new RedirectResponse($this->router->generate('admin'));
         }
 
+        // Les champs requis de la page profile doivent être renseignés, sinon à chaque connexion l'utilisateur sera toujours redirigé sur le formulaire de la page de profile
+        if($first_name == NULL || $last_name == NULL || $study_field == NULL || $gender == NULL || $certificate_obtention == NULL || $city == NULL || $country == NULL){
+            return new RedirectResponse($this->router->generate('my_profile', ['id' => $id]));
+        }
+
         // Default redirection for other users (my profile only for now, must be changed later)
-        return new RedirectResponse($this->router->generate('my_profile', ['id' => $id]));
+        return new RedirectResponse($this->router->generate('app_main'));
     }
 }

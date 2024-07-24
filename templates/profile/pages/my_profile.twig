@@ -4,6 +4,7 @@
 		<h2 class="border-bottom border-3 my-border-green my-text-green">Mon profil</h2>
 
 		{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+		{{ form_errors(form) }}
 
 		<div>
 			<label for="picture">Photo de profil</label>
@@ -19,6 +20,7 @@
 			<div class="col-md-6">
 				<label for="firstname">Prénom</label>
 				{{ form_widget(form.firstname) }}
+				{{ form_errors(form.firstname) }}
 			</div>
 			<div class="col-md-6">
 				<label for="lastname">Nom</label>

@@ -5,22 +5,36 @@
     <title>Nouvelle offre d'emploi à valider</title>
 </head>
 <body>
-       <h1>Prévisualisation de l'offre d'emploi</h1>
+    <h1>Prévisualisation de l'offre d'emploi</h1>
     <p><strong>Intitulé du poste :</strong> {{ emploi.name }}</p>
     <p><strong>Description :</strong> {{ emploi.description|raw }}</p> <!-- Utilisation de |raw pour le contenu HTML -->
-    <p><strong>Entreprise :</strong> {{ emploi.entreprise }}</p>
-    <p><strong>Ville :</strong> {{ emploi.city }}</p>
-    <p><strong>Code postal :</strong> {{ emploi.zipcode }}</p>
+    <p><strong>Entreprise :</strong> {{ emploi.entreprise|default('Non spécifiée') }}</p>
+    <p><strong>Ville :</strong> {{ emploi.city|default('Non spécifiée') }}</p>
+    <p><strong>Code postal :</strong> {{ emploi.zipcode|default('Non spécifié') }}</p>
     <p><strong>Lien de l'annonce :</strong> <a href="{{ emploi.link }}">{{ emploi.link }}</a></p>
     
     <p><strong>Compétences :</strong></p>
     <ul>
-        {% for skill in emploi.skills %}
-            <li>{{ skill }}</li>
-        {% endfor %}
+        {% if emploi.skills is iterable %}
+            {% for skill in emploi.skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        {% else %}
+            <li>Aucune compétence spécifiée</li>
+        {% endif %}
     </ul>
 
-    <p><strong>Domaine d'activité :</strong> {{ emploi.field }}</p>
+    <p><strong>Domaine d'activité :</strong></p>
+    <ul>
+        {% if emploi.field is iterable %}
+            {% for field in emploi.field %}
+                <li>{{ field }}</li>
+            {% endfor %}
+        {% else %}
+            <li>Non spécifié</li>
+        {% endif %}
+    </ul>
+
     <p><strong>Date de publication :</strong> {{ emploi.publicationDate|date('d/m/Y') }}</p>
     <p><strong>Date limite de l'offre :</strong> {{ emploi.limitOffer ? emploi.limitOffer|date('d/m/Y') : 'Non spécifiée' }}</p>
 
@@ -28,9 +42,13 @@
 
     <p><strong>Type de contrat :</strong></p>
     <ul>
-        {% for contract in emploi.contract %}
-            <li>{{ contract }}</li>
-        {% endfor %}
+        {% if emploi.contract is iterable %}
+            {% for contract in emploi.contract %}
+                <li>{{ contract }}</li>
+            {% endfor %}
+        {% else %}
+            <li>Aucun type de contrat spécifié</li>
+        {% endif %}
     </ul>
 
     <p><strong>Statut :</strong> En attente de validation</p>

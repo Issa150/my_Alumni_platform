@@ -117,7 +117,7 @@ class EmploiCrudController extends AbstractCrudController
                 ->allowMultipleChoices()
                 ->renderExpanded(),
             FormField::addPanel('Logo'),
-            ChoiceField::new('logo', 'Bibliothèque de logos')
+            ChoiceField::new('logo', 'Bibliothèque de logos')->hideOnForm()
                 ->setChoices($logoChoicesWithLabels)
                 ->renderExpanded(),
             TextField::new('newLogo', 'Téléchargement d\'un nouveau logo')->setFormType(FileType::class)->hideOnIndex()->setFormTypeOptions([

@@ -236,6 +236,11 @@ img.my-active{
   height: 50px;
 }
 
+.my-required {
+  color: red;
+  font-size: 1.2em;
+  vertical-align: top;
+}
 /* --------------------------------------------- */
 /* Reset */
 img {

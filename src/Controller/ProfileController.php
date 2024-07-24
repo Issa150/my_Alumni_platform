@@ -3,17 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Form\UserProfileUpdaterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ProfileController extends AbstractController
 {
@@ -59,7 +60,8 @@ class ProfileController extends AbstractController
         #[Autowire('%kernel.project_dir%/public/uploads/userPictures')] string $profilePicturesDirectory,
         #[Autowire('%kernel.project_dir%/public/uploads/cv')] string $cvDirectory,
         #[Autowire('%kernel.project_dir%/public/uploads/covers')] string $coverDirectory,
-        int $id
+        int $id,
+        ValidatorInterface $validator
     ): Response {
         $user = $userRepository->findOneById($id);
         if (!$user) {

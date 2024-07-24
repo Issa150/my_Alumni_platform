@@ -3,8 +3,8 @@
 	<div
 		class="container-fluid my-bg-gray rounded-2 p-1 h-100 w-100">
 		{# Img cover #}
-		<img class="my-img-cover w-100" src="{% if app.user and app.user.cover %}{{ asset('uploads/covers/' ~ app.user.cover) }}{% else %}{{ asset('assets/img/default/cover-default.jpg') }}{% endif %}" alt="Profile image cover">
-		<img class="my-img-profile shadow-sm mx-auto d-block rounded-circle ratio ratio-1x1" src="{% if app.user and app.user.picture %}{{ asset('uploads/userPictures/' ~ app.user.picture) }}{% else %}{{ asset('assets/img/default/user-default.jpg') }}{% endif %}" alt="Photo de profil" class="rounded-circle user-profil">
+		<img class="my-img-cover w-100" src="{% if user and user.cover %}{{ asset('uploads/covers/' ~ user.cover) }}{% else %}{{ asset('assets/img/default/cover-default.jpg') }}{% endif %}" alt="Profile image cover">
+		<img class="my-img-profile shadow-sm mx-auto d-block rounded-circle ratio ratio-1x1" src="{% if user and user.picture %}{{ asset('uploads/userPictures/' ~ user.picture) }}{% else %}{{ asset('assets/img/default/user-default.jpg') }}{% endif %}" alt="Photo de profil" class="rounded-circle user-profil">
 		<h3 class="text-center">{{user.firstname}}
 			{{user.lastname}}</h3>
 		<a class="d-block text-center" href="mailto:{{user.email}}">{{user.email}}</a>
@@ -26,11 +26,12 @@
 			<div class="d-flex gap-3 my-1">
 				{% for link in user.socialLinks %}
 					{% if link.url matches '/github.com/' %}
-						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-github fs-4"></i></a></li>
-					{% endif %}
-					{% if link.url matches '/linkedin.com/' %}
-						<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
-					{% endif %}
+					<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-github fs-4"></i></a></li>
+				{% elseif link.url matches '/linkedin.com/' %}
+					<li><a target="_blank" href="{{ link.url }}"><i class="fa-brands fa-linkedin fs-4"></i></a></li>
+				{% else %}
+					<li><a target="_blank" href="{{ link.url }}"><i class="fa-solid fa-link fs-4"></i></a></li>
+				{% endif %}
 				{% endfor %}
 			</div>
 		</ul>

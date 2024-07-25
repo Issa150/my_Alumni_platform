@@ -66,7 +66,7 @@ class DirectoryController extends AbstractController
 
         $users = $queryBuilder->getQuery()->getResult();
 
-        return $this->render('directory/_user_cards1.html.twig', [
+        return $this->render('directory/_user_cards.html.twig', [
             'users' => $users,
         ]);
     }

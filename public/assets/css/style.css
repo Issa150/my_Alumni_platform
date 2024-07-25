@@ -217,13 +217,13 @@ img.my-active{
 
 /* Special situations */
 /* taille cards */
+/* --------------------------------------------- */
+
 .my-ratio {
   height: 280px;
 
 }
 
-
-/* --------------------------------------------- */
 
 .my-circle {
   width: 40px !important;
@@ -256,6 +256,19 @@ body {
   color: var(--clr-dark);
   background-color: var(--clr-bg);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* NAV NAVIGATION */
 .navbar {

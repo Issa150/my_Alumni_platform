@@ -241,6 +241,13 @@ img.my-active{
   font-size: 1.2em;
   vertical-align: top;
 }
+
+.my-container-custom-logo{
+  width: 400px !important;
+  display: inline-block;
+}
+
+
 /* --------------------------------------------- */
 /* Reset */
 img {

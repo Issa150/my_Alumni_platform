@@ -3,9 +3,12 @@
 		<nav class="navbar navbar-expand-lg navbar-dark" aria-label="Thirteenth navbar example">
 			<div class=" container-fluid d-flex align-items-center justify-content-between menuBu">
 
-				<div class="d-flex justify-content-between">
+				{# Choose the two commented lines for div and img to change the logo #}
+				<div class="d-flex justify-content-between my-container-custom-logo">
+				{# <div class="d-flex justify-content-between"> #}
 					<a class="navbar-brand col" href="{{ path('app_main') }}">
-						<img src="{{ asset('assets/img/alumni_logo.svg') }}" alt="Logo Alumni" class="custom-logo">
+						<img src="{{ asset('assets/img/PACS_blanc.svg') }}" alt="Logo Alumni" class="custom-logo">
+						{# <img src="{{ asset('assets/img/alumni_logo.svg') }}" alt="Logo Alumni" class="custom-logo"> #}
 					</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -15,7 +18,7 @@
 				<div class="collapse navbar-collapse row justify-content-between" id="navbarsExample11">
 
 					{% if app.request.attributes.get('_route') != 'app_login' %}
-						<ul class="navbar-nav col-lg-4 justify-content-lg-center gap-1">
+						<ul class="navbar-nav col justify-content-lg-center gap-1">
 
 							<li class="nav-item">
 								<a class="nav-link rounded-2 my-link-item-hover {{app.current_route  == 'app_aganda' ? 'my-active' : ''}}" aria-disabled="true" {% if app.user %} href="#" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>Agenda</a>

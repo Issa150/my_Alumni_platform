@@ -117,7 +117,7 @@ class EmploiCrudController extends AbstractCrudController
                 ->allowMultipleChoices()
                 ->renderExpanded(),
             FormField::addPanel('Logo'),
-            ChoiceField::new('logo', 'Bibliothèque de logos')->hideOnForm()
+            ChoiceField::new('logo', 'Bibliothèque de logos')
                 ->setChoices($logoChoicesWithLabels)
                 ->renderExpanded(),
             TextField::new('newLogo', 'Téléchargement d\'un nouveau logo')->setFormType(FileType::class)->hideOnIndex()->setFormTypeOptions([
@@ -143,11 +143,6 @@ class EmploiCrudController extends AbstractCrudController
             $newFilename = uniqid().'.'.$newLogoFile->guessExtension();
             $newLogoFile->move($this->uploadsDirectory, $newFilename);
             $entityInstance->setLogo($newFilename);
-        } else {
-            $logo = $request->request->get('Emploi')['logo'];
-            if ($logo) {
-                $entityInstance->setLogo($logo);
-            }
         }
 
         $entityInstance->setStatus(EmploiStatus::PENDING);
@@ -165,11 +160,6 @@ class EmploiCrudController extends AbstractCrudController
             $newFilename = uniqid().'.'.$newLogoFile->guessExtension();
             $newLogoFile->move($this->uploadsDirectory, $newFilename);
             $entityInstance->setLogo($newFilename);
-        } else {
-            $logo = $request->request->get('Emploi')['logo'];
-            if ($logo) {
-                $entityInstance->setLogo($logo);
-            }
         }
 
         parent::updateEntity($entityManager, $entityInstance);

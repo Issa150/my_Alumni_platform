@@ -1,4 +1,12 @@
 # Projet Plateforme PACS
+## On this project:
+- User creation only by admin
+- Login page
+- Password restoration
+- Profile Update
+- Ajax live search
+- Relational Database
+
 
 Ensemble des dispositifs pour tester l'application  
 Email des utilisateurs de test pour se connecter via le formulaire de connexion
